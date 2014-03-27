@@ -18,7 +18,7 @@ function [pulseShapedSignal] = pulseShaping(symbols, upFactor, psFilter,...
 %    pulse shaping filter of choice.
 %--------------------------------------------------------------------------
 
-if (params.type == 'Rectangular')
+if strcmp(params.type, 'Rectangular')
     pulseShapedSignal = rectpulse(symbols. params.sps);
     return
 else

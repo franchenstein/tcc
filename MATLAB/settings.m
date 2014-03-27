@@ -1,0 +1,1 @@
+f = struct('type', 'Root-Raised-Cosine', 'sps', 16, 'T', 1, 'length', 25, 'r', 0.5);

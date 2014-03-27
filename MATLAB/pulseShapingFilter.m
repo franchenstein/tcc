@@ -27,8 +27,8 @@ switch filterParams.type
         psFilter = ones(1,filterParams.sps);
         return
     case 'Root-Raised-Cosine'
-        psFilter = rcosfir(filterParams.r, (filterParams.length-1)/2, ...
-                             filterParams.sps, filterParams.T, 'sqrt');
+        psFilter = rcosfir(filterParams.r, filterParams.length,...
+                           filterParams.sps, filterParams.T, 'sqrt');
     case 'Gaussian'
         psFilter = gaussfir(filterParams.bt, filterParams.T/2,...
                                filterParams.sps);
