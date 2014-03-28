@@ -16,14 +16,14 @@ function [alligndSig allignOffset] = ELGate(inSig, downFactor, del)
 %--------------------------------------------------------------------------
 
 N = [1:downFactor];
-tau = [];
+tau = zeros(1,downFactor);
 
 for i = N
     y = downsample(inSig(i:end),downFactor);
     y_p = conj([y(del+1:end) zeros(1,del)]);
     y_n = [zeros(1,del) y(1:end-del)];
     est = sum(abs(y.*(y_p - y_n)));
-    tau = [tau est];
+    tau(i) = est;
 end
 
 allignOffset = find(tau == max(tau));
