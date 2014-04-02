@@ -26,7 +26,7 @@ for i = N
     tau(i) = est;
 end
 
-allignOffset = find(tau == max(tau));
+[~ , allignOffset] = max(tau);
 alligndSig = inSig(allignOffset:end);
 
 end

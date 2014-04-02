@@ -24,6 +24,6 @@ end
 c4 = now;
 T2 = c4 - c3;
 
-fprintf('My algorithm: %d seconds.\n', T1);
-fprintf('Previous algorithm: %d seconds.\n', T2);
-fprintf('My algorithm is %d times faster than the previous one.\n', T2/T1);
+fprintf('My algorithm: %6.2e seconds.\n', T1);
+fprintf('Previous algorithm: %6.2e seconds.\n', T2);
+fprintf('My algorithm is %6.2f times faster than the previous one.\n', T2/T1);
