@@ -1,8 +1,5 @@
 %transmitter - this script simulates all the steps of the SDR transmitter.
 
-clear
-clc
-
 %Parameters----------------------------------------------------------------
 mLength = 1000;         %Message length
 srcType = 'random';     %Source type
@@ -19,6 +16,8 @@ f = struct(...          %Pulse shaping filter parameters
 psFilter = pulseShapingFilter(f);   %Pulse shaping filter
 oversample = 16;        %Oversampling factor
 synchAlg = 'Early-Late Gate';       %Symbol synch algorithm
+Fc = 433e6;                         %Carrier frequency
+Fs = 4*Fc;                          %Sample rate
 %--------------------------------------------------------------------------
 
 %--------------------------------------------------------------------------
@@ -43,3 +42,8 @@ symbols = mapper(frame, modSchm, M, energy); %Maps bits to the symbols of
 %--------------------------------------------------------------------------
 %Shapes the symbols to the selected pulse shape:
 pulses = pulseShaping(symbols, oversample, psFilter, f);
+
+%--------------------------------------------------------------------------
+%Modulation
+%--------------------------------------------------------------------------
+txSig = modulation(pulses, Fc, Fs, 1);

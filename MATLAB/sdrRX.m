@@ -17,12 +17,26 @@ f = struct(...          %Pulse shaping filter parameters
 psFilter = pulseShapingFilter(f);   %Pulse shaping filter
 oversample = 16;        %Oversampling factor
 synchAlg = 'Early-Late Gate';       %Symbol synch algorithm
+Fc = 433e6;                         %Carrier frequency
+Fs = 4*Fc;                          %Sample rate
+bpfParams = struct(...              %Demod's band-pass filter parameters
+            'rolloff', 0.4,...      %Roll-off factor
+            'q', f.sps,...          %Oversample factor
+            'order', 64);           %FIR filter order
+bpf = demodBPF(Fc, Fs, bpfParams);  %BPF coefficients
 %--------------------------------------------------------------------------
+
+
+%--------------------------------------------------------------------------
+%Demodulation
+%--------------------------------------------------------------------------
+rxSig = demodulator(txSig, Fc, Fs, bpf);
+
 
 %--------------------------------------------------------------------------
 %Matched Filtering
 %--------------------------------------------------------------------------
-rSymbols = matchedFiltering(pulses, psFilter);
+rSymbols = matchedFiltering(rxSig, psFilter);
 
 %--------------------------------------------------------------------------
 %Symbol Timing Synchronization

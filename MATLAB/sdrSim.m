@@ -1,5 +1,8 @@
 %simulation - connects the TX, channel model and the RX
 
+clear
+clc
+
 %Transmitter---------------------------------------------------------------
 sdrTX;
 
