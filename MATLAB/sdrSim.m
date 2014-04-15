@@ -3,11 +3,16 @@
 clear
 clc
 
+%Simulation parameters-----------------------------------------------------
+timingOffset = 6.24;      %timing offset in % in the channel
+nGain = 0;            %Noise gain
+%--------------------------------------------------------------------------
+
 %Transmitter---------------------------------------------------------------
 sdrTX;
 
 %Channel-------------------------------------------------------------------
-%TODO: Channel model
+rxSig = channelModel(txSig, f.sps, timingOffset, nGain);
 
 %Receiver------------------------------------------------------------------
 sdrRX;

@@ -5,7 +5,7 @@ function [alligndSig allignOffset] = ELGate(inSig, downFactor, del)
 %   INPUTS:
 %       inSig - matched filtered signal, with its peaks at the optimum
 %               moments for sampling;
-%       downFactor - the downsampling factor; 
+%       downFactor - samples per symbol; 
 %       del - the stepsize of the function.
 %   OUTPUTS:
 %      synchdSig - the resampled signal, now correctly synchronized;
@@ -15,7 +15,7 @@ function [alligndSig allignOffset] = ELGate(inSig, downFactor, del)
 %    synchronized.
 %--------------------------------------------------------------------------
 
-N = [1:downFactor];
+N = 1:downFactor;
 tau = zeros(1,downFactor);
 
 for i = N
