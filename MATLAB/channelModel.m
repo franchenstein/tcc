@@ -1,9 +1,9 @@
-function [rxSig] = channelModel(txSig, sps, timingOffset, nGain)
+function [rxSig] = channelModel(txSig, oversample, timingOffset, nGain)
 %channelModel - simulates the channel with all its imparities.
 %--------------------------------------------------------------------------
 %   INPUTS:
 %       txSig - The transmitted modulated signal;
-%       sps - samples per symbol used in the communication;
+%       oversample - samples per symbol used in the communication;
 %       timingOffset - the timing offset as % of symbol period;
 %       nGain - the AWG noise gain/amplitude.
 %   OUTPUTS:
@@ -22,7 +22,7 @@ corruptSig = txSig;
 corruptSig = corruptSig + nGain*randn(size(corruptSig));
 
 %Adding timing offset/delay
-timingOffset = floor(0.01*timingOffset*sps);
+timingOffset = floor(0.01*timingOffset*oversample);
 corruptSig = corruptSig(1+timingOffset:end);
 
 rxSig = corruptSig;

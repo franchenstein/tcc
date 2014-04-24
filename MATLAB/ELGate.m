@@ -1,4 +1,4 @@
-function [alligndSig allignOffset] = ELGate(inSig, downFactor, del)
+function [samples allignOffset] = ELGate(inSig, oFactor, del, mLength, nt)
 %ELGate - Implements the Early-Late Gate algorithm for symbol
 %synchronization.
 %--------------------------------------------------------------------------
@@ -6,7 +6,9 @@ function [alligndSig allignOffset] = ELGate(inSig, downFactor, del)
 %       inSig - matched filtered signal, with its peaks at the optimum
 %               moments for sampling;
 %       downFactor - samples per symbol; 
-%       del - the stepsize of the function.
+%       del - the step between the samples to the left and to the right;
+%       mLength - the original message length;
+%       nt - half the size of the pulse.
 %   OUTPUTS:
 %      synchdSig - the resampled signal, now correctly synchronized;
 %       allignOffset - the allignment offset measured by the algorithm.
@@ -15,18 +17,24 @@ function [alligndSig allignOffset] = ELGate(inSig, downFactor, del)
 %    synchronized.
 %--------------------------------------------------------------------------
 
-N = 1:downFactor;
-tau = zeros(1,downFactor);
+tnow = nt*oFactor+1;
+tau = 0; xs = zeros(1,mLength); i = 0;
+mu = 0.01;
 
-for i = N
-    y = downsample(inSig(i:end),downFactor);
-    y_p = conj([y(del+1:end) zeros(1,del)]);
-    y_n = [zeros(1,del) y(1:end-del)];
-    est = sum(abs(y.*(y_p - y_n)));
-    tau(i) = est;
+while tnow < length(inSig) - nt*oFactor
+    i = i + 1;
+    xs(i) = inSig(ceil(tnow+tau*oFactor));
+    x_deltap = inSig(ceil(tnow+tau*oFactor)+del);
+    x_deltan = inSig(ceil(tnow+tau*oFactor)-del);
+    dx = x_deltap - x_deltan;
+    tau = tau + mu*dx*xs(i);
+    tnow = tnow + oFactor;    
 end
 
-[~ , allignOffset] = max(tau);
-alligndSig = inSig(allignOffset:end);
+allignOffset = round(tau*oFactor);
+%a and b are used to discard the tails inserted by the pulse shaping
+a = nt*oFactor + 1 + allignOffset;
+b = a + (mLength - 1)*oFactor;
+samples = downsample(inSig(a:b), oFactor);
 
 end

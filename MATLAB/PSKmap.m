@@ -13,7 +13,7 @@ function [pskSymbols] = PSKmap(bits, M)
 
 switch M
     case 2
-        pskSymbols = complex(2*bits - 1,0);
+        pskSymbols = 2*bits - 1;
     otherwise
         error('Invalid or not implemented value of M for PSK');
 end

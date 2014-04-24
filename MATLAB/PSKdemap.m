@@ -13,7 +13,7 @@ function [pskBits] = PSKdemap(symbols, M)
 
 switch M
     case 2
-        pskBits = sign(symbols) > 0;
+        pskBits = symbols > 0;
     otherwise
         error('Invalid or not implemented value of M for PSK');
 end

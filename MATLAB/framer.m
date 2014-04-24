@@ -1,4 +1,4 @@
-function [framed_message] = framer(message)
+function [framed_message, synchWordLength] = framer(message)
 %framer - Concatenates the header and the footer of the message. Currently
 %it only puts the training sequence before the message.
 %--------------------------------------------------------------------------
@@ -20,6 +20,7 @@ frame_synchronization_word = frame_synchronization_word.sequence;
 frame_synchronization_word = double(frame_synchronization_word > 0);
 
 framed_message = [frame_synchronization_word, message];
+synchWordLength = length(frame_synchronization_word);
 
 end
 

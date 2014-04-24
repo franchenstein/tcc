@@ -1,4 +1,4 @@
-function y=interposinc(x, t, l, beta)
+function y=interpsinc(x, t, l, beta)
 % interpolate to find a single point using the direct method
 %        x = sampled data
 %        t = place at which value desired
