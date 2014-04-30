@@ -13,12 +13,12 @@ msg = source(srcType, mLength, srcFile); %Message bits are generated
 %--------------------------------------------------------------------------
 %Frame Generation
 %--------------------------------------------------------------------------
-%[frame, synchWordLength] = framer(msg); %Includes training sequence as header
+[frame, synchWordLength] = framer(msg); %Includes training sequence as header
 
 %--------------------------------------------------------------------------
 %Bit-to-Symbol Mapping
 %--------------------------------------------------------------------------
-symbols = mapper(msg, modSchm, M, energy); %Maps bits to the symbols of
+symbols = mapper(frame, modSchm, M, energy); %Maps bits to the symbols of
                                              %corresponding mod scheme.
                                              
 %--------------------------------------------------------------------------

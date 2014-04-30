@@ -33,6 +33,6 @@ bpfParams = struct(...              %Demod's band-pass filter parameters
             'q', f.sps,...          %Oversample factor
             'order', 64);           %FIR filter order
 bpf = demodBPF(Fc, Fs, bpfParams);  %BPF coefficients
-%synchWordLength = 0;
+synchWordLength = 255;
 
 save('sdrSettings.mat')

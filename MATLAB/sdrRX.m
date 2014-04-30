@@ -12,22 +12,28 @@
 rxSig = corruptSig;%demodulator(corruptSig, Fc, Fs, bpf);
 
 %--------------------------------------------------------------------------
+%Automatic Gain Control
+%--------------------------------------------------------------------------
+agcSig = agc(rxSig);
+
+%--------------------------------------------------------------------------
 %Matched Filtering
 %--------------------------------------------------------------------------
-rSymbols = matchedFiltering(rxSig, psFilter);
+rSymbols = matchedFiltering(agcSig, psFilter);
 
 %--------------------------------------------------------------------------
 %Symbol Timing Synchronization
 %--------------------------------------------------------------------------
 [synchSymbols, allignOffset] = symbolSynch(rSymbols, oversample,...
-                                           mLength, 2*f.nt, synchAlg);
+                                           mLength + synchWordLength,...
+                                           2*f.nt, synchAlg);
 
 %--------------------------------------------------------------------------
 %Demapping
 %--------------------------------------------------------------------------
-rxBits = demapper(synchSymbols, modSchm, M);
+synchBits = demapper(synchSymbols, modSchm, M);
 
 %--------------------------------------------------------------------------
 %Frame Synchronization
 %--------------------------------------------------------------------------
-%[rxBits, delay] = slidingCorrelator(synchBits, mLength);
+[rxBits, delay] = slidingCorrelator(synchBits, mLength);

@@ -1,11 +1,15 @@
-function [rxSig] = channelModel(txSig, oversample, timingOffset, nGain)
+function [rxSig] = channelModel(txSig, normEnergy, oversample,...
+                                timingOffset, nGain, fp, fg)
 %channelModel - simulates the channel with all its imparities.
 %--------------------------------------------------------------------------
 %   INPUTS:
 %       txSig - The transmitted modulated signal;
+%       normEnergy - The normalized energy of the signal;
 %       oversample - samples per symbol used in the communication;
 %       timingOffset - the timing offset as % of symbol period;
-%       nGain - the AWG noise gain/amplitude.
+%       nGain - the AWG noise gain/amplitude;
+%       fp - The fading profile frequency;
+%       fg - The fading profile gain (in %).
 %   OUTPUTS:
 %       rxSig - the signal received by the RX, after it's corrupted by the
 %               channel.
@@ -17,6 +21,12 @@ function [rxSig] = channelModel(txSig, oversample, timingOffset, nGain)
 %--------------------------------------------------------------------------
 
 corruptSig = txSig;
+n = length(corruptSig);
+
+%Fading profile
+fp = (fg*normEnergy)+abs(sin(2*pi*fp*(1:n)/n));
+corruptSig = fp.*corruptSig;
+
 
 %Additive White Gaussian Noise
 corruptSig = corruptSig + nGain*randn(size(corruptSig));

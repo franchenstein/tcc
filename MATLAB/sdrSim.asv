@@ -7,7 +7,7 @@ clc
 sdrSettingsSave;
 
 %Simulation parameters-----------------------------------------------------
-timingOffset = 20;      %timing offset in % in the channel
+timingOffset = 30;      %timing offset in % in the channel
 nGain = 0.2;            %Noise gain
 fp = 1;                 %Fading profile frequency
 fg = .75;                 %Fading profile gain (in %)
