@@ -13,7 +13,7 @@ function [outSig, gain] = agc(inSig)
 %--------------------------------------------------------------------------
 
 lr = length(inSig);
-ds = pow(inSig);    %Desired average power
+ds = 0.1;    %Desired average power
 g = zeros(1, lr); g(1) = 1; %Gain initialization
 mu = 0.05;    %Stepsize
 nr = zeros(1, lr);
