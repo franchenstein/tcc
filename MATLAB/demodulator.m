@@ -1,4 +1,4 @@
-function [demodulatedSig] = demodulator(rxSig, Fc, Fs, bpf)
+function [demodulatedSig] = demodulator(rxSig, Fc, Fs)%, bpf)
 %demodulator - Demodulates the received signal with the appropriate
 %corrections.
 %--------------------------------------------------------------------------
@@ -18,10 +18,12 @@ function [demodulatedSig] = demodulator(rxSig, Fc, Fs, bpf)
 %--------------------------------------------------------------------------
 
 %Band pass filtering:
-filtrdSig = conv(rxSig, bpf);
+%filtrdSig = conv(rxSig, bpf);
 
-%AGC:
-%TODO: agc
+%--------------------------------------------------------------------------
+%Automatic Gain Control
+%--------------------------------------------------------------------------
+agcSig = agc(rxSig);
 
 %Carrier-Phase Recovery:
 %TODO: costas loop

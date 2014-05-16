@@ -27,12 +27,12 @@ bpfParams = struct(...              %Demod's band-pass filter parameters
             'rolloff', 0.4,...      %Roll-off factor
             'q', f.sps,...          %Oversample factor
             'order', 64);           %FIR filter order
-bpf = demodBPF(Fc, Fs, bpfParams);  %BPF coefficients
-bpfParams = struct(...              %Demod's band-pass filter parameters
-            'rolloff', 0.4,...      %Roll-off factor
-            'q', f.sps,...          %Oversample factor
-            'order', 64);           %FIR filter order
-bpf = demodBPF(Fc, Fs, bpfParams);  %BPF coefficients
+%bpf = demodBPF(Fc, Fs, bpfParams);  %BPF coefficients
+%bpfParams = struct(...              %Demod's band-pass filter parameters
+%            'rolloff', 0.4,...      %Roll-off factor
+%            'q', f.sps,...          %Oversample factor
+%            'order', 64);           %FIR filter order
+%bpf = demodBPF(Fc, Fs, bpfParams);  %BPF coefficients
 synchWordLength = 255;
 
 save('sdrSettings.mat')
