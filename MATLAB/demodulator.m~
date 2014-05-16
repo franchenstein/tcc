@@ -31,6 +31,6 @@ theta = 0;
 j = sqrt(-1);
 t = 0:(length(rxSig) - 1);
 carrier = exp(j*2*pi*(Fc/Fs)*t + theta);
-demodulatedSig = real(carrier.*rxSig);
+demodulatedSig = real(carrier.*hilbert(rxSig));
 
 end

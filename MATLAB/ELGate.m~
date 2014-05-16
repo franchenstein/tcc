@@ -24,6 +24,7 @@ mu = 0.01;
 while tnow < length(inSig) - nt*oFactor
     i = i + 1;
     xs(i) = inSig(ceil(tnow+tau*oFactor));
+    xs(i)
     x_deltap = inSig(ceil(tnow+tau*oFactor)+del);
     x_deltan = inSig(ceil(tnow+tau*oFactor)-del);
     dx = x_deltap - x_deltan;

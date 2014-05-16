@@ -20,7 +20,7 @@ trainingSequence = load('mSequence.mat');
 trainingSequence = trainingSequence.sequence;
 trainingSequence = double(trainingSequence > 0);
 
-inSig = ~inSig;
+inSig = inSig;
 
 corrltdSig = xcorr(trainingSequence, double(inSig));
 [~, delay] = max(corrltdSig);
