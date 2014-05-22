@@ -1,5 +1,6 @@
 function [synchdMsg delay] = slidingCorrelator(inSig, mLength)
-%framer - Applies the sliding correlator algorithm to recover frame synch.
+%slidingCorrelator - Applies the sliding correlator algorithm to recover frame
+%synch.
 %--------------------------------------------------------------------------
 %   INPUTS:
 %       inSig - the symbol synchornized signal that needs to be frame
@@ -20,9 +21,10 @@ trainingSequence = load('mSequence.mat');
 trainingSequence = trainingSequence.sequence;
 trainingSequence = double(trainingSequence > 0);
 
-inSig = ~inSig;
+inSig = ~inSig;	% The bits get inverted somehow -- TODO: research reasons.
 
 corrltdSig = xcorr(trainingSequence, double(inSig));
+plot(corrltdSig)
 [~, delay] = max(corrltdSig);
 delay = length(inSig) - delay(1) + 1;
 
@@ -30,7 +32,6 @@ trainingLength = length(trainingSequence);
 
 synchdMsg = inSig(delay + trainingLength:...
                   (delay + trainingLength+ mLength - 1));
-%synchdMsg = ~inSig(trainingLength+1:end);
               
 delay = delay - 1;
 

@@ -19,7 +19,7 @@ function [txSig] = modulation(pulses, Fc, Fs, gain)
 
 j = sqrt(-1);
 t = 0:(length(pulses) - 1);
-carrier = exp(j*2*pi*(Fc/Fs)*t);
+carrier = exp(j*2*pi*(Fc/Fs).*t);
 txSig = gain*real(pulses.*carrier);
 
 end

@@ -1,4 +1,4 @@
-function [demodulatedSig] = demodulator(rxSig, Fc, Fs)%, bpf)
+function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs)%, bpf)
 %demodulator - Demodulates the received signal with the appropriate
 %corrections.
 %--------------------------------------------------------------------------
@@ -25,14 +25,18 @@ function [demodulatedSig] = demodulator(rxSig, Fc, Fs)%, bpf)
 %--------------------------------------------------------------------------
 agcSig = agc(rxSig);
 
-%Carrier-Phase Recovery:
-%TODO: costas loop
-theta = 0;
-
-%Demodulation:
+%--------------------------------------------------------------------------
+%Carrier Phase Offset Estimation
+%--------------------------------------------------------------------------
+theta = carrierPhaseCorrection(agcSig, Fc, Fs, 64, 0.008, 'Costas Loop', 0, 0);
 j = sqrt(-1);
+phaseCorrection = exp(-j*theta);
+
+%--------------------------------------------------------------------------
+%Demodulation
+%--------------------------------------------------------------------------
 t = 0:(length(rxSig) - 1);
-carrier = exp(j*2*pi*(Fc/Fs)*t + theta);
-demodulatedSig = real(carrier.*rxSig);
+carrier = exp(j*2*pi*(Fc/Fs).*t);%.*phaseCorrection;
+demodulatedSig = real(carrier.*agcSig);
 
 end

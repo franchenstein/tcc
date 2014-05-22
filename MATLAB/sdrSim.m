@@ -10,7 +10,8 @@ sdrSettingsSave;
 timingOffset = 20;      %timing offset in % in the channel
 nGain = 0.2;            %Noise gain
 fp = 1;                 %Fading profile frequency
-fg = .75;                 %Fading profile gain (in %)
+fg = 0.75;                 %Fading profile gain (in %)
+theta = 0;           %Carrier phase offset
 %--------------------------------------------------------------------------
 
 %Transmitter---------------------------------------------------------------
@@ -18,7 +19,7 @@ sdrTX;
 
 %Channel-------------------------------------------------------------------
 corruptSig = channelModel(txSig, energy, oversample, timingOffset, nGain,...
-                          fp, fg);
+                          fp, fg, theta);
 
 %Receiver------------------------------------------------------------------
 sdrRX;
@@ -30,3 +31,4 @@ e = 100*bitErrorRate(msg, rxBits);
 fprintf('BER: %2.2f%%. \n', e);
 fprintf('Allignment offset: %d.\n', allignOffset);
 fprintf('Frame offset: %d.\n', delay);
+fprintf('Phase offset: %d.\n', theta);
