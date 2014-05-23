@@ -21,15 +21,11 @@ trainingSequence = load('mSequence.mat');
 trainingSequence = trainingSequence.sequence;
 trainingSequence = double(trainingSequence > 0);
 
-inSig = ~inSig;	% The bits get inverted somehow -- TODO: research reasons.
-
 corrltdSig = xcorr(trainingSequence, double(inSig));
-plot(corrltdSig)
 [~, delay] = max(corrltdSig);
 delay = length(inSig) - delay(1) + 1;
 
 trainingLength = length(trainingSequence);
-
 synchdMsg = inSig(delay + trainingLength:...
                   (delay + trainingLength+ mLength - 1));
               

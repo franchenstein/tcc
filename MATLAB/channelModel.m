@@ -25,12 +25,12 @@ corruptSig = txSig;
 n = length(corruptSig);
 
 %Carrier phase offset:
-%phaseOffset = exp(j*theta);
-%corruptSig = real(corruptSig.*phaseOffset);
+phaseOffset = exp(j*theta);
+corruptSig = real(corruptSig.*phaseOffset);
 
 %Fading profile
-fp = (fg*normEnergy)+abs(sin(2*pi*fp*(1:n)/n));
-corruptSig = fp.*corruptSig;
+%fp = (fg*normEnergy)+abs(sin(2*pi*fp*(1:n)/n));
+%corruptSig = fp.*corruptSig;
 
 
 %Additive White Gaussian Noise
