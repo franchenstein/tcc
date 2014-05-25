@@ -24,11 +24,11 @@ rSymbols = matchedFiltering(rxSig, psFilter);
                                            2*f.nt, synchAlg);
 
 %--------------------------------------------------------------------------
-%Demapping
-%--------------------------------------------------------------------------
-synchBits = demapper(synchSymbols, modSchm, M);
-
-%--------------------------------------------------------------------------
 %Frame Synchronization
 %--------------------------------------------------------------------------
-[rxBits, delay] = slidingCorrelator(synchBits, mLength);
+[rxBits, delay] = slidingCorrelator(synchSymbols, mLength);
+
+%--------------------------------------------------------------------------
+%Demapping
+%--------------------------------------------------------------------------
+rxBits = demapper(rxBits, modSchm, M);

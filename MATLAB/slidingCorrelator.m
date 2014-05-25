@@ -19,14 +19,14 @@ function [synchdMsg delay] = slidingCorrelator(inSig, mLength)
 
 trainingSequence = load('mSequence.mat');
 trainingSequence = trainingSequence.sequence;
-trainingSequence = double(trainingSequence > 0);
 
-corrltdSig = xcorr(trainingSequence, double(inSig));
-[~, delay] = max(corrltdSig);
-delay = length(inSig) - delay(1) + 1;
+corrltdSig = xcorr(trainingSequence, inSig);
+[~, posMax] = max(abs(corrltdSig));
+signMax = sign(corrltdSig(posMax(1)));
+delay = length(inSig) - posMax(1) + 1;
 
 trainingLength = length(trainingSequence);
-synchdMsg = inSig(delay + trainingLength:...
+synchdMsg = signMax*inSig(delay + trainingLength:...
                   (delay + trainingLength+ mLength - 1));
               
 delay = delay - 1;

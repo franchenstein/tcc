@@ -20,7 +20,7 @@ function [theta] = carrierPhaseCorrection(inSig, Fc, Fs, order, mu, method,...
 
 switch(method)
 	case 'Costas Loop'
-		theta = costasLoop(inSig, Fc, Fs, order, mu);
+		theta = costasLoop(inSig, Fc, Fs, 100, 0.03);
 	otherwise
 		error('Carrier phase offset correction not implemented or incorrect.');
 end

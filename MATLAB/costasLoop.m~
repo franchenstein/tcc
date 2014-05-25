@@ -31,5 +31,7 @@ function [theta] = costasLoop(inSig, Fc, Fs, order, mu)
 	end
 	
 	plot(theta)
+	
+	theta = mean(theta(end - 100 : end));
 
 end

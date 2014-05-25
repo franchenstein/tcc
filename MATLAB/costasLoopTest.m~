@@ -36,7 +36,7 @@ t = 0:(length(sinal) - 1);
 carrier = exp(j*2*pi*(Fc/Fs)*t)*phaseOffset;
 modSig = real(carrier.*sinal);
 
-	theta = costasLoop(modSig, Fc, Fs, order, mu)
+	theta = costasLoop(modSig, Fc, Fs, order, mu);
 	
 	%plot(theta)
 	%xlabel('Iteracoes')

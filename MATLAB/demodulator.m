@@ -28,7 +28,7 @@ agcSig = agc(rxSig);
 %--------------------------------------------------------------------------
 %Carrier Phase Offset Estimation
 %--------------------------------------------------------------------------
-theta = carrierPhaseCorrection(agcSig, Fc, Fs, 64, 0.008, 'Costas Loop', 0, 0);
+theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, 0.08, 'Costas Loop', 0, 0);
 j = sqrt(-1);
 phaseCorrection = exp(-j*theta);
 
@@ -36,7 +36,7 @@ phaseCorrection = exp(-j*theta);
 %Demodulation
 %--------------------------------------------------------------------------
 t = 0:(length(rxSig) - 1);
-carrier = cos(2*pi*Fc.*t);%.*phaseCorrection;
-demodulatedSig = carrier.*rxSig;
+carrier = real(exp(j*2*pi*(Fc/Fs).*t).*phaseCorrection);
+demodulatedSig = carrier.*agcSig;
 
 end
