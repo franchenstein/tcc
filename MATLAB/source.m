@@ -16,7 +16,7 @@ function [source_bits] = source(type, length, filepath)
 
 switch(type)
     case 'random'
-        source_bits = (randn(1,length) > 0.5);
+        source_bits = (rand(1,length) > 0.5);
     case 'file'
         A = dec2bin(loaddata(filepath))'; %Converts ASCII file to bits
         source_bits = A(:);               %Serializes bits
