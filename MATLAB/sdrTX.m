@@ -12,7 +12,7 @@ msg = source(srcType, mLength, srcFile); %Message bits are generated
 %--------------------------------------------------------------------------
 %Encoder
 %--------------------------------------------------------------------------
-[code, mLength] = coder(double(msg), codingAlgorithm, codingParams, mLength);
+[code, codeLength] = coder(double(msg), codingAlgorithm, codingParams);
 
 %--------------------------------------------------------------------------
 %Frame Generation

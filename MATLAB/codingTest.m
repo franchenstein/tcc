@@ -1,13 +1,13 @@
 %coding test
-L = 202*40;
-n = 7;
-k = 4;
-params = struct('n', n, 'k', k);
-p = 0.1;
+L = 1005;
+p = 0.01;
 
 msg = double(rand(1,L) > 0.5);
 a = zeros(1,100);
-algorithm = 'none';
+algorithm = 'none'
+n = 7;
+k = L;
+params = struct('n', n, 'k', k);
 for i = 1:100
     code = coder(msg, algorithm, params);
     
@@ -16,7 +16,7 @@ for i = 1:100
 
     r = double(xor(code,noise));
 
-    newmsg = decoder(r, algorithm, params);
+    newmsg = decoder(r, algorithm, params, L);
     
     ber = bitErrorRate(msg, newmsg);
     
@@ -25,7 +25,10 @@ for i = 1:100
 end
 
 b = zeros(1,100);
-algorithm = 'Hamming';
+algorithm = 'Hamming'
+n = 7;
+k = 4;
+params = struct('n', n, 'k', k);
 for i = 1:100
     code = coder(msg, algorithm, params);
     
@@ -33,7 +36,7 @@ for i = 1:100
 
     r = double(xor(code,noise));
 
-    newmsg = decoder(r, algorithm, params);
+    newmsg = decoder(r, algorithm, params,L);
 
     ber = bitErrorRate(msg, newmsg);
     
@@ -42,12 +45,10 @@ for i = 1:100
 end
 
 c = zeros(1,100);
-algorithm = 'BCH';
-n = 511;
-k = 202;
+algorithm = 'BCH'
+n = 255;
+k = 199;
 params = struct('n', n, 'k', k);
-warning('off','comm:obsolete:bchenc')
-warning('off','comm:obsolete:bchdec')
 for i = 1:100
     code = coder(msg, algorithm, params);
     
@@ -55,7 +56,7 @@ for i = 1:100
 
     r = double(xor(code,noise));
 
-    newmsg = decoder(r, algorithm, params);
+    newmsg = decoder(r, algorithm, params,L);
 
     ber = bitErrorRate(msg, newmsg);
     
@@ -67,6 +68,6 @@ am = mean(a);
 bm = mean(b);
 cm = mean(c);
 
-fprintf('No ECC mean BER: %2.2f%%. \n', 100*am);
-fprintf('Hamming code mean BER: %2.2f%%. \n', 100*bm);
-fprintf('BCH code mean BER: %2.2f%%. \n', 100*cm);
+fprintf('No ECC mean BER: %2.4f%%. \n', 100*am);
+fprintf('Hamming code mean BER: %2.4f%%. \n', 100*bm);
+fprintf('BCH code mean BER: %2.4f%%. \n', 100*cm);

@@ -1,4 +1,4 @@
-function decMsg = decoder(code, algorithm, params)
+function decMsg = decoder(code, algorithm, params, L)
 %decoder - applies error correcting decoding algorithm to the received bits.
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -8,7 +8,8 @@ function decMsg = decoder(code, algorithm, params)
 %                       -none;
 %                       -Hamming;
 %                       -BCH; 
-%       params - a structure with the appropriate parameters for the decoding.
+%       params - a structure with the appropriate parameters for the decoding;
+%       L - the original message length.
 %   OUTPUTS:
 %      decMsg - the recovered decoded message.
 %   DESCRIPTION:
@@ -28,5 +29,8 @@ function decMsg = decoder(code, algorithm, params)
         otherwise
             error('ECC method not implemented or invalid.');
     end
+    
+    
+    decMsg = decMsg(1:L); %removes any padding added in the encoder.
 
 end

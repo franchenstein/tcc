@@ -26,7 +26,7 @@ rSymbols = matchedFiltering(rxSig, psFilter);
 %--------------------------------------------------------------------------
 %Frame Synchronization
 %--------------------------------------------------------------------------
-[symbols, delay] = slidingCorrelator(synchSymbols, mLength);
+[symbols, delay] = slidingCorrelator(synchSymbols, codeLength);
 
 %--------------------------------------------------------------------------
 %Demapping
