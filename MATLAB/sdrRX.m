@@ -26,9 +26,14 @@ rSymbols = matchedFiltering(rxSig, psFilter);
 %--------------------------------------------------------------------------
 %Frame Synchronization
 %--------------------------------------------------------------------------
-[rxBits, delay] = slidingCorrelator(synchSymbols, mLength);
+[symbols, delay] = slidingCorrelator(synchSymbols, mLength);
 
 %--------------------------------------------------------------------------
 %Demapping
 %--------------------------------------------------------------------------
-rxBits = demapper(rxBits, modSchm, M);
+bits = demapper(symbols, modSchm, M);
+
+%--------------------------------------------------------------------------
+%Decoder
+%--------------------------------------------------------------------------
+rxBits = decoder(bits, codingAlgorithm, codingParams);

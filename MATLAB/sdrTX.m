@@ -9,11 +9,15 @@
 %--------------------------------------------------------------------------
 msg = source(srcType, mLength, srcFile); %Message bits are generated
 
+%--------------------------------------------------------------------------
+%Encoder
+%--------------------------------------------------------------------------
+[code, mLength] = coder(double(msg), codingAlgorithm, codingParams, mLength);
 
 %--------------------------------------------------------------------------
 %Frame Generation
 %--------------------------------------------------------------------------
-[frame, synchWordLength] = framer(msg); %Includes training sequence as header
+[frame, synchWordLength] = framer(code); %Includes training sequence as header
 
 %--------------------------------------------------------------------------
 %Bit-to-Symbol Mapping

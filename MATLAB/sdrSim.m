@@ -8,7 +8,7 @@ sdrSettingsSave;
 
 %Simulation parameters-----------------------------------------------------
 timingOffset = 0;      %timing offset in % in the channel
-nGain = 0.5;            %Noise gain
+nGain = 0;            %Noise gain
 fp = 0;                 %Fading profile frequency
 fg = 1;                 %Fading profile gain (in %)
 theta = 0;           %Carrier phase offset

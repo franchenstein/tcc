@@ -36,7 +36,7 @@ phaseCorrection = exp(-j*theta);
 %Demodulation
 %--------------------------------------------------------------------------
 t = 0:(length(rxSig) - 1);
-carrier = real(exp(j*2*pi*(Fc/Fs).*t).*phaseCorrection);
+carrier = real(exp(j*2*pi*(Fc/Fs)*t)*phaseCorrection);
 demodulatedSig = carrier.*agcSig;
 
 end

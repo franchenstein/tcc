@@ -34,5 +34,9 @@ bpfParams = struct(...              %Demod's band-pass filter parameters
 %            'order', 64);           %FIR filter order
 %bpf = demodBPF(Fc, Fs, bpfParams);  %BPF coefficients
 synchWordLength = 255;
+codingAlgorithm = 'BCH';
+codingParams = struct(...
+               'n', 7,...
+               'k', 4);
 
 save('sdrSettings.mat')

@@ -30,6 +30,6 @@ function [theta] = costasLoop(inSig, Fc, Fs, order, mu)
 		theta(i + 1) = theta(i) + mu*lpf1*lpf2;
 	end
 	
-	plot(theta)
+	theta = mean(theta(end - 100 : end));
 
 end
