@@ -20,7 +20,7 @@ rSymbols = matchedFiltering(rxSig, psFilter);
 %Symbol Timing Synchronization
 %--------------------------------------------------------------------------
 [synchSymbols, allignOffset] = symbolSynch(rSymbols, oversample,...
-                                           mLength + synchWordLength,...
+                                           codeLength + synchWordLength,...
                                            2*f.nt, synchAlg);
 
 %--------------------------------------------------------------------------
@@ -36,4 +36,4 @@ bits = demapper(symbols, modSchm, M);
 %--------------------------------------------------------------------------
 %Decoder
 %--------------------------------------------------------------------------
-rxBits = decoder(bits, codingAlgorithm, codingParams);
+rxBits = decoder(bits, codingAlgorithm, codingParams, mLength);

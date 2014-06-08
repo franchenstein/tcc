@@ -2,13 +2,14 @@
 
 clear
 clc
+warning('off', 'all')
 
 %Loads TX and RX parameters:
 sdrSettingsSave;
 
 %Simulation parameters-----------------------------------------------------
-timingOffset = 10;      %timing offset in % in the channel
-nGain = 0.1;            %Noise gain
+timingOffset = 0;      %timing offset in % in the channel
+nGain = 0;            %Noise gain
 fp = 0;                 %Fading profile frequency
 fg = 1;                 %Fading profile gain (in %)
 theta = 0;           %Carrier phase offset
@@ -32,3 +33,5 @@ fprintf('BER: %2.2f%%. \n', e);
 fprintf('Allignment offset: %d.\n', allignOffset);
 fprintf('Frame offset: %d.\n', delay);
 fprintf('Phase offset: %d.\n', theta);
+
+warning('on', 'all')

@@ -26,6 +26,7 @@ signMax = sign(corrltdSig(posMax(1)));
 delay = length(inSig) - posMax(1) + 1;
 
 trainingLength = length(trainingSequence);
+
 synchdMsg = signMax*inSig(delay + trainingLength :...
                          (delay + trainingLength + mLength - 1));
               

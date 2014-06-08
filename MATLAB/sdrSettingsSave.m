@@ -36,7 +36,7 @@ bpfParams = struct(...              %Demod's band-pass filter parameters
 synchWordLength = 255;
 codingAlgorithm = 'BCH';
 codingParams = struct(...
-               'n', 7,...
-               'k', 4);
+               'n', 255,...
+               'k', 199);
 
 save('sdrSettings.mat')
