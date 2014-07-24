@@ -66,7 +66,7 @@ if prev_config == 'n'
 			srcType = input('What will be the source type? (random/file/image) ', 's');
 		end
 		
-		if srcType == 'random'
+		if strcmp(srcType,'random') == 1
 			mLength = input('What is the length of the source message? ');
 			srcFile = 'none';
 		else
@@ -96,6 +96,10 @@ if prev_config == 'n'
 			'r', r,...
 			'nt', nt);
 		psFilter = pulseShapingFilter(f);
+		oversample = f.sps;
+		
+		disp('The only implemented synchronization algorithm is the Early-Late Gate.');		
+		synchAlg = 'Early-Late Gate';       %Symbol synch algorithm
 		
 		Fc = input('Select a carrier frequency ');
 		Fs = input('Select a sampling frequency ');
@@ -108,12 +112,13 @@ if prev_config == 'n'
 					'q', f.sps,...
 					'order', order);
 					
+		disp('The only available synchornization word is 255 bits long.');
 		synchWordLength = 255;
 		
 		codingAlgorithm = 'BCH';
 		disp('BCH code parameters:')
-		n = input('Choose the size of the block (n) ');
-		k = input('Choose the codeword size (k) ');
+		n = input('Choose the codeword size (n) ');
+		k = input('Choose the block size (k) ');
 		codingParams = struct(...
 						'n', n,...
 						'k', k);

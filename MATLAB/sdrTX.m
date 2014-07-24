@@ -7,7 +7,7 @@
 %--------------------------------------------------------------------------
 %Message Generation
 %--------------------------------------------------------------------------
-msg = source(srcType, mLength, srcFile); %Message bits are generated
+[msg, mLength] = source(srcType, mLength, srcFile); %Message bits are generated
 
 %--------------------------------------------------------------------------
 %Encoder

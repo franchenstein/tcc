@@ -1,5 +1,5 @@
-function [source_bits, mLength] = source(type, mLength, filepath)
-%source - creates the source's bit stream
+function [sink_msg] = sink(rx_msg, type)
+%sink - converts the received bit stream to its final form
 %--------------------------------------------------------------------------
 %   INPUTS:
 %       -type: string, can be either "random" or "file";
@@ -17,18 +17,20 @@ function [source_bits, mLength] = source(type, mLength, filepath)
 
 switch(type)
     case 'random'
-        source_bits = (rand(1,mLength) > 0.5);
+        %nothing to do, the BER calculation is the last stop for random streams
+        sink_msg = rx_msg;
     case 'file'
-        A = dec2bin(fileread(filepath))'; %Converts ASCII file to bits
-        A = A(:)';               %Serializes bits
-        for i = 1:length(A)
-			source_bits(i) = str2num(A(i));
+		r = [];
+		for i = 1:length(rx_msg)
+			r = [r num2str(rx_msg(i))];
 		end
+        A = bin2dec(vec2mat(r,7))';  %Converts stream to ascii decimals 
+        sink_msg = char(A);				 %Converts decimals to char
+        fileID = fopen('rx_msg.txt', 'w');
+        fwrite(fileID, sink_msg);
     otherwise
         error('Invalid source type')
 end
-
-mLength = length(source_bits);
 
 end
 
