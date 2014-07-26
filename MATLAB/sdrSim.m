@@ -9,6 +9,8 @@ sdrSettingsPrompt;
 
 %--------------------------------------------------------------------------
 
+disp('******Starting Simulation******');
+
 %Transmitter---------------------------------------------------------------
 sdrTX;
 
@@ -23,6 +25,7 @@ sdrRX;
 
 e = 100*bitErrorRate(msg, rxBits);
 
+disp('******End Results******');
 fprintf('BER: %2.2f%%. \n', e);
 fprintf('Allignment offset: %d.\n', allignOffset);
 fprintf('Frame offset: %d.\n', delay);

@@ -2,17 +2,13 @@ function [sink_msg] = sink(rx_msg, type)
 %sink - converts the received bit stream to its final form
 %--------------------------------------------------------------------------
 %   INPUTS:
-%       -type: string, can be either "random" or "file";
-%       -length: user-defined length for the random message;
-%       -filepath: path where the message is located.
+%       -rx_msg: the final processed received bits;
+%       -type: the type of message that was sent (random, file or image).
 %   OUTPUTS:
-%       -source_bits: the message bit stream.
-%		-mLength: final message length.
+%       -sink_msg: the estimated message.
 %   DESCRIPTION:
-%       Generates the bit stream of the source. If the type is "random", a
-%       random bit stream will be generated with the user defined length.
-%       In case "file" is chosen, the file in filepath will be loaded and
-%       the length will be ignored.
+%       Recreates the estimation of original message from the received
+%       bitstream.
 %--------------------------------------------------------------------------
 
 switch(type)
