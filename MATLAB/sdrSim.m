@@ -18,6 +18,18 @@ sdrTX;
 corruptSig = channelModel(txSig, energy, oversample, timingOffset, nGain,...
                           fp, fg, theta);
 
+figure();
+disp('Plotting channel-corrupted analog signal.');
+subplot(2,1,1), plot(t2, real(corruptSig)); %t2 defined in sdrTX
+title('In-Phase Channel-corrupted signal');
+xlabel('Time');
+ylabel('Amplitude');
+subplot(2,1,2), plot(t2, imag(corruptSig)); %t2 defined in sdrTX
+title('Quadrature Channel-corrupted signal');
+xlabel('Time');
+ylabel('Amplitude');
+                     
+
 %Receiver------------------------------------------------------------------
 sdrRX;
 

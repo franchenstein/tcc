@@ -26,4 +26,12 @@ end
 outSig = nr;
 gain = g;
 
+disp('Plotting AGC evolution per iteration.');
+figure();
+i = 1:lr;
+plot(i, g);
+title('AGC');
+xlabel('Iteration');
+ylabel('Gain');
+
 end

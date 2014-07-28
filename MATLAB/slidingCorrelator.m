@@ -32,4 +32,11 @@ synchdMsg = signMax*inSig(delay + trainingLength :...
               
 delay = delay - 1;
 
+disp('Plotting the correlation.');
+figure()
+plot(corrltdSig);
+title('Correlation between received signal and synch sequence.');
+xlabel('Sample Number');
+ylabel('Correlation value');
+
 end
