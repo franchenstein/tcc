@@ -23,11 +23,13 @@ function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs)%, bpf)
 %--------------------------------------------------------------------------
 %Automatic Gain Control
 %--------------------------------------------------------------------------
+disp('******Automatic Gain Control******');
 agcSig = agc(rxSig);
 
 %--------------------------------------------------------------------------
 %Carrier Phase Offset Estimation
 %--------------------------------------------------------------------------
+disp('******Estimating Phase Offset******');
 theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, 0.08, 'Costas Loop', 0, 0);
 j = sqrt(-1);
 phaseCorrection = exp(-j*theta);

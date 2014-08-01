@@ -3,12 +3,12 @@ L = 1005;
 p = 0.01;
 
 msg = double(rand(1,L) > 0.5);
-a = zeros(1,100);
+a = zeros(1,10);
 algorithm = 'none'
 n = 7;
 k = L;
 params = struct('n', n, 'k', k);
-for i = 1:100
+for i = 1:10
     code = coder(msg, algorithm, params);
     
     noise = double(rand(1,length(code)) < p);
@@ -24,12 +24,12 @@ for i = 1:100
     
 end
 
-b = zeros(1,100);
+b = zeros(1,10);
 algorithm = 'Hamming'
 n = 7;
 k = 4;
 params = struct('n', n, 'k', k);
-for i = 1:100
+for i = 1:10
     code = coder(msg, algorithm, params);
     
     noise = double(rand(1,length(code)) < p);
@@ -44,12 +44,12 @@ for i = 1:100
     
 end
 
-c = zeros(1,100);
+c = zeros(1,10);
 algorithm = 'BCH'
 n = 255;
 k = 199;
 params = struct('n', n, 'k', k);
-for i = 1:100
+for i = 1:10
     code = coder(msg, algorithm, params);
     
     noise = double(rand(1,length(code)) < p);

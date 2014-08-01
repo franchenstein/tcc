@@ -20,6 +20,7 @@ function [samples allignOffset] = ELGate(inSig, oFactor, del, mLength, nt)
 tnow = nt*oFactor+1;
 tau = 0; xs = zeros(1,mLength); i = 0;
 mu = 0.01;
+tau_plot = [];
 
 while tnow < length(inSig) - nt*oFactor
     i = i + 1;
@@ -28,7 +29,8 @@ while tnow < length(inSig) - nt*oFactor
     x_deltan = inSig(ceil(tnow+tau*oFactor)-del);
     dx = x_deltap - x_deltan;
     tau = tau + mu*dx*xs(i);
-    tnow = tnow + oFactor;    
+    tnow = tnow + oFactor;
+    tau_plot = [tau_plot tau];    
 end
 
 allignOffset = round(tau*oFactor);
@@ -36,5 +38,12 @@ allignOffset = round(tau*oFactor);
 a = nt*oFactor + 1 + allignOffset;
 b = a + (mLength - 1)*oFactor;
 samples = downsample(inSig(a:b), oFactor);
+                                           
+disp('Plotting sample timing estimation.');
+figure();
+plot(tau_plot);
+title('Sample timing estimation per iteration (Early-Late Gate)');
+xlabel('Iteration');
+ylabel('Tau');
 
 end

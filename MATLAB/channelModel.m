@@ -20,7 +20,7 @@ function [rxSig] = channelModel(txSig, normEnergy, oversample,...
 %       gaussian white noise, carrier phase offset, fading, multipath
 %       effects, delays and timing errors.
 %--------------------------------------------------------------------------
-
+disp('******Message Passing Through Channel******');
 corruptSig = txSig;
 n = length(corruptSig);
 
@@ -41,5 +41,4 @@ timingOffset = floor(0.01*timingOffset*oversample);
 corruptSig = corruptSig(1+timingOffset:end);
 
 rxSig = corruptSig;
-
 end

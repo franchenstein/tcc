@@ -1,4 +1,4 @@
-function [source_bits] = source(type, length, filepath)
+function [source_bits, mLength] = source(type, mLength, filepath)
 %source - creates the source's bit stream
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -7,6 +7,7 @@ function [source_bits] = source(type, length, filepath)
 %       -filepath: path where the message is located.
 %   OUTPUTS:
 %       -source_bits: the message bit stream.
+%		-mLength: final message length.
 %   DESCRIPTION:
 %       Generates the bit stream of the source. If the type is "random", a
 %       random bit stream will be generated with the user defined length.
@@ -16,13 +17,18 @@ function [source_bits] = source(type, length, filepath)
 
 switch(type)
     case 'random'
-        source_bits = (rand(1,length) > 0.5);
+        source_bits = (rand(1,mLength) > 0.5);
     case 'file'
-        A = dec2bin(loaddata(filepath))'; %Converts ASCII file to bits
-        source_bits = A(:);               %Serializes bits
+        A = dec2bin(fileread(filepath))'; %Converts ASCII file to bits
+        A = A(:)';               %Serializes bits
+        for i = 1:length(A)
+			source_bits(i) = str2num(A(i));
+		end
     otherwise
         error('Invalid source type')
 end
+
+mLength = length(source_bits);
 
 end
 
