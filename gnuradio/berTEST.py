@@ -4,7 +4,7 @@
 # Title: BER Test
 # Author: Daniel Franch
 # Description: Tests the BER block created
-# Generated: Fri Aug  1 11:28:43 2014
+# Generated: Fri Aug  1 12:40:03 2014
 ##################################################
 
 execfile("/home/ubuntu/.grc_gnuradio/bitErrorRate.py")
@@ -53,19 +53,20 @@ class berTEST(grc_wxgui.top_block_gui):
         )
         self.Add(self.wxgui_numbersink2_0.win)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
+        self.blocks_not_xx_0 = blocks.not_bb()
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((100, ))
         self.bitErrorRate_0 = bitErrorRate()
-        self.analog_random_source_x_0_0 = blocks.vector_source_b(map(int, numpy.random.randint(0, 2, 16)), True)
         self.analog_random_source_x_0 = blocks.vector_source_b(map(int, numpy.random.randint(0, 2, 16)), True)
 
         ##################################################
         # Connections
         ##################################################
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.wxgui_numbersink2_0, 0))
-        self.connect((self.analog_random_source_x_0_0, 0), (self.bitErrorRate_0, 1))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self.bitErrorRate_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.analog_random_source_x_0, 0), (self.bitErrorRate_0, 0))
+        self.connect((self.analog_random_source_x_0, 0), (self.blocks_not_xx_0, 0))
+        self.connect((self.blocks_not_xx_0, 0), (self.bitErrorRate_0, 1))
 
 
 # QT sink close method reimplementation
