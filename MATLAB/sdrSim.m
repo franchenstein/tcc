@@ -20,6 +20,10 @@ corruptSig = channelModel(txSig, energy, oversample, timingOffset, nGain,...
 
 figure();
 disp('Plotting channel-corrupted analog signal.');
+if length(corruptSig) < length(t2)
+	pad = zeros(1, length(length(t2) - length(corruptSig)));
+	corruptSig = [corruptSig pad];
+end
 subplot(2,1,1), plot(t2, real(corruptSig)); %t2 defined in sdrTX
 title('In-Phase Channel-corrupted signal');
 xlabel('Time');
