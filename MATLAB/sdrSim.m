@@ -5,7 +5,7 @@ clc
 warning('off', 'all')
 
 %Loads TX and RX parameters:
-sdrSettingsPrompt;
+load('sdrSettings.mat');
 
 %--------------------------------------------------------------------------
 
