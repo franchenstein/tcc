@@ -37,6 +37,6 @@ function [theta] = costasLoop(inSig, Fc, Fs, order, mu)
     xlabel('Iteration');
     ylabel('Theta estimation');
 	
-	theta = mean(theta(end - 100 : end));
+	theta = mean(theta(end - 100: end));
 
 end
