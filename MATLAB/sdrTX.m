@@ -19,7 +19,12 @@ fprintf('Variation of the message bits: %2.2f \n', msg_var);
 %Encoder
 %--------------------------------------------------------------------------
 disp('******Channel coding the message******');
-[code, codeLength] = coder(double(msg), codingAlgorithm, codingParams);
+if (enableCoding)
+    [code, codeLength] = coder(double(msg), codingAlgorithm, codingParams);
+else
+    code = msg;
+    codeLength = length(code);
+end
 
 %--------------------------------------------------------------------------
 %Frame Generation
@@ -53,6 +58,7 @@ title('Quadrature TX symbols (100 first)');
 %Pulse Shaping
 %--------------------------------------------------------------------------
 disp('******Applying pulse shaping filter******');
+psFilter = pulseShapingFilter(f);
 pulses = pulseShaping(symbols, oversample, psFilter, f);
 
 disp('Plotting pulse shape');

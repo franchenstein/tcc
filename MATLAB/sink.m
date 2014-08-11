@@ -1,4 +1,4 @@
-function [sink_msg] = sink(rx_msg, type)
+function [sink_msg] = sink(rx_msg, type, sinkFile)
 %sink - converts the received bit stream to its final form
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -22,7 +22,7 @@ switch(type)
 		end
         A = bin2dec(vec2mat(r,7))';  %Converts stream to ascii decimals 
         sink_msg = char(A);				 %Converts decimals to char
-        fileID = fopen('rx_msg.txt', 'w');
+        fileID = fopen(sinkFile, 'w');
         fwrite(fileID, sink_msg);
     otherwise
         error('Invalid source type')

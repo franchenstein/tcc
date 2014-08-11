@@ -1,4 +1,5 @@
-function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs)%, bpf)
+function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,...
+                                               agcEnable, clEnable)%, bpf)
 %demodulator - Demodulates the received signal with the appropriate
 %corrections.
 %--------------------------------------------------------------------------
@@ -24,15 +25,24 @@ function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs)%, bpf)
 %Automatic Gain Control
 %--------------------------------------------------------------------------
 disp('******Automatic Gain Control******');
-agcSig = agc(rxSig);
+if (agcEnable)
+    agcSig = agc(rxSig, agcStep);
+else
+    agcSig = rxSig;
+end
 
 %--------------------------------------------------------------------------
 %Carrier Phase Offset Estimation
 %--------------------------------------------------------------------------
 disp('******Estimating Phase Offset******');
-theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, 0.08, 'Costas Loop', 0, 0);
-j = sqrt(-1);
-phaseCorrection = exp(-j*theta);
+if(clEnable)
+    theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, clStep,...
+                                   'Costas Loop', 0, 0);
+    j = sqrt(-1);
+    phaseCorrection = exp(-j*theta);
+else
+    phaseCorrection = 1;
+end;
 
 %--------------------------------------------------------------------------
 %Demodulation

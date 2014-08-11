@@ -1,4 +1,5 @@
-function [synchdSig allignOffset] = symbolSynch(inSig, sps, mLength, nt, algorithm)
+function [synchdSig allignOffset] = symbolSynch(inSig, sps, mLength, nt,...
+                                                algorithm, step)
 %symbolSynch - Applies the chosen algorithm to the matched filtered signal
 %to recover symbol synchronism.
 %--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ function [synchdSig allignOffset] = symbolSynch(inSig, sps, mLength, nt, algorit
 
 switch algorithm
     case 'Early-Late Gate'
-        [synchdSig allignOffset] = ELGate(inSig, sps, 1, mLength, nt);
+        [synchdSig allignOffset] = ELGate(inSig, sps, 1, mLength, nt, step);
     otherwise
         error('Invalid or not implemented symbol synchronization algorithm.');
 end

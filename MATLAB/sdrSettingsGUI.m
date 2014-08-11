@@ -875,7 +875,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
     global clStep;
-    clStep = 10;
+    clStep = 0.08;
 
 
 

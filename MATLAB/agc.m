@@ -1,4 +1,4 @@
-function [outSig, gain] = agc(inSig)
+function [outSig, gain] = agc(inSig, agcStep)
 %agc - Corrects fading profile using automatic gain control.
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -15,7 +15,7 @@ function [outSig, gain] = agc(inSig)
 lr = length(inSig);
 ds = mean(abs(inSig).^2);    %Desired average power
 g = zeros(1, lr); g(1) = 1; %Gain initialization
-mu = 0.05;    %Stepsize
+mu = agcStep;    %Stepsize
 nr = zeros(1, lr);
 
 for i = 1:lr - 1

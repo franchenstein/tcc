@@ -10,7 +10,8 @@
 %Demodulation
 %--------------------------------------------------------------------------
 disp('******Analog demodulation******');
-[rxSig, theta]= demodulator(corruptSig, Fc, Fs);%, bpf);
+[rxSig, theta]= demodulator(corruptSig, Fc, Fs, agcStep, clStep, enableAGC,...
+                            enableCL);%, bpf);
 disp('Plotting demodulated signal.');
 figure();
 c = f.nt + length(symbols) - 1/f.sps;
@@ -24,7 +25,8 @@ ylabel('Amplitude');
 %Matched Filtering
 %--------------------------------------------------------------------------
 disp('******Matched Filtering******');
-rSymbols = matchedFiltering(rxSig, psFilter);
+rxFilter = pulseShapingFilter(rxF);
+rSymbols = matchedFiltering(rxSig, rxFilter);
 disp('Plotting matched-filtered signal (peaks at symbol time).');
 figure();
 plot(rSymbols);
@@ -36,9 +38,16 @@ ylabel('Amplitude');
 %Symbol Timing Synchronization
 %--------------------------------------------------------------------------
 disp('******Symbol Synchronization******');
-[synchSymbols, allignOffset] = symbolSynch(rSymbols, oversample,...
+if(enableEL)
+    [synchSymbols, allignOffset] = symbolSynch(rSymbols, rxOversample,...
                                            codeLength + synchWordLength,...
-                                           2*f.nt, synchAlg);
+                                           2*f.nt, synchAlg, elStep);
+else
+    a = rxF.nt * rxOversample + 1;
+    b = a + (codeLength + synchWordLength - 1)*rxOversample;
+    synchSymbols = rSymbols(a: rxOversample : b);
+    allignOffset = 0;
+end
 
 disp('Plotting sampled signal');
 figure();
@@ -55,7 +64,12 @@ hold off;
 %Frame Synchronization
 %--------------------------------------------------------------------------
 disp('******Frame Synchronization******');
-[symbols, delay] = slidingCorrelator(synchSymbols, codeLength);
+if (enableCorr)
+    [symbols, delay] = slidingCorrelator(synchSymbols, codeLength);
+else
+    delay = 0;
+    symbols = synchSymbols(trainingLength : trainingLength + codeLength - 1);
+end
 
 disp('Plotting received constellation');
 scatterplot(symbols);
@@ -64,16 +78,20 @@ scatterplot(symbols);
 %Demapping
 %--------------------------------------------------------------------------
 disp('******Modulation Scheme Demapping******');
-bits = demapper(symbols, modSchm, M);
+bits = demapper(symbols, rxModSchm, rxM);
 
 %--------------------------------------------------------------------------
 %Decoder
 %--------------------------------------------------------------------------
 disp('******Channel Decoding******');
-rxBits = decoder(bits, codingAlgorithm, codingParams, mLength);
+if (enableCoding)
+    rxBits = decoder(bits, rxCodingAlgorithm, rxCodingParams, rxMLength);
+else
+    rxBits = bits;
+end
 
 %--------------------------------------------------------------------------
 %Sink
 %--------------------------------------------------------------------------
 disp('******Message Recovery******');
-sink_msg = sink(rxBits, srcType);
+sink_msg = sink(rxBits, srcType, sinkFile);

@@ -1,4 +1,5 @@
-function [samples allignOffset] = ELGate(inSig, oFactor, del, mLength, nt)
+function [samples allignOffset] = ELGate(inSig, oFactor, del, mLength, nt,...
+                                         elStep)
 %ELGate - Implements the Early-Late Gate algorithm for symbol
 %synchronization.
 %--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ function [samples allignOffset] = ELGate(inSig, oFactor, del, mLength, nt)
 
 tnow = nt*oFactor+1;
 tau = 0; xs = zeros(1,mLength); i = 0;
-mu = 0.01;
+mu = elStep;
 tau_plot = [];
 
 while tnow < length(inSig) - nt*oFactor
