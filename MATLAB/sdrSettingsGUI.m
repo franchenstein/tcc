@@ -271,6 +271,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     global enableCorr;
     global enableCoding;
     global sinkFile;
+    global matchfilt;
     save('sdrSettings.mat', 'nGain', '-append');
     save('sdrSettings.mat', 'timingOffset', '-append');
     save('sdrSettings.mat', 'fp', '-append');
@@ -306,6 +307,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     save('sdrSettings.mat', 'enableCL', '-append');
     save('sdrSettings.mat', 'enableCorr', '-append');
     save('sdrSettings.mat', 'enableCoding', '-append');
+    save('sdrSettings.mat', 'matchfilt', '-append');
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.

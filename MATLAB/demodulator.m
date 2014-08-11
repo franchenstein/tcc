@@ -35,12 +35,13 @@ end
 %Carrier Phase Offset Estimation
 %--------------------------------------------------------------------------
 disp('******Estimating Phase Offset******');
+    j = sqrt(-1);
 if(clEnable)
     theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, clStep,...
                                    'Costas Loop', 0, 0);
-    j = sqrt(-1);
     phaseCorrection = exp(-j*theta);
 else
+    theta = 0;
     phaseCorrection = 1;
 end;
 

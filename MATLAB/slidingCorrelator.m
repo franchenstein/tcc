@@ -27,8 +27,13 @@ delay = length(inSig) - posMax(1) + 1;
 
 trainingLength = length(trainingSequence);
 
-synchdMsg = signMax*inSig(delay + trainingLength :...
-                         (delay + trainingLength + mLength - 1));
+a = delay + trainingLength;
+b = a + mLength - 1;
+if b < length(inSig)
+    synchdMsg = signMax*inSig(a : b);
+else
+    synchdMsg = signMax*inSig(a : end);
+end                         
               
 delay = delay - 1;
 

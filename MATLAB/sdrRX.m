@@ -25,8 +25,14 @@ ylabel('Amplitude');
 %Matched Filtering
 %--------------------------------------------------------------------------
 disp('******Matched Filtering******');
-rxFilter = pulseShapingFilter(rxF);
-rSymbols = matchedFiltering(rxSig, rxFilter);
+if strcmp(matchfilt, 'Matched')
+    rxFilter = pulseShapingFilter(rxF);
+    rSymbols = matchedFiltering(rxSig, rxFilter);
+else
+    ff = [0 0.01 0.02 1]; fa = [1 1 0 0];
+    rxFilter = firpm(32, ff, fa);
+    rSymbols = conv(rxSig, rxFilter);
+end
 disp('Plotting matched-filtered signal (peaks at symbol time).');
 figure();
 plot(rSymbols);
@@ -68,6 +74,9 @@ if (enableCorr)
     [symbols, delay] = slidingCorrelator(synchSymbols, codeLength);
 else
     delay = 0;
+    trainingSequence = load('mSequence.mat');
+    trainingSequence = trainingSequence.sequence;
+    trainingLength = length(trainingSequence);
     symbols = synchSymbols(trainingLength : trainingLength + codeLength - 1);
 end
 
