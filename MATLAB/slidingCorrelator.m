@@ -38,8 +38,7 @@ end
 delay = delay - 1;
 
 disp('Plotting the correlation.');
-figure()
-plot(corrltdSig);
+subplot(4,2,8), plot(corrltdSig);
 title('Correlation between received signal and synch sequence.');
 xlabel('Sample Number');
 ylabel('Correlation value');

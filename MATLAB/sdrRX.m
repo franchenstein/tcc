@@ -10,13 +10,13 @@
 %Demodulation
 %--------------------------------------------------------------------------
 disp('******Analog demodulation******');
+figure();
 [rxSig, theta]= demodulator(corruptSig, Fc, Fs, agcStep, clStep, enableAGC,...
                             enableCL);%, bpf);
 disp('Plotting demodulated signal.');
-figure();
 c = f.nt + length(symbols) - 1/f.sps;
 t2 = -f.nt : 1/f.sps : c;
-plot(t2, rxSig);
+subplot(4,2,3),plot(t2, rxSig);
 title('Demodulated signal');
 xlabel('Time');
 ylabel('Amplitude');
@@ -33,9 +33,9 @@ else
     rxFilter = firpm(32, ff, fa);
     rSymbols = conv(rxSig, rxFilter);
 end
+subplot(4,2,4), plot(rxFilter);
 disp('Plotting matched-filtered signal (peaks at symbol time).');
-figure();
-plot(rSymbols);
+subplot(4,2,5),plot(rSymbols);
 title('Matched-Filtering');
 xlabel('Time');
 ylabel('Amplitude');
@@ -56,11 +56,10 @@ else
 end
 
 disp('Plotting sampled signal');
-figure();
-plot(rSymbols);
+subplot(4,2,7), plot(rSymbols);
 hold on;
 t3 = 1 + f.sps^2 : f.sps : f.sps*length(synchSymbols) + f.sps^2;
-stem(t3, synchSymbols, 'r');
+subplot(4,2,7), stem(t3, synchSymbols, 'r');
 title('Matched-Filtered signal and the samples taken');
 xlabel('Time');
 ylabel('Amplitude');

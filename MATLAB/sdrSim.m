@@ -40,11 +40,15 @@ sdrRX;
 %Results-------------------------------------------------------------------
 
 e = 100*bitErrorRate(msg, rxBits);
+Eb = 2;
+No = nGain^2;
+ee = 100*qfunc(sqrt(2*Eb/No));
 
 disp('******End Results******');
 fprintf('BER: %2.2f%%. \n', e);
+fprintf('Expected BER: %2.2f%%. \n', ee);
 fprintf('Allignment offset: %d.\n', allignOffset);
 fprintf('Frame offset: %d.\n', delay);
-fprintf('Phase offset: %d.\n', theta);
+fprintf('Phase offset: %2.2f.\n', theta);
 
 warning('on', 'all')

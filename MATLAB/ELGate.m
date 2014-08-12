@@ -41,10 +41,10 @@ b = a + (mLength - 1)*oFactor;
 samples = downsample(inSig(a:b), oFactor);
                                            
 disp('Plotting sample timing estimation.');
-figure();
-plot(tau_plot);
+subplot(4,2,6), plot(tau_plot);
 title('Sample timing estimation per iteration (Early-Late Gate)');
 xlabel('Iteration');
 ylabel('Tau');
+axis([0 length(tau_plot) -0.6 0.6]);
 
 end

@@ -31,11 +31,11 @@ function [theta] = costasLoop(inSig, Fc, Fs, order, mu)
 	end
 	
 	disp('Plotting Costas Loop theta estimation progress with each iteration');
-	figure();	
-    plot(t,theta);
+    subplot(4,2,2), plot(t,theta);
     title('Costas Loop');
     xlabel('Iteration');
     ylabel('Theta estimation');
+    axis([t(1) t(end) -2*pi 2*pi]);
 	
 	theta = mean(theta(end - 100: end));
 
