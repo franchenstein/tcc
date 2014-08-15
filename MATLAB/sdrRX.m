@@ -11,8 +11,10 @@
 %--------------------------------------------------------------------------
 disp('******Analog demodulation******');
 figure();
+agcPlot = struct('x', 4, 'y', 2, 'p', 1);
+clPlot = struct('x', 4, 'y', 2, 'p', 2);
 [rxSig, theta]= demodulator(corruptSig, Fc, Fs, agcStep, clStep, enableAGC,...
-                            enableCL);%, bpf);
+                            enableCL, agcPlot, clPlot);%, bpf);
 disp('Plotting demodulated signal.');
 c = f.nt + length(symbols) - 1/f.sps;
 t2 = -f.nt : 1/f.sps : c;
@@ -29,7 +31,7 @@ if strcmp(matchfilt, 'Matched')
     rxFilter = pulseShapingFilter(rxF);
     rSymbols = matchedFiltering(rxSig, rxFilter);
 else
-    ff = [0 0.01 0.02 1]; fa = [1 1 0 0];
+    ff = [0 0.1 0.2 1]; fa = [1 1 0 0];
     rxFilter = firpm(32, ff, fa);
     rSymbols = conv(rxSig, rxFilter);
 end
@@ -44,10 +46,11 @@ ylabel('Amplitude');
 %Symbol Timing Synchronization
 %--------------------------------------------------------------------------
 disp('******Symbol Synchronization******');
+plotparams = struct('x', 4, 'y', 2, 'p', 6);
 if(enableEL)
     [synchSymbols, allignOffset] = symbolSynch(rSymbols, rxOversample,...
                                            codeLength + synchWordLength,...
-                                           2*f.nt, synchAlg, elStep);
+                                           2*f.nt, synchAlg, elStep, plotparams);
 else
     a = rxF.nt * rxOversample + 1;
     b = a + (codeLength + synchWordLength - 1)*rxOversample;
@@ -70,7 +73,8 @@ hold off;
 %--------------------------------------------------------------------------
 disp('******Frame Synchronization******');
 if (enableCorr)
-    [symbols, delay] = slidingCorrelator(synchSymbols, codeLength);
+    plotparams.p = 8;
+    [symbols, delay] = slidingCorrelator(synchSymbols, codeLength, plotparams);
 else
     delay = 0;
     trainingSequence = load('mSequence.mat');

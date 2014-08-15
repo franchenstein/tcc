@@ -40,9 +40,7 @@ sdrRX;
 %Results-------------------------------------------------------------------
 
 e = 100*bitErrorRate(msg, rxBits);
-Eb = 2;
-No = nGain^2;
-ee = 100*qfunc(sqrt(2*Eb/No));
+ee = 100*berEstimate(2, nGain^2, modSchm, M); 
 
 disp('******End Results******');
 fprintf('BER: %2.2f%%. \n', e);

@@ -1,4 +1,4 @@
-function [theta] = costasLoop(inSig, Fc, Fs, order, mu)
+function [theta] = costasLoop(inSig, Fc, Fs, order, mu, plotparams)
 %costasLoop - estimates carrier phase offset using Costas Loop.
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -7,6 +7,8 @@ function [theta] = costasLoop(inSig, Fc, Fs, order, mu)
 %		Fs - sampling frequency;
 %		order - desired order for the filters used in the algorithms;
 %		mu - desired stepsize to be used in the algorithms;
+%       plotparams - the position in the subplot to be used for the algorithm's
+%                    plots.
 %   OUTPUTS:
 %      theta - phase offset estimate;
 %   DESCRIPTION:
@@ -31,7 +33,7 @@ function [theta] = costasLoop(inSig, Fc, Fs, order, mu)
 	end
 	
 	disp('Plotting Costas Loop theta estimation progress with each iteration');
-    subplot(4,2,2), plot(t,theta);
+    subplot(plotparams.x,plotparams.y,plotparams.p), plot(t,theta);
     title('Costas Loop');
     xlabel('Iteration');
     ylabel('Theta estimation');

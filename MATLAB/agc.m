@@ -1,8 +1,11 @@
-function [outSig, gain] = agc(inSig, agcStep)
+function [outSig, gain] = agc(inSig, agcStep, plotparams)
 %agc - Corrects fading profile using automatic gain control.
 %--------------------------------------------------------------------------
 %   INPUTS:
 %       inSig - received signal, suffering from a fading profile.
+%       agcStep - the step size to be used by the algorithm.
+%       plotparams - the position in the subplot to be used for the algorithm's
+%                    plots.
 %   OUTPUS:
 %       outSig - signal multiplied by the corrected gain.
 %   DESCRIPTION:
@@ -28,7 +31,7 @@ gain = g;
 
 disp('Plotting AGC evolution per iteration.');
 i = 1:lr;
-subplot(4,2,1), plot(i, g);
+subplot(plotparams.x,plotparams.y,plotparams.p), plot(i, g);
 title('AGC');
 xlabel('Iteration');
 ylabel('Gain');

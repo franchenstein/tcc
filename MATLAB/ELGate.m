@@ -1,5 +1,5 @@
 function [samples allignOffset] = ELGate(inSig, oFactor, del, mLength, nt,...
-                                         elStep)
+                                         elStep, plotparams)
 %ELGate - Implements the Early-Late Gate algorithm for symbol
 %synchronization.
 %--------------------------------------------------------------------------
@@ -10,6 +10,8 @@ function [samples allignOffset] = ELGate(inSig, oFactor, del, mLength, nt,...
 %       del - the step between the samples to the left and to the right;
 %       mLength - the original message length;
 %       nt - half the size of the pulse.
+%       elStep - the step size of the algorithm;
+%       plotparams - the subplot position parameters.
 %   OUTPUTS:
 %      synchdSig - the resampled signal, now correctly synchronized;
 %       allignOffset - the allignment offset measured by the algorithm.
@@ -41,7 +43,7 @@ b = a + (mLength - 1)*oFactor;
 samples = downsample(inSig(a:b), oFactor);
                                            
 disp('Plotting sample timing estimation.');
-subplot(4,2,6), plot(tau_plot);
+subplot(plotparams.x,plotparams.y,plotparam.p), plot(tau_plot);
 title('Sample timing estimation per iteration (Early-Late Gate)');
 xlabel('Iteration');
 ylabel('Tau');

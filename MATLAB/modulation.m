@@ -15,6 +15,10 @@ function [txSig] = modulation(pulses, Fc, Fs, gain)
 %    will result in a signal with an In-Phase and a Quadrature component
 %    that will be transmitted over the air. This block only simulates this
 %    process, once this needs to be done by analog circuitry.
+%    NOTE: For the purpose of adding carrier phase offset in the channel,
+%    the Hilbert transform is not taken at this point, where it should be.
+%    instead, the channel adds the carrier phase offset and then takes the
+%    Fourier transform.
 %--------------------------------------------------------------------------
 
 j = sqrt(-1);

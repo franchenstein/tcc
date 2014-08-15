@@ -1,5 +1,6 @@
 function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,...
-                                               agcEnable, clEnable)%, bpf)
+                                               agcEnable, clEnable,...
+                                               agcPlot, clPlot)%, bpf)
 %demodulator - Demodulates the received signal with the appropriate
 %corrections.
 %--------------------------------------------------------------------------
@@ -8,6 +9,12 @@ function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,..
 %       Fc - the carrier frequency; 
 %       Fs - the sample rate;
 %       bpf - the band-pass filter coefficients;
+%       agcStep - Automatic Gain Control's algorithm step size;
+%       clStep - Costas Loop's step size;
+%       agcEnable - determines whether or not to use the AGC;
+%       clEnable - determine whether or not to use Costas Loop;
+%       agcPlot - plot parameters to be used by the agc's subplot;
+%       clPlot - plot parameters to be used by the Costas Loop's subplot.
 %   OUTPUTS:
 %      demodulatedSig - the signal after demodulation, containing the
 %                       pulses that should be matched filtered.
@@ -26,7 +33,7 @@ function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,..
 %--------------------------------------------------------------------------
 disp('******Automatic Gain Control******');
 if (agcEnable)
-    agcSig = agc(rxSig, agcStep);
+    agcSig = agc(rxSig, agcStep, agcPlot);
 else
     agcSig = rxSig;
 end
@@ -38,7 +45,7 @@ disp('******Estimating Phase Offset******');
     j = sqrt(-1);
 if(clEnable)
     theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, clStep,...
-                                   'Costas Loop', 0, 0);
+                                   'Costas Loop', 0, 0, clPlot);
     phaseCorrection = exp(-j*theta);
 else
     theta = 0;
