@@ -48,7 +48,6 @@ title('Matched-Filtering');
 xlabel('Time');
 ylabel('Amplitude');
 axis([0 500 -(max(rSymbols) + 1) (max(rSymbols) + 1)]);
-rSymbols = agc(rSymbols, agcStep, agcPlot);
 
 %--------------------------------------------------------------------------
 %Symbol Timing Synchronization

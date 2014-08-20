@@ -16,7 +16,7 @@ function [outSig, gain] = agc(inSig, agcStep, plotparams)
 %--------------------------------------------------------------------------
 
 lr = length(inSig);
-ds = 2*mean(abs(inSig).^2);    %Desired average power
+ds = mean(abs(2*inSig).^2);    %Desired average power
 g = zeros(1, lr); g(1) = 1; %Gain initialization
 mu = agcStep;    %Stepsize
 nr = zeros(1, lr);
@@ -27,7 +27,7 @@ for i = 1:lr - 1
 end
 
 outSig = nr;
-gain = g;
+gain = mean(g(end-100: end));
 
 disp('Plotting AGC evolution per iteration.');
 i = 1:lr;

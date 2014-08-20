@@ -29,12 +29,23 @@ function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,..
 %filtrdSig = conv(rxSig, bpf);
 
 %--------------------------------------------------------------------------
+%Automatic Gain Control
+%--------------------------------------------------------------------------
+disp('******Automatic Gain Control******');
+if (agcEnable)
+    [sig gain] = agc(rxSig, agcStep, agcPlot);
+    agcSig = gain*rxSig;
+else
+    demodulatedSig = demodulatedSig;
+end
+
+%--------------------------------------------------------------------------
 %Carrier Phase Offset Estimation
 %--------------------------------------------------------------------------
 disp('******Estimating Phase Offset******');
     j = sqrt(-1);
 if(clEnable)
-    theta = carrierPhaseCorrection(rxSig, Fc, Fs, 100, clStep,...
+    theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, clStep,...
                                    'Costas Loop', 0, 0, clPlot);
     phaseCorrection = exp(-j*theta);
 else
@@ -48,15 +59,5 @@ end;
 t = 0:(length(rxSig) - 1);
 carrier = real(exp(j*2*pi*(Fc/Fs)*t)*phaseCorrection);
 demodulatedSig = carrier.*rxSig;
-
-%--------------------------------------------------------------------------
-%Automatic Gain Control
-%--------------------------------------------------------------------------
-%disp('******Automatic Gain Control******');
-%if (agcEnable)
-%    demodulatedSig = agc(demodulatedSig, agcStep, agcPlot);
-%else
-%    demodulatedSig = demodulatedSig;
-%end
 
 end
