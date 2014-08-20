@@ -52,11 +52,11 @@ demodulatedSig = carrier.*rxSig;
 %--------------------------------------------------------------------------
 %Automatic Gain Control
 %--------------------------------------------------------------------------
-disp('******Automatic Gain Control******');
-if (agcEnable)
-    demodulatedSig = agc(demodulatedSig, agcStep, agcPlot);
-else
-    demodulatedSig = demodulatedSig;
-end
+%disp('******Automatic Gain Control******');
+%if (agcEnable)
+%    demodulatedSig = agc(demodulatedSig, agcStep, agcPlot);
+%else
+%    demodulatedSig = demodulatedSig;
+%end
 
 end

@@ -28,10 +28,12 @@ subplot(2,1,1), plot(t2, real(corruptSig)); %t2 defined in sdrTX
 title('In-Phase Channel-corrupted signal');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 25 -(max(real(corruptSig)) + 1) (max(real(corruptSig)) + 1)])
 subplot(2,1,2), plot(t2, imag(corruptSig)); %t2 defined in sdrTX
 title('Quadrature Channel-corrupted signal');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 25 -(max(imag(corruptSig)) + 1) (max(imag(corruptSig)) + 1)])
                      
 
 %Receiver------------------------------------------------------------------

@@ -37,7 +37,7 @@ function [theta] = costasLoop(inSig, Fc, Fs, order, mu, plotparams)
     title('Costas Loop');
     xlabel('Iteration');
     ylabel('Theta estimation');
-    axis([t(1) t(end) -2*pi 2*pi]);
+    axis([t(1) t(end) -pi/2 pi/2]);
 	
 	theta = mean(theta(end - 100: end));
 

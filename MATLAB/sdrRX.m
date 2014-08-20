@@ -22,6 +22,7 @@ subplot(4,2,3),plot(t2, rxSig);
 title('Demodulated signal');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 50 -(max(rxSig) + 1) (max(rxSig) + 1)]);
 
 %--------------------------------------------------------------------------
 %Matched Filtering
@@ -46,6 +47,8 @@ subplot(4,2,5),plot(rSymbols);
 title('Matched-Filtering');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 500 -(max(rSymbols) + 1) (max(rSymbols) + 1)]);
+rSymbols = agc(rSymbols, agcStep, agcPlot);
 
 %--------------------------------------------------------------------------
 %Symbol Timing Synchronization
@@ -71,6 +74,7 @@ subplot(4,2,7), stem(t3, synchSymbols, 'r');
 title('Matched-Filtered signal and the samples taken');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 500 -(max(synchSymbols) + 1) (max(synchSymbols) + 1)]);
 hold off;
 
 %--------------------------------------------------------------------------

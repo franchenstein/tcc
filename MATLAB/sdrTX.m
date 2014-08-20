@@ -75,10 +75,12 @@ subplot(4,2,5), plot(t2,real(pulses));
 title('In-Phase Pulse-Shaped Signal');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 50 -(max(real(pulses)) + 1) (max(real(pulses)) + 1)]);
 subplot(4,2,6), plot(t2,imag(pulses));
 title('Quadrature Pulse-Shaped Signal');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 50 -(max(imag(pulses)) + 1) (max(imag(pulses)) + 1)]);
 
 %--------------------------------------------------------------------------
 %Modulation
@@ -90,8 +92,10 @@ subplot(4,2,7), plot(t2,real(txSig));
 title('In-Phase TX Signal');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 25 -(max(real(txSig)) + 1) (max(real(txSig)) + 1)]);
 subplot(4,2,8), plot(t2,imag(txSig));
 title('Quadrature TX Signal');
 xlabel('Time');
 ylabel('Amplitude');
+axis([0 25 -(max(imag(txSig)) + 1) (max(imag(txSig)) + 1)]);
 
