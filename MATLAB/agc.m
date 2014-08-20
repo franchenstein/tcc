@@ -16,7 +16,7 @@ function [outSig, gain] = agc(inSig, agcStep, plotparams)
 %--------------------------------------------------------------------------
 
 lr = length(inSig);
-ds = mean(abs(inSig).^2);    %Desired average power
+ds = 2*mean(abs(inSig).^2);    %Desired average power
 g = zeros(1, lr); g(1) = 1; %Gain initialization
 mu = agcStep;    %Stepsize
 nr = zeros(1, lr);

@@ -1,5 +1,5 @@
 function [synchdSig allignOffset] = symbolSynch(inSig, sps, mLength, nt,...
-                                                algorithm, step)
+                                                algorithm, step, plotparams)
 %symbolSynch - Applies the chosen algorithm to the matched filtered signal
 %to recover symbol synchronism.
 %--------------------------------------------------------------------------
@@ -9,7 +9,9 @@ function [synchdSig allignOffset] = symbolSynch(inSig, sps, mLength, nt,...
 %       downFactor - the downsampling factor;
 %       sps - Samples per symbol;
 %       algorithm - the synchronization algorithm to be used. Right now, 
-%                   only the Early-Late Gate algorithm is implemented.                      
+%                   only the Early-Late Gate algorithm is implemented.
+%		step - step size to be used by the algorithm;
+%		plotparams - the parameters for the algorithm's subplots.
 %   OUTPUTS:
 %      synchdSig - the resampled signal, now correctly synchronized;
 %       allignOffset - the allignment offset measured by the algorithm.
@@ -21,7 +23,8 @@ function [synchdSig allignOffset] = symbolSynch(inSig, sps, mLength, nt,...
 
 switch algorithm
     case 'Early-Late Gate'
-        [synchdSig allignOffset] = ELGate(inSig, sps, 1, mLength, nt, step);
+        [synchdSig allignOffset] = ELGate(inSig, sps, 1, mLength, nt, step,...
+										  plotparams);
     otherwise
         error('Invalid or not implemented symbol synchronization algorithm.');
 end

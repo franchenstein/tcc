@@ -30,12 +30,17 @@ disp('******Matched Filtering******');
 if strcmp(matchfilt, 'Matched')
     rxFilter = pulseShapingFilter(rxF);
     rSymbols = matchedFiltering(rxSig, rxFilter);
+	t1 = -rxF.nt:1/rxF.sps:rxF.nt;
 else
-    ff = [0 0.1 0.2 1]; fa = [1 1 0 0];
-    rxFilter = firpm(32, ff, fa);
+    ff = [0 0.2 0.25 1]; fa = [1 1 0 0]; order = 32;
+    rxFilter = firpm(order, ff, fa);
     rSymbols = conv(rxSig, rxFilter);
+    t1 = -order/2:order/2
 end
-subplot(4,2,4), plot(rxFilter);
+subplot(4,2,4), plot(t1,rxFilter);
+title('Receive Filter');
+xlabel('Time');
+ylabel('Amplitude');
 disp('Plotting matched-filtered signal (peaks at symbol time).');
 subplot(4,2,5),plot(rSymbols);
 title('Matched-Filtering');

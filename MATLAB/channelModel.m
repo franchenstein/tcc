@@ -29,7 +29,7 @@ phaseOffset = exp(j*theta);
 corruptSig = real(corruptSig.*phaseOffset);
 
 %Fading profile
-fp = (fg*normEnergy)+abs(sin(2*pi*fp*(1:n)/n));
+fp = 1;
 corruptSig = fp.*corruptSig;
 
 
