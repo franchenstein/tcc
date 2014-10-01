@@ -1,5 +1,5 @@
 function [rxSig] = channelModel(txSig, normEnergy, oversample,...
-                                timingOffset, nGain, fp, fg, theta)
+                                timingOffset, nGain, fp, fg, theta, msgFlag)
 %channelModel - simulates the channel with all its imparities.
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -20,7 +20,10 @@ function [rxSig] = channelModel(txSig, normEnergy, oversample,...
 %       gaussian white noise, carrier phase offset, fading, multipath
 %       effects, delays and timing errors.
 %--------------------------------------------------------------------------
-disp('******Message Passing Through Channel******');
+if(msgFlag)
+    disp('******Message Passing Through Channel******');
+end
+
 corruptSig = txSig;
 n = length(corruptSig);
 
@@ -34,7 +37,7 @@ corruptSig = fp.*corruptSig;
 
 
 %Additive White Gaussian Noise
-corruptSig = corruptSig + nGain*randn(size(corruptSig));
+corruptSig = corruptSig + sqrt(nGain)*randn(size(corruptSig));
 
 %Adding timing offset/delay
 timingOffset = floor(0.01*timingOffset*oversample);

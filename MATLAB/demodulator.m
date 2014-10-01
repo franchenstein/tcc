@@ -1,6 +1,7 @@
 function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,...
                                                agcEnable, clEnable,...
-                                               agcPlot, clPlot)%, bpf)
+                                               agcPlot, clPlot, plotFlag,...
+                                               msgFlag)%, bpf)
 %demodulator - Demodulates the received signal with the appropriate
 %corrections.
 %--------------------------------------------------------------------------
@@ -14,7 +15,8 @@ function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,..
 %       agcEnable - determines whether or not to use the AGC;
 %       clEnable - determine whether or not to use Costas Loop;
 %       agcPlot - plot parameters to be used by the agc's subplot;
-%       clPlot - plot parameters to be used by the Costas Loop's subplot.
+%       clPlot - plot parameters to be used by the Costas Loop's subplot;
+%       plotFlag - whether the plots should or shouldn't be displayed.
 %   OUTPUTS:
 %      demodulatedSig - the signal after demodulation, containing the
 %                       pulses that should be matched filtered.
@@ -25,28 +27,31 @@ function [demodulatedSig, theta] = demodulator(rxSig, Fc, Fs, agcStep, clStep,..
 %    Costas-Loop to correct carrier phase offset and fading.
 %--------------------------------------------------------------------------
 
-%Band pass filtering:
-%filtrdSig = conv(rxSig, bpf);
-
 %--------------------------------------------------------------------------
 %Automatic Gain Control
 %--------------------------------------------------------------------------
-disp('******Automatic Gain Control******');
+if(msgFlag)
+    disp('******Automatic Gain Control******');
+end
+
 if (agcEnable)
-    [sig gain] = agc(rxSig, agcStep, agcPlot);
+    [sig gain] = agc(rxSig, agcStep, agcPlot, plotFlag);
     agcSig = gain*rxSig;
 else
-    demodulatedSig = demodulatedSig;
+    agcSig = rxSig;
 end
 
 %--------------------------------------------------------------------------
 %Carrier Phase Offset Estimation
 %--------------------------------------------------------------------------
-disp('******Estimating Phase Offset******');
+if(msgFlag)
+    disp('******Estimating Phase Offset******');
+end
+
     j = sqrt(-1);
 if(clEnable)
     theta = carrierPhaseCorrection(agcSig, Fc, Fs, 100, clStep,...
-                                   'Costas Loop', 0, 0, clPlot);
+                                   'Costas Loop', 0, 0, clPlot, plotFlag);
     phaseCorrection = exp(-j*theta);
 else
     theta = 0;
@@ -58,6 +63,12 @@ end;
 %--------------------------------------------------------------------------
 t = 0:(length(rxSig) - 1);
 carrier = real(exp(j*2*pi*(Fc/Fs)*t)*phaseCorrection);
-demodulatedSig = carrier.*rxSig;
+demodulatedSig = carrier.*agcSig;
+
+%ff = [0 0.1 0.15 1]; fa = [1 1 0 0]; order = 32;
+%demodFilter = firpm(order, ff, fa);
+%dSig = conv(demodulatedSig, demodFilter);
+%g = max(demodulatedSig)/max(dSig);
+%demodulatedSig = g*dSig((order/2):(end-(order/2)));
 
 end

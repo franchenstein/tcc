@@ -1,4 +1,4 @@
-function [sink_msg] = sink(rx_msg, type, sinkFile)
+function [sink_msg] = sink(rx_msg, msgType, sinkFile)
 %sink - converts the received bit stream to its final form
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -11,7 +11,7 @@ function [sink_msg] = sink(rx_msg, type, sinkFile)
 %       bitstream.
 %--------------------------------------------------------------------------
 
-switch(type)
+switch(msgType)
     case 'random'
         %nothing to do, the BER calculation is the last stop for random streams
         sink_msg = rx_msg;

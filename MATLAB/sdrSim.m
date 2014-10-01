@@ -10,13 +10,15 @@ load('sdrSettings.mat');
 %--------------------------------------------------------------------------
 
 disp('******Starting Simulation******');
+plotFlag = 1;
+msgFlag = 1;
 
 %Transmitter---------------------------------------------------------------
 sdrTX;
 
 %Channel-------------------------------------------------------------------
 corruptSig = channelModel(txSig, energy, oversample, timingOffset, nGain,...
-                          fp, fg, theta);
+                          fp, fg, theta, msgFlag);
 
 figure();
 if length(t2) > length(corruptSig)
@@ -42,7 +44,19 @@ sdrRX;
 %Results-------------------------------------------------------------------
 
 e = 100*bitErrorRate(msg, rxBits);
-ee = 100*berEstimate(2, nGain^2, modSchm, M); 
+
+Eb_Noise = E %Check the sdrRX
+ 
+%Run the receiver again without noise, so the expected BER can be estimated:
+plotFlag = 0;
+msgFlag = 0;
+corruptSig = channelModel(txSig, energy, oversample, timingOffset, 0,...
+                          fp, fg, theta, msgFlag);
+sdrRX;
+Eb = E
+No = 2*(Eb - Eb_Noise)
+
+ee = 100*berEstimate(Eb, No, modSchm, M); 
 
 disp('******End Results******');
 fprintf('BER: %2.2f%%. \n', e);

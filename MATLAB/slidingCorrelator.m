@@ -1,4 +1,4 @@
-function [synchdMsg delay] = slidingCorrelator(inSig, mLength, plotparams)
+function [synchdMsg delay] = slidingCorrelator(inSig, mLength, plotparams, plotFlag)
 %slidingCorrelator - Applies the sliding correlator algorithm to recover frame
 %synch.
 %--------------------------------------------------------------------------
@@ -6,7 +6,8 @@ function [synchdMsg delay] = slidingCorrelator(inSig, mLength, plotparams)
 %       inSig - the symbol synchornized signal that needs to be frame
 %                 synchronized.
 %       mLength - the length of the original message.
-%       plotparams - the subplot's position parameters.
+%       plotparams - the subplot's position parameters;
+%       plotFlag - whether the plots should or shouldn't be displayed.
 %   OUTPUTS:
 %      synchMsg - the frame synchronized message, that will only need to be
 %                 demapped and decoded;
@@ -38,10 +39,12 @@ end
               
 delay = delay - 1;
 
-disp('Plotting the correlation.');
-subplot(plotparams.x,plotparams.y,plotparams.p), plot(corrltdSig);
-title('Correlation between received signal and synch sequence.');
-xlabel('Sample Number');
-ylabel('Correlation value');
+if(plotFlag)
+    disp('Plotting the correlation.');
+    subplot(plotparams.x,plotparams.y,plotparams.p), plot(corrltdSig);
+    title('Correlation between received signal and synch sequence.');
+    xlabel('Sample Number');
+    ylabel('Correlation value');
+end
 
 end
