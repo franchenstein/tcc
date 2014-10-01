@@ -45,7 +45,7 @@ sdrRX;
 
 e = 100*bitErrorRate(msg, rxBits);
 
-Eb_Noise = E %Check the sdrRX
+Eb_Noise = E; %Check the sdrRX
  
 %Run the receiver again without noise, so the expected BER can be estimated:
 plotFlag = 0;
@@ -53,8 +53,8 @@ msgFlag = 0;
 corruptSig = channelModel(txSig, energy, oversample, timingOffset, 0,...
                           fp, fg, theta, msgFlag);
 sdrRX;
-Eb = E
-No = 2*(Eb - Eb_Noise)
+Eb = E;
+No = abs(2*(Eb_Noise - Eb));
 
 ee = 100*berEstimate(Eb, No, modSchm, M); 
 

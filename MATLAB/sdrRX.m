@@ -20,7 +20,9 @@ if(plotFlag)
 end
 
 [rxSig, theta]= demodulator(corruptSig, Fc, Fs, agcStep, clStep, enableAGC,...
-                            enableCL, agcPlot, clPlot, plotFlag, msgFlag);%, bpf);
+                           enableCL, agcPlot, clPlot, plotFlag, msgFlag);%, bpf);
+
+
 if(plotFlag)                            
     disp('Plotting demodulated signal.');
     c = f.nt + length(symbols) - 1/f.sps;

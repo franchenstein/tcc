@@ -35,8 +35,7 @@ if(msgFlag)
 end
 
 if (agcEnable)
-    [sig gain] = agc(rxSig, agcStep, agcPlot, plotFlag);
-    agcSig = gain*rxSig;
+    [agcSig gain] = agc(rxSig, agcStep, agcPlot, plotFlag);
 else
     agcSig = rxSig;
 end
