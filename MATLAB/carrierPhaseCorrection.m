@@ -1,5 +1,6 @@
 function [theta] = carrierPhaseCorrection(inSig, Fc, Fs, order, mu, method,...
-										  synchWordLength, oversample)
+										  synchWordLength, oversample, plotparams,...
+										  plotFlag)
 %carrierPhaseCorrection - applies the desired algorithm to recover phase offset.
 %--------------------------------------------------------------------------
 %   INPUTS:
@@ -11,6 +12,8 @@ function [theta] = carrierPhaseCorrection(inSig, Fc, Fs, order, mu, method,...
 %		method - which algorithm will be used to recover phase offset;
 %		synchWordLength - the length of the training sequence word;
 %		oversample - the oversample factor;
+%       plotparams - the algorithm's subplot parameters;
+%       plotFlag - whether the plots should or shouldn't be displayed.
 %   OUTPUTS:
 %      theta - phase offset estimate;
 %   DESCRIPTION:
@@ -20,7 +23,7 @@ function [theta] = carrierPhaseCorrection(inSig, Fc, Fs, order, mu, method,...
 
 switch(method)
 	case 'Costas Loop'
-		theta = costasLoop(inSig, Fc, Fs, order, mu);
+		theta = costasLoop(inSig, Fc, Fs, order, mu, plotparams, plotFlag);
 	otherwise
 		error('Carrier phase offset correction not implemented or incorrect.');
 end
