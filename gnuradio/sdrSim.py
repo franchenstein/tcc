@@ -3,7 +3,7 @@
 # Gnuradio Python Flow Graph
 # Title: SDR Simulation
 # Author: Daniel Franch
-# Generated: Wed Oct 15 14:21:45 2014
+# Generated: Wed Oct 15 15:20:48 2014
 ##################################################
 
 execfile("/home/ubuntu/.grc_gnuradio/bitErrorRate.py")
@@ -132,6 +132,22 @@ class sdrSim(gr.top_block, Qt.QWidget):
         self.top_layout.addLayout(self._freq_offset_layout)
         self.sdrTX_0 = sdrTX()
         self.sdrRX_0 = sdrRX()
+        self.qtgui_sink_x_0 = qtgui.sink_f(
+        	1024, #fftsize
+        	firdes.WIN_BLACKMAN_hARRIS, #wintype
+        	0, #fc
+        	samp_rate, #bw
+        	"QT GUI Plot", #name
+        	True, #plotfreq
+        	True, #plotwaterfall
+        	True, #plottime
+        	True, #plotconst
+        )
+        self.qtgui_sink_x_0.set_update_time(1.0/10)
+        self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_sink_x_0_win)
+        
+        
         self.channels_channel_model_0 = channels.channel_model(
         	noise_voltage=noise_volt,
         	frequency_offset=freq_offset,
@@ -140,8 +156,10 @@ class sdrSim(gr.top_block, Qt.QWidget):
         	noise_seed=0,
         	block_tags=False
         )
+        self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((100, ))
+        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
         self.bitErrorRate_0 = bitErrorRate()
         self.ber = qtgui.number_sink(
                 gr.sizeof_float,
@@ -171,13 +189,16 @@ class sdrSim(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.sdrRX_0, 0), (self.bitErrorRate_0, 1))
         self.connect((self.sdrTX_0, 1), (self.channels_channel_model_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.sdrRX_0, 0))
         self.connect((self.sdrTX_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.bitErrorRate_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.ber, 0))
         self.connect((self.bitErrorRate_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.sdrRX_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))
+        self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.bitErrorRate_0, 1))
+        self.connect((self.blocks_throttle_0, 0), (self.bitErrorRate_0, 0))
+        self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_sink_x_0, 0))
+        self.connect((self.sdrTX_0, 0), (self.blocks_char_to_float_0, 0))
 
 
 # QT sink close method reimplementation
@@ -191,9 +212,9 @@ class sdrSim(gr.top_block, Qt.QWidget):
 
     def set_time_offset(self, time_offset):
         self.time_offset = time_offset
-        self.channels_channel_model_0.set_timing_offset(self.time_offset)
         Qt.QMetaObject.invokeMethod(self._time_offset_counter, "setValue", Qt.Q_ARG("double", self.time_offset))
         Qt.QMetaObject.invokeMethod(self._time_offset_slider, "setValue", Qt.Q_ARG("double", self.time_offset))
+        self.channels_channel_model_0.set_timing_offset(self.time_offset)
 
     def get_taps(self):
         return self.taps
@@ -208,24 +229,25 @@ class sdrSim(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
+        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
 
     def get_noise_volt(self):
         return self.noise_volt
 
     def set_noise_volt(self, noise_volt):
         self.noise_volt = noise_volt
-        self.channels_channel_model_0.set_noise_voltage(self.noise_volt)
         Qt.QMetaObject.invokeMethod(self._noise_volt_counter, "setValue", Qt.Q_ARG("double", self.noise_volt))
         Qt.QMetaObject.invokeMethod(self._noise_volt_slider, "setValue", Qt.Q_ARG("double", self.noise_volt))
+        self.channels_channel_model_0.set_noise_voltage(self.noise_volt)
 
     def get_freq_offset(self):
         return self.freq_offset
 
     def set_freq_offset(self, freq_offset):
         self.freq_offset = freq_offset
-        self.channels_channel_model_0.set_frequency_offset(self.freq_offset)
         Qt.QMetaObject.invokeMethod(self._freq_offset_counter, "setValue", Qt.Q_ARG("double", self.freq_offset))
         Qt.QMetaObject.invokeMethod(self._freq_offset_slider, "setValue", Qt.Q_ARG("double", self.freq_offset))
+        self.channels_channel_model_0.set_frequency_offset(self.freq_offset)
 
 if __name__ == '__main__':
     import ctypes
