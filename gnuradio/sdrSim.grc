@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
+<<<<<<< HEAD
   <timestamp>Wed Oct 15 15:20:01 2014</timestamp>
+=======
+  <timestamp>Fri Oct 17 00:05:03 2014</timestamp>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
   <block>
     <key>options</key>
     <param>
@@ -272,6 +276,315 @@
     </param>
   </block>
   <block>
+<<<<<<< HEAD
+    <key>channels_channel_model</key>
+    <param>
+      <key>id</key>
+      <value>channels_channel_model_0</value>
+=======
+    <key>blocks_throttle</key>
+    <param>
+      <key>id</key>
+      <value>blocks_throttle_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>samples_per_second</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(444, 157)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>bitErrorRate</key>
+    <param>
+      <key>id</key>
+      <value>bitErrorRate_0</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>noise_voltage</key>
+      <value>noise_volt</value>
+    </param>
+    <param>
+      <key>freq_offset</key>
+      <value>freq_offset</value>
+    </param>
+    <param>
+      <key>epsilon</key>
+      <value>time_offset</value>
+    </param>
+    <param>
+<<<<<<< HEAD
+      <key>taps</key>
+      <value>taps</value>
+=======
+      <key>_coordinate</key>
+      <value>(1007, 197)</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    </param>
+    <param>
+      <key>seed</key>
+      <value>0</value>
+    </param>
+<<<<<<< HEAD
+    <param>
+      <key>block_tags</key>
+      <value>False</value>
+=======
+  </block>
+  <block>
+    <key>blocks_multiply_const_vxx</key>
+    <param>
+      <key>id</key>
+      <value>blocks_multiply_const_vxx_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+<<<<<<< HEAD
+      <value>(427, 240)</value>
+=======
+      <value>(810, 362)</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>qtgui_time_sink_x</key>
+    <param>
+      <key>id</key>
+      <value>qtgui_time_sink_x_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>name</key>
+      <value>BER</value>
+    </param>
+    <param>
+      <key>size</key>
+      <value>1024</value>
+    </param>
+    <param>
+      <key>srate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>ymin</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>ymax</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>nconnections</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>update_time</key>
+      <value>0.10</value>
+    </param>
+    <param>
+      <key>tr_mode</key>
+      <value>qtgui.TRIG_MODE_FREE</value>
+    </param>
+    <param>
+      <key>tr_slope</key>
+      <value>qtgui.TRIG_SLOPE_POS</value>
+    </param>
+    <param>
+      <key>tr_level</key>
+      <value>0.0</value>
+    </param>
+    <param>
+      <key>tr_delay</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>tr_chan</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>tr_tag</key>
+      <value>""</value>
+    </param>
+    <param>
+      <key>entags</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+<<<<<<< HEAD
+      <value>(832, 434)</value>
+=======
+      <value>(1020, 346)</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>qtgui_sink_x</key>
+    <param>
+      <key>id</key>
+      <value>qtgui_sink_x_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>name</key>
+      <value>QT GUI Plot</value>
+    </param>
+    <param>
+      <key>fftsize</key>
+      <value>1024</value>
+    </param>
+    <param>
+      <key>wintype</key>
+      <value>firdes.WIN_BLACKMAN_hARRIS</value>
+    </param>
+    <param>
+      <key>fc</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>bw</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>rate</key>
+      <value>10</value>
+    </param>
+    <param>
+      <key>plotfreq</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>plotwaterfall</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>plottime</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>plotconst</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>freqchangevar</key>
+      <value>None</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+<<<<<<< HEAD
+      <value>(1123, 161)</value>
+=======
+      <value>(833, 17)</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>channels_channel_model</key>
     <param>
       <key>id</key>
@@ -319,7 +632,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(427, 240)</value>
+      <value>(414, 237)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -327,10 +640,10 @@
     </param>
   </block>
   <block>
-    <key>blocks_multiply_const_vxx</key>
+    <key>qtgui_sink_x</key>
     <param>
       <key>id</key>
-      <value>blocks_multiply_const_vxx_0</value>
+      <value>qtgui_sink_x_0_0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -338,193 +651,55 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>complex</value>
     </param>
     <param>
-      <key>const</key>
-      <value>100</value>
+      <key>name</key>
+      <value>QT GUI Plot</value>
     </param>
     <param>
-      <key>vlen</key>
-      <value>1</value>
+      <key>fftsize</key>
+      <value>1024</value>
     </param>
     <param>
-      <key>affinity</key>
-      <value></value>
+      <key>wintype</key>
+      <value>firdes.WIN_BLACKMAN_hARRIS</value>
     </param>
     <param>
-      <key>minoutbuf</key>
+      <key>fc</key>
       <value>0</value>
     </param>
     <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
+      <key>bw</key>
+      <value>samp_rate</value>
     </param>
     <param>
-      <key>_coordinate</key>
-      <value>(832, 434)</value>
+      <key>rate</key>
+      <value>10</value>
     </param>
     <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>bitErrorRate</key>
-    <param>
-      <key>id</key>
-      <value>bitErrorRate_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
+      <key>plotfreq</key>
       <value>True</value>
     </param>
     <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1123, 161)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>qtgui_number_sink</key>
-    <param>
-      <key>id</key>
-      <value>ber</value>
-    </param>
-    <param>
-      <key>_enabled</key>
+      <key>plotwaterfall</key>
       <value>True</value>
     </param>
     <param>
-      <key>type</key>
-      <value>float</value>
+      <key>plottime</key>
+      <value>True</value>
     </param>
     <param>
-      <key>autoscale</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>avg</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>graph_type</key>
-      <value>qtgui.NUM_GRAPH_NONE</value>
-    </param>
-    <param>
-      <key>nconnections</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>min</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>max</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>update_time</key>
-      <value>0.10</value>
+      <key>plotconst</key>
+      <value>True</value>
     </param>
     <param>
       <key>gui_hint</key>
       <value></value>
     </param>
     <param>
-      <key>label1</key>
-      <value>BER (in %)</value>
-    </param>
-    <param>
-      <key>color1</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label2</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color2</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label3</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color3</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label4</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color4</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label5</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color5</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label6</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color6</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label7</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color7</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label8</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color8</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label9</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color9</key>
-      <value>("black", "black")</value>
-    </param>
-    <param>
-      <key>label10</key>
-      <value></value>
-    </param>
-    <param>
-      <key>color10</key>
-      <value>("black", "black")</value>
+      <key>freqchangevar</key>
+      <value>None</value>
     </param>
     <param>
       <key>affinity</key>
@@ -532,6 +707,69 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(488, 1)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>sdrTX</key>
+    <param>
+      <key>id</key>
+      <value>sdrTX_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(164, 199)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>sdrRX</key>
+    <param>
+      <key>id</key>
+      <value>sdrRX_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+<<<<<<< HEAD
       <value>(1087, 418)</value>
     </param>
     <param>
@@ -791,6 +1029,9 @@
     <param>
       <key>_coordinate</key>
       <value>(444, 64)</value>
+=======
+      <value>(714, 231)</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
     </param>
     <param>
       <key>_rotation</key>
@@ -801,12 +1042,6 @@
     <source_block_id>sdrTX_0</source_block_id>
     <sink_block_id>channels_channel_model_0</sink_block_id>
     <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>channels_channel_model_0</source_block_id>
-    <sink_block_id>sdrRX_0</sink_block_id>
-    <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
@@ -846,15 +1081,43 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
+<<<<<<< HEAD
     <source_block_id>blocks_char_to_float_0</source_block_id>
+    <sink_block_id>qtgui_sink_x_0</sink_block_id>
+=======
+    <source_block_id>bitErrorRate_0</source_block_id>
+    <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+<<<<<<< HEAD
+    <source_block_id>sdrTX_0</source_block_id>
+    <sink_block_id>blocks_char_to_float_0</sink_block_id>
+=======
+    <source_block_id>channels_channel_model_0</source_block_id>
+    <sink_block_id>sdrRX_0</sink_block_id>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>channels_channel_model_0</source_block_id>
     <sink_block_id>qtgui_sink_x_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>sdrTX_0</source_block_id>
-    <sink_block_id>blocks_char_to_float_0</sink_block_id>
-    <source_key>0</source_key>
+    <sink_block_id>qtgui_sink_x_0_0</sink_block_id>
+    <source_key>1</source_key>
     <sink_key>0</sink_key>
   </connection>
 </flow_graph>

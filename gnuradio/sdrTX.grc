@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
+<<<<<<< HEAD
   <timestamp>Wed Oct 15 15:12:00 2014</timestamp>
+=======
+  <timestamp>Thu Oct 16 23:13:39 2014</timestamp>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
   <block>
     <key>options</key>
     <param>
@@ -64,7 +68,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>sps</value>
+      <value>mLength</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -72,11 +76,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>2</value>
+      <value>10000</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(9, 300)</value>
+      <value>(9, 378)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -87,29 +91,8 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0.35</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(7, 448)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
+<<<<<<< HEAD
+=======
       <value>samp_rate</value>
     </param>
     <param>
@@ -133,7 +116,8 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>mLength</value>
+>>>>>>> 172c1866b85b5c74388ae360bb87fac894ab86ca
+      <value>excess_bw</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -141,11 +125,57 @@
     </param>
     <param>
       <key>value</key>
-      <value>10000</value>
+      <value>0.35</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(9, 378)</value>
+      <value>(7, 448)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>M</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(11, 227)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(9, 300)</value>
     </param>
     <param>
       <key>_rotation</key>

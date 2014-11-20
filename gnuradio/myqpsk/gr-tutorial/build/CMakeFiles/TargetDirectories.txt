@@ -1,0 +1,9 @@
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/swig/CMakeFiles/_tutorial_swig.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/swig/CMakeFiles/_tutorial_swig_doc_tag.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/swig/CMakeFiles/_tutorial_swig_swig_tag.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/lib/CMakeFiles/gnuradio-tutorial.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/python/CMakeFiles/pygen_python_3486f.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/swig/CMakeFiles/pygen_swig_e91c5.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/lib/CMakeFiles/test-tutorial.dir
+/home/franchz/tcc/gnuradio/myqpsk/gr-tutorial/build/CMakeFiles/uninstall.dir
