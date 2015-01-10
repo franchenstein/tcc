@@ -1,0 +1,11 @@
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/swig/CMakeFiles/_tcc_sdr_swig.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/swig/CMakeFiles/_tcc_sdr_swig_doc_tag.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/swig/CMakeFiles/_tcc_sdr_swig_swig_tag.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/docs/doxygen/CMakeFiles/doxygen_target.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/lib/CMakeFiles/gnuradio-tcc_sdr.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/python/CMakeFiles/pygen_python_67cdf.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/swig/CMakeFiles/pygen_swig_3e38e.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/swig/CMakeFiles/tcc_sdr_swig_swig_doc.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/lib/CMakeFiles/test-tcc_sdr.dir
+/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/CMakeFiles/uninstall.dir

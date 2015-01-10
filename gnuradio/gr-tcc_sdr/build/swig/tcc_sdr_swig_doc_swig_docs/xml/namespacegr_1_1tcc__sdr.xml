@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespacegr_1_1tcc__sdr" kind="namespace">
+    <compoundname>gr::tcc_sdr</compoundname>
+    <innerclass refid="classgr_1_1tcc__sdr_1_1interleaver__bb" prot="public">gr::tcc_sdr::interleaver_bb</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/include/tcc_sdr/interleaver_bb.h" line="29"/>
+  </compounddef>
+</doxygen>

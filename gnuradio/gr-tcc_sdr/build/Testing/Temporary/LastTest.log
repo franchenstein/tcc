@@ -1,0 +1,76 @@
+Start testing: Jan 10 19:03 BRST
+----------------------------------------------------------
+1/2 Testing: test_tcc_sdr
+1/2 Test: test_tcc_sdr
+Command: "/bin/sh" "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/lib/test_tcc_sdr_test.sh"
+Directory: /home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/lib
+"test_tcc_sdr" start time: Jan 10 19:03 BRST
+Output:
+----------------------------------------------------------
+
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_tcc_sdr" end time: Jan 10 19:03 BRST
+"test_tcc_sdr" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: qa_interleaver_bb
+2/2 Test: qa_interleaver_bb
+Command: "/bin/sh" "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/python/qa_interleaver_bb_test.sh"
+Directory: /home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/python
+"qa_interleaver_bb" start time: Jan 10 19:03 BRST
+Output:
+----------------------------------------------------------
+@
+Ice Radio Endpoint: gnuradio -t:tcp -h 192.168.1.107 -p 34554
+....FF
+======================================================================
+FAIL: test_005_t (__main__.qa_interleaver_bb_bb)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 94, in test_005_t
+    self.assertEqual(expected_result, result_data)
+AssertionError: Tuples differ: (0, 0, 0, 0, 0, 0, 0, 0, 1, 2,... != (0, 0, 0, 0, 0, 0, 0, 0, 170, ...
+
+First differing element 8:
+1
+170
+
+- (0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4)
+?                                ^  ^
+
++ (0, 0, 0, 0, 0, 0, 0, 0, 170, 42, 0, 0)
+?                           ++  +   ^  ^
+
+
+======================================================================
+FAIL: test_006_t (__main__.qa_interleaver_bb_bb)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 106, in test_006_t
+    self.assertEqual(expected_result, result_data)
+AssertionError: Tuples differ: (0, 0, 0, 0, 1, 3, 2, 4, 5, 7,... != (0, 0, 0, 0, 1, 3, 2, 4, 0, 0,...
+
+First differing element 8:
+5
+0
+
+- (0, 0, 0, 0, 1, 3, 2, 4, 5, 7, 6, 8, 9, 11, 10, 12)
++ (0, 0, 0, 0, 1, 3, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0)
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.018s
+
+FAILED (failures=2)
+<end of output>
+Test time =   0.21 sec
+----------------------------------------------------------
+Test Failed.
+"qa_interleaver_bb" end time: Jan 10 19:03 BRST
+"qa_interleaver_bb" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jan 10 19:03 BRST

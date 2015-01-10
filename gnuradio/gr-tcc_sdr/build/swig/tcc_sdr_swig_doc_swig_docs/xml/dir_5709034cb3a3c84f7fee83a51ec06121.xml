@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_5709034cb3a3c84f7fee83a51ec06121" kind="dir">
+    <compoundname>/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/include/tcc_sdr/</compoundname>
+    <innerfile refid="api_8h">api.h</innerfile>
+    <innerfile refid="interleaver__bb_8h">interleaver_bb.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/include/tcc_sdr/"/>
+  </compounddef>
+</doxygen>

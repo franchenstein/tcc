@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_f2647ad435bde04ad813c8378cec39c4" kind="dir">
+    <compoundname>/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/include/</compoundname>
+    <innerdir refid="dir_5709034cb3a3c84f7fee83a51ec06121">/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/include/tcc_sdr/</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/include/"/>
+  </compounddef>
+</doxygen>

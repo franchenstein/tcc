@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -O3 -DNDEBUG   -shared -Wl,-soname,_tcc_sdr_swig.so -o _tcc_sdr_swig.so CMakeFiles/_tcc_sdr_swig.dir/tcc_sdr_swigPYTHON_wrap.cxx.o -lpython2.7 ../lib/libgnuradio-tcc_sdr.so -lboost_filesystem-mt -lboost_system-mt /usr/local/lib/libgnuradio-runtime.so /usr/local/lib/libgnuradio-pmt.so -Wl,-rpath,/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/lib:/usr/local/lib: 

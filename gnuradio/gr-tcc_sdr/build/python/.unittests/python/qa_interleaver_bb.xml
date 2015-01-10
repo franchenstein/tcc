@@ -1,0 +1,52 @@
+<testsuite errors="6" failures="0" name="unittest.suite.TestSuite" tests="6" time="0.001">
+  <testcase classname="__main__.qa_interleaver_bb" name="test_001_t" time="0.0003">
+    <error type="exceptions.AttributeError">'module' object has no attribute 'interleaver'
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 38, in test_001_t
+    intlv = tcc_sdr.interleaver(2,3)
+    </error>
+  </testcase>
+  <testcase classname="__main__.qa_interleaver_bb" name="test_002_t" time="0.0001">
+    <error type="exceptions.AttributeError">'module' object has no attribute 'interleaver'
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 50, in test_002_t
+    intlv = tcc_sdr.interleaver(2,2)
+    </error>
+  </testcase>
+  <testcase classname="__main__.qa_interleaver_bb" name="test_003_t" time="0.0001">
+    <error type="exceptions.AttributeError">'module' object has no attribute 'interleaver'
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 62, in test_003_t
+    intlv = tcc_sdr.interleaver(3,2)
+    </error>
+  </testcase>
+  <testcase classname="__main__.qa_interleaver_bb" name="test_004_t" time="0.0001">
+    <error type="exceptions.AttributeError">'module' object has no attribute 'interleaver'
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 74, in test_004_t
+    intlv = tcc_sdr.interleaver(3,3)
+    </error>
+  </testcase>
+  <testcase classname="__main__.qa_interleaver_bb" name="test_005_t" time="0.0001">
+    <error type="exceptions.AttributeError">'module' object has no attribute 'interleaver'
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 86, in test_005_t
+    intlv1 = tcc_sdr.interleaver(2,2)
+    </error>
+  </testcase>
+  <testcase classname="__main__.qa_interleaver_bb" name="test_006_t" time="0.0002">
+    <error type="exceptions.AttributeError">'module' object has no attribute 'interleaver'
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 100, in test_006_t
+    intlv = tcc_sdr.interleaver(2,2)
+    </error>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

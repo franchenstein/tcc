@@ -1,0 +1,58 @@
+<testsuite errors="0" failures="2" name="unittest.suite.TestSuite" tests="6" time="0.017">
+  <testcase classname="__main__.qa_interleaver_bb_bb" name="test_001_t" time="0.0044"></testcase>
+  <testcase classname="__main__.qa_interleaver_bb_bb" name="test_002_t" time="0.0007"></testcase>
+  <testcase classname="__main__.qa_interleaver_bb_bb" name="test_003_t" time="0.0019"></testcase>
+  <testcase classname="__main__.qa_interleaver_bb_bb" name="test_004_t" time="0.0007"></testcase>
+  <testcase classname="__main__.qa_interleaver_bb_bb" name="test_005_t" time="0.0039">
+    <failure type="exceptions.AssertionError">Tuples differ: (0, 0, 0, 0, 0, 0, 0, 0, 1, 2,... != (0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+
+First differing element 8:
+1
+0
+
+- (0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4)
+?                          ^  ^  ^  ^
+
++ (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+?                          ^  ^  ^  ^
+
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 94, in test_005_t
+    self.assertEqual(expected_result, result_data)
+  File "/usr/lib/python2.7/unittest/case.py", line 511, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "/usr/lib/python2.7/unittest/case.py", line 751, in assertTupleEqual
+    self.assertSequenceEqual(tuple1, tuple2, msg, seq_type=tuple)
+  File "/usr/lib/python2.7/unittest/case.py", line 722, in assertSequenceEqual
+    self.fail(msg)
+  File "/usr/lib/python2.7/unittest/case.py", line 408, in fail
+    raise self.failureException(msg)
+    </failure>
+  </testcase>
+  <testcase classname="__main__.qa_interleaver_bb_bb" name="test_006_t" time="0.0045">
+    <failure type="exceptions.AssertionError">Tuples differ: (0, 0, 0, 0, 1, 3, 2, 4, 5, 7,... != (0, 0, 0, 0, 1, 3, 2, 4, 170, ...
+
+First differing element 8:
+5
+170
+
+- (0, 0, 0, 0, 1, 3, 2, 4, 5, 7, 6, 8, 9, 11, 10, 12)
++ (0, 0, 0, 0, 1, 3, 2, 4, 170, 42, 0, 0, 120, 151, 31, 172)
+  File "/usr/lib/python2.7/unittest/case.py", line 327, in run
+    testMethod()
+  File "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/python/qa_interleaver_bb.py", line 106, in test_006_t
+    self.assertEqual(expected_result, result_data)
+  File "/usr/lib/python2.7/unittest/case.py", line 511, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "/usr/lib/python2.7/unittest/case.py", line 751, in assertTupleEqual
+    self.assertSequenceEqual(tuple1, tuple2, msg, seq_type=tuple)
+  File "/usr/lib/python2.7/unittest/case.py", line 722, in assertSequenceEqual
+    self.fail(msg)
+  File "/usr/lib/python2.7/unittest/case.py", line 408, in fail
+    raise self.failureException(msg)
+    </failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
