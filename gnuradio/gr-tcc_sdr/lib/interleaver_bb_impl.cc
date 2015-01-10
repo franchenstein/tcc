@@ -87,6 +87,9 @@ namespace gr {
             }
             else
                 out[i] = buffer2[buf_count++];
+                
+            if (buf_count >= i_n*i_m)
+                buf_count = 0;
                
             buffer[n_count + i_m*m_count] = in[i + i_n*i_m];
             
