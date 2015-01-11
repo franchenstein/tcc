@@ -1,5 +1,5 @@
 <block>
-  <name>Interleaver bb</name>
+  <name>Interleaver</name>
   <key>tcc_sdr_interleaver_bb</key>
   <category>TCC_SDR</category>
   <import>import tcc_sdr</import>
