@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Mpsk Sim
-# Generated: Fri Jan 16 00:15:55 2015
+# Generated: Fri Jan 16 00:24:50 2015
 ##################################################
 
 from PyQt4 import Qt
@@ -339,41 +339,41 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_n(self, n):
         self.n = n
-        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
-        self.set_m(self.n)
         self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
+        self.set_m(self.n)
+        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
 
     def get_sps(self):
         return self.sps
 
     def set_sps(self, sps):
         self.sps = sps
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_preamble(self):
         return self.preamble
 
     def set_preamble(self, preamble):
         self.preamble = preamble
-        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
         self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
+        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
 
     def get_nfilts(self):
         return self.nfilts
 
     def set_nfilts(self, nfilts):
         self.nfilts = nfilts
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_m(self):
         return self.m
 
     def set_m(self, m):
         self.m = m
-        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
         self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
+        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
 
     def get_eb(self):
         return self.eb
