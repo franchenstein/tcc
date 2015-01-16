@@ -1,0 +1,25 @@
+<block>
+  <name>Interleaver bb</name>
+  <key>tcc_sdr_interleaver_bb</key>
+  <category>TCC_SDR</category>
+  <import>import tcc_sdr</import>
+  <make>tcc_sdr.interleaver_bb($n, $m)</make>
+  <param>
+    <name>N</name>
+    <key>n</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>M</name>
+    <key>m</key>
+    <type>int</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

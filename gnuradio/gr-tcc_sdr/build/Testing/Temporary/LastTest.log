@@ -1,10 +1,10 @@
-Start testing: Jan 10 19:42 BRST
+Start testing: Jan 11 20:10 BRST
 ----------------------------------------------------------
 1/2 Testing: test_tcc_sdr
 1/2 Test: test_tcc_sdr
 Command: "/bin/sh" "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/lib/test_tcc_sdr_test.sh"
 Directory: /home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/lib
-"test_tcc_sdr" start time: Jan 10 19:42 BRST
+"test_tcc_sdr" start time: Jan 11 20:10 BRST
 Output:
 ----------------------------------------------------------
 
@@ -13,7 +13,7 @@ Output:
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"test_tcc_sdr" end time: Jan 10 19:42 BRST
+"test_tcc_sdr" end time: Jan 11 20:10 BRST
 "test_tcc_sdr" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -21,22 +21,22 @@ Test Passed.
 2/2 Test: qa_interleaver_bb
 Command: "/bin/sh" "/home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/python/qa_interleaver_bb_test.sh"
 Directory: /home/ubuntu/tcc/gnuradio/gr-tcc_sdr/build/python
-"qa_interleaver_bb" start time: Jan 10 19:42 BRST
+"qa_interleaver_bb" start time: Jan 11 20:10 BRST
 Output:
 ----------------------------------------------------------
-@
-Ice Radio Endpoint: gnuradio -t:tcp -h 192.168.1.107 -p 58374
+
+Ice Radio Endpoint: gnuradio -t:tcp -h 192.168.1.107 -p 49108
 ......
 ----------------------------------------------------------------------
-Ran 6 tests in 0.019s
+Ran 6 tests in 0.016s
 
 OK
 <end of output>
 Test time =   0.22 sec
 ----------------------------------------------------------
 Test Passed.
-"qa_interleaver_bb" end time: Jan 10 19:42 BRST
+"qa_interleaver_bb" end time: Jan 11 20:10 BRST
 "qa_interleaver_bb" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jan 10 19:42 BRST
+End testing: Jan 11 20:10 BRST

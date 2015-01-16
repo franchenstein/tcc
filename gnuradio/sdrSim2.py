@@ -2,10 +2,11 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Simulation for SDR TCC
-# Generated: Fri Nov  7 14:23:02 2014
+# Generated: Sun Jan 11 21:50:12 2015
 ##################################################
 
 from PyQt4 import Qt
+from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import blocks
 from gnuradio import channels
 from gnuradio import digital
@@ -101,7 +102,13 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self._time_offset_tool_bar = Qt.QToolBar(self)
         self._time_offset_layout.addWidget(self._time_offset_tool_bar)
         self._time_offset_tool_bar.addWidget(Qt.QLabel("Timing Offset"+": "))
-        self._time_offset_counter = Qwt.QwtCounter()
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._time_offset_counter = qwt_counter_pyslot()
         self._time_offset_counter.setRange(0.999, 1.001, 0.0001)
         self._time_offset_counter.setNumButtons(2)
         self._time_offset_counter.setValue(self.time_offset)
@@ -141,7 +148,13 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self._noise_volt_tool_bar = Qt.QToolBar(self)
         self._noise_volt_layout.addWidget(self._noise_volt_tool_bar)
         self._noise_volt_tool_bar.addWidget(Qt.QLabel("Noise Voltage"+": "))
-        self._noise_volt_counter = Qwt.QwtCounter()
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._noise_volt_counter = qwt_counter_pyslot()
         self._noise_volt_counter.setRange(0, 1, 0.01)
         self._noise_volt_counter.setNumButtons(2)
         self._noise_volt_counter.setValue(self.noise_volt)
@@ -158,7 +171,13 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self._freq_offset_tool_bar = Qt.QToolBar(self)
         self._freq_offset_layout.addWidget(self._freq_offset_tool_bar)
         self._freq_offset_tool_bar.addWidget(Qt.QLabel("Frequency Offset"+": "))
-        self._freq_offset_counter = Qwt.QwtCounter()
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._freq_offset_counter = qwt_counter_pyslot()
         self._freq_offset_counter.setRange(-0.1, 0.1, 0.001)
         self._freq_offset_counter.setNumButtons(2)
         self._freq_offset_counter.setValue(self.freq_offset)
@@ -186,7 +205,13 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self._delay_tool_bar = Qt.QToolBar(self)
         self._delay_layout.addWidget(self._delay_tool_bar)
         self._delay_tool_bar.addWidget(Qt.QLabel("Delay"+": "))
-        self._delay_counter = Qwt.QwtCounter()
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._delay_counter = qwt_counter_pyslot()
         self._delay_counter.setRange(0, 200, 1)
         self._delay_counter.setNumButtons(2)
         self._delay_counter.setValue(self.delay)
@@ -210,6 +235,32 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0_0.set_y_axis(-1, 2)
         self.qtgui_time_sink_x_0_0.enable_tags(-1, True)
         self.qtgui_time_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_0_0.enable_autoscale(False)
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+                  "magenta", "yellow", "dark red", "dark green", "blue"]
+        styles = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        markers = [-1, -1, -1, -1, -1,
+                   -1, -1, -1, -1, -1]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        
+        for i in xrange(2):
+            if len(labels[i]) == 0:
+                self.qtgui_time_sink_x_0_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_time_sink_x_0_0.set_line_label(i, labels[i])
+            self.qtgui_time_sink_x_0_0.set_line_width(i, widths[i])
+            self.qtgui_time_sink_x_0_0.set_line_color(i, colors[i])
+            self.qtgui_time_sink_x_0_0.set_line_style(i, styles[i])
+            self.qtgui_time_sink_x_0_0.set_line_marker(i, markers[i])
+            self.qtgui_time_sink_x_0_0.set_line_alpha(i, alphas[i])
+        
         self._qtgui_time_sink_x_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_0_win, 2,1,1,1)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
@@ -222,6 +273,32 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.set_y_axis(-1, 4)
         self.qtgui_time_sink_x_0.enable_tags(-1, True)
         self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_0.enable_autoscale(False)
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+                  "magenta", "yellow", "dark red", "dark green", "blue"]
+        styles = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        markers = [-1, -1, -1, -1, -1,
+                   -1, -1, -1, -1, -1]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_time_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_time_sink_x_0.set_line_style(i, styles[i])
+            self.qtgui_time_sink_x_0.set_line_marker(i, markers[i])
+            self.qtgui_time_sink_x_0.set_line_alpha(i, alphas[i])
+        
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.received_grid_layout_1.addWidget(self._qtgui_time_sink_x_0_win,  0,0,1,1)
         self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
@@ -232,6 +309,31 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self.qtgui_const_sink_x_0.set_update_time(0.10)
         self.qtgui_const_sink_x_0.set_y_axis(-2, 2)
         self.qtgui_const_sink_x_0.set_x_axis(-2, 2)
+        self.qtgui_const_sink_x_0.enable_autoscale(False)
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "red", "red", "red",
+                  "red", "red", "red", "red", "red"]
+        styles = [0, 0, 0, 0, 0,
+                  0, 0, 0, 0, 0]
+        markers = [0, 0, 0, 0, 0,
+                   0, 0, 0, 0, 0]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_const_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_const_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_const_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_const_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_const_sink_x_0.set_line_style(i, styles[i])
+            self.qtgui_const_sink_x_0.set_line_marker(i, markers[i])
+            self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
+        
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.received_grid_layout_0.addWidget(self._qtgui_const_sink_x_0_win,  0,0,1,1)
         self._freq_bw_layout = Qt.QVBoxLayout()
@@ -271,7 +373,7 @@ class sdrSim2(gr.top_block, Qt.QWidget):
         self.blocks_vector_source_x_0_0 = blocks.vector_source_b(map(lambda x: (-x+1)/2, preamble), True, 1, [])
         self.blocks_unpack_k_bits_bb_0_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(2)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_stream_mux_0_0_0 = blocks.stream_mux(gr.sizeof_char*1, (len(preamble)/8,payload_size))
         self.blocks_pack_k_bits_bb_1 = blocks.pack_k_bits_bb(8)
         self.blocks_pack_k_bits_bb_0 = blocks.pack_k_bits_bb(8)
@@ -326,16 +428,16 @@ class sdrSim2(gr.top_block, Qt.QWidget):
 
     def set_sps(self, sps):
         self.sps = sps
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_nfilts(self):
         return self.nfilts
 
     def set_nfilts(self, nfilts):
         self.nfilts = nfilts
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_eb(self):
         return self.eb
@@ -349,7 +451,7 @@ class sdrSim2(gr.top_block, Qt.QWidget):
 
     def set_timing_loop_bw(self, timing_loop_bw):
         self.timing_loop_bw = timing_loop_bw
-        self._timing_loop_bw_slider.setValue(self.timing_loop_bw)
+        Qt.QMetaObject.invokeMethod(self._timing_loop_bw_slider, "setValue", Qt.Q_ARG("double", self.timing_loop_bw))
         self.digital_pfb_clock_sync_xxx_0.set_loop_bandwidth(self.timing_loop_bw)
 
     def get_time_offset(self):
@@ -358,8 +460,8 @@ class sdrSim2(gr.top_block, Qt.QWidget):
     def set_time_offset(self, time_offset):
         self.time_offset = time_offset
         self.channels_channel_model_0.set_timing_offset(self.time_offset)
-        self._time_offset_counter.setValue(self.time_offset)
-        self._time_offset_slider.setValue(self.time_offset)
+        Qt.QMetaObject.invokeMethod(self._time_offset_counter, "setValue", Qt.Q_ARG("double", self.time_offset))
+        Qt.QMetaObject.invokeMethod(self._time_offset_slider, "setValue", Qt.Q_ARG("double", self.time_offset))
 
     def get_taps(self):
         return self.taps
@@ -373,9 +475,9 @@ class sdrSim2(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
         self.qtgui_time_sink_x_0_0.set_samp_rate(self.samp_rate)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
 
     def get_rrc_taps(self):
         return self.rrc_taps
@@ -401,7 +503,7 @@ class sdrSim2(gr.top_block, Qt.QWidget):
 
     def set_phase_bw(self, phase_bw):
         self.phase_bw = phase_bw
-        self._phase_bw_slider.setValue(self.phase_bw)
+        Qt.QMetaObject.invokeMethod(self._phase_bw_slider, "setValue", Qt.Q_ARG("double", self.phase_bw))
         self.digital_costas_loop_cc_0.set_loop_bandwidth(self.phase_bw)
 
     def get_payload_size(self):
@@ -416,8 +518,8 @@ class sdrSim2(gr.top_block, Qt.QWidget):
     def set_noise_volt(self, noise_volt):
         self.noise_volt = noise_volt
         self.channels_channel_model_0.set_noise_voltage(self.noise_volt)
-        self._noise_volt_counter.setValue(self.noise_volt)
-        self._noise_volt_slider.setValue(self.noise_volt)
+        Qt.QMetaObject.invokeMethod(self._noise_volt_counter, "setValue", Qt.Q_ARG("double", self.noise_volt))
+        Qt.QMetaObject.invokeMethod(self._noise_volt_slider, "setValue", Qt.Q_ARG("double", self.noise_volt))
 
     def get_matched_filter(self):
         return self.matched_filter
@@ -431,15 +533,15 @@ class sdrSim2(gr.top_block, Qt.QWidget):
     def set_freq_offset(self, freq_offset):
         self.freq_offset = freq_offset
         self.channels_channel_model_0.set_frequency_offset(self.freq_offset)
-        self._freq_offset_counter.setValue(self.freq_offset)
-        self._freq_offset_slider.setValue(self.freq_offset)
+        Qt.QMetaObject.invokeMethod(self._freq_offset_counter, "setValue", Qt.Q_ARG("double", self.freq_offset))
+        Qt.QMetaObject.invokeMethod(self._freq_offset_slider, "setValue", Qt.Q_ARG("double", self.freq_offset))
 
     def get_freq_bw(self):
         return self.freq_bw
 
     def set_freq_bw(self, freq_bw):
         self.freq_bw = freq_bw
-        self._freq_bw_slider.setValue(self.freq_bw)
+        Qt.QMetaObject.invokeMethod(self._freq_bw_slider, "setValue", Qt.Q_ARG("double", self.freq_bw))
 
     def get_excess_bw(self):
         return self.excess_bw
@@ -452,7 +554,7 @@ class sdrSim2(gr.top_block, Qt.QWidget):
 
     def set_eq_gain(self, eq_gain):
         self.eq_gain = eq_gain
-        self._eq_gain_slider.setValue(self.eq_gain)
+        Qt.QMetaObject.invokeMethod(self._eq_gain_slider, "setValue", Qt.Q_ARG("double", self.eq_gain))
         self.digital_cma_equalizer_cc_0.set_gain(self.eq_gain)
 
     def get_delay(self):
@@ -460,8 +562,8 @@ class sdrSim2(gr.top_block, Qt.QWidget):
 
     def set_delay(self, delay):
         self.delay = delay
-        self._delay_counter.setValue(self.delay)
-        self._delay_slider.setValue(self.delay)
+        Qt.QMetaObject.invokeMethod(self._delay_counter, "setValue", Qt.Q_ARG("double", self.delay))
+        Qt.QMetaObject.invokeMethod(self._delay_slider, "setValue", Qt.Q_ARG("double", self.delay))
         self.blocks_delay_0.set_dly(int(self.delay))
 
     def get_arity(self):
@@ -472,8 +574,8 @@ class sdrSim2(gr.top_block, Qt.QWidget):
 
 if __name__ == '__main__':
     import ctypes
-    import os
-    if os.name == 'posix':
+    import sys
+    if sys.platform.startswith('linux'):
         try:
             x11 = ctypes.cdll.LoadLibrary('libX11.so')
             x11.XInitThreads()
@@ -481,6 +583,7 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
+    Qt.QApplication.setGraphicsSystem(gr.prefs().get_string('qtgui','style','raster'))
     qapp = Qt.QApplication(sys.argv)
     tb = sdrSim2()
     tb.start()
