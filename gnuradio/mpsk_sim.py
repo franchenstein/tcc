@@ -2,11 +2,10 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Mpsk Sim
-# Generated: Fri Jan 16 00:24:50 2015
+# Generated: Sun Feb  8 07:11:38 2015
 ##################################################
 
 from PyQt4 import Qt
-from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import blocks
 from gnuradio import channels
 from gnuradio import digital
@@ -17,6 +16,7 @@ from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
 import PyQt4.Qwt5 as Qwt
+import frame_detection
 import sip
 import sys
 import tcc_sdr
@@ -64,12 +64,12 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.qpsk = qpsk = digital.constellation_rect(([0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j]), ([0, 1, 2, 3]), 4, 2, 2, 1, 1).base()
         self.phase_bw = phase_bw = 0.1
         self.payload_size = payload_size = 10000*n*m - len(preamble)/8
+        self.packed_preamble = packed_preamble = [83, 34, 91, 29, 13, 115, -33, 3]
         self.noise_volt = noise_volt = 0
         self.matched_filter = matched_filter = firdes.root_raised_cosine(nfilts, nfilts, 1, eb, int(11*sps*nfilts))
         self.freq_offset = freq_offset = 0
         self.excess_bw = excess_bw = 0.35
         self.eq_gain = eq_gain = 0.01
-        self.delay = delay = n*m - (3*(len(preamble)/8) + 7)%(n*m)
         self.arity = arity = 4
 
         ##################################################
@@ -102,13 +102,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self._time_offset_tool_bar = Qt.QToolBar(self)
         self._time_offset_layout.addWidget(self._time_offset_tool_bar)
         self._time_offset_tool_bar.addWidget(Qt.QLabel("Timing Offset"+": "))
-        class qwt_counter_pyslot(Qwt.QwtCounter):
-            def __init__(self, parent=None):
-                Qwt.QwtCounter.__init__(self, parent)
-            @pyqtSlot('double')
-            def setValue(self, value):
-                super(Qwt.QwtCounter, self).setValue(value)
-        self._time_offset_counter = qwt_counter_pyslot()
+        self._time_offset_counter = Qwt.QwtCounter()
         self._time_offset_counter.setRange(0.999, 1.001, 0.0001)
         self._time_offset_counter.setNumButtons(2)
         self._time_offset_counter.setValue(self.time_offset)
@@ -136,13 +130,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self._noise_volt_tool_bar = Qt.QToolBar(self)
         self._noise_volt_layout.addWidget(self._noise_volt_tool_bar)
         self._noise_volt_tool_bar.addWidget(Qt.QLabel("Noise Voltage"+": "))
-        class qwt_counter_pyslot(Qwt.QwtCounter):
-            def __init__(self, parent=None):
-                Qwt.QwtCounter.__init__(self, parent)
-            @pyqtSlot('double')
-            def setValue(self, value):
-                super(Qwt.QwtCounter, self).setValue(value)
-        self._noise_volt_counter = qwt_counter_pyslot()
+        self._noise_volt_counter = Qwt.QwtCounter()
         self._noise_volt_counter.setRange(0, 1, 0.01)
         self._noise_volt_counter.setNumButtons(2)
         self._noise_volt_counter.setValue(self.noise_volt)
@@ -159,13 +147,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self._freq_offset_tool_bar = Qt.QToolBar(self)
         self._freq_offset_layout.addWidget(self._freq_offset_tool_bar)
         self._freq_offset_tool_bar.addWidget(Qt.QLabel("Frequency Offset"+": "))
-        class qwt_counter_pyslot(Qwt.QwtCounter):
-            def __init__(self, parent=None):
-                Qwt.QwtCounter.__init__(self, parent)
-            @pyqtSlot('double')
-            def setValue(self, value):
-                super(Qwt.QwtCounter, self).setValue(value)
-        self._freq_offset_counter = qwt_counter_pyslot()
+        self._freq_offset_counter = Qwt.QwtCounter()
         self._freq_offset_counter.setRange(-0.1, 0.1, 0.001)
         self._freq_offset_counter.setNumButtons(2)
         self._freq_offset_counter.setValue(self.freq_offset)
@@ -189,7 +171,6 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self._eq_gain_layout.addWidget(self._eq_gain_label)
         self._eq_gain_layout.addWidget(self._eq_gain_slider)
         self.controls_grid_layout_1.addLayout(self._eq_gain_layout, 0,1,1,1)
-        self.tcc_sdr_interleaver_bb_3 = tcc_sdr.interleaver_bb(n, m)
         self.tcc_sdr_interleaver_bb_2 = tcc_sdr.interleaver_bb(n, m)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
         	1024, #size
@@ -201,35 +182,6 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.set_y_axis(-1, 1)
         self.qtgui_time_sink_x_0.enable_tags(-1, True)
         self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_0.enable_autoscale(False)
-        
-        labels = ["", "", "", "", "",
-                  "", "", "", "", ""]
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-                  "magenta", "yellow", "dark red", "dark green", "blue"]
-        styles = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        markers = [-1, -1, -1, -1, -1,
-                   -1, -1, -1, -1, -1]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-        
-        for i in xrange(2*1):
-            if len(labels[i]) == 0:
-                if(i % 2 == 0):
-                    self.qtgui_time_sink_x_0.set_line_label(i, "Re{{Data {0}}}".format(i/2))
-                else:
-                    self.qtgui_time_sink_x_0.set_line_label(i, "Im{{Data {0}}}".format(i/2))
-            else:
-                self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_0.set_line_alpha(i, alphas[i])
-        
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.controls_grid_layout_0.addWidget(self._qtgui_time_sink_x_0_win, 1,0,2,2)
         self.qtgui_sink_x_1 = qtgui.sink_c(
@@ -264,6 +216,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.controls_grid_layout_1.addWidget(self._qtgui_sink_x_0_win, 3,0,2,2)
         
         
+        self.frame_detection_deinterleaver_bb_0 = frame_detection.deinterleaver_bb(n, n)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, timing_loop_bw, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(4)
         self.digital_costas_loop_cc_0 = digital.costas_loop_cc(phase_bw, arity)
@@ -289,15 +242,16 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         )
         self.blocks_vector_source_x_0_0 = blocks.vector_source_b(map(lambda x: (-x+1)/2, preamble), True, 1, [])
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(2)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate)
         self.blocks_stream_mux_0_0_0 = blocks.stream_mux(gr.sizeof_char*1, (len(preamble)/8,payload_size))
+        self.blocks_skiphead_0 = blocks.skiphead(gr.sizeof_char*1, n*m)
         self.blocks_pack_k_bits_bb_1 = blocks.pack_k_bits_bb(8)
         self.blocks_pack_k_bits_bb_0 = blocks.pack_k_bits_bb(8)
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*1)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/ubuntu/original_message", True)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/ubuntu/rx_message", False)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/tx_teste.txt", True)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/rx_teste.txt", False)
         self.blocks_file_sink_0.set_unbuffered(True)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_char*1, delay)
+        self.blocks_delay_0 = blocks.delay(gr.sizeof_char*1, 2342)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
         ##################################################
@@ -322,10 +276,11 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.connect((self.digital_constellation_decoder_cb_0, 0), (self.digital_diff_decoder_bb_0, 0))
         self.connect((self.digital_diff_decoder_bb_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))
         self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.blocks_pack_k_bits_bb_1, 0))
-        self.connect((self.tcc_sdr_interleaver_bb_2, 0), (self.blocks_stream_mux_0_0_0, 1))
-        self.connect((self.tcc_sdr_interleaver_bb_3, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.frame_detection_deinterleaver_bb_0, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.tcc_sdr_interleaver_bb_2, 0), (self.blocks_skiphead_0, 0))
+        self.connect((self.blocks_skiphead_0, 0), (self.blocks_stream_mux_0_0_0, 1))
         self.connect((self.blocks_pack_k_bits_bb_1, 0), (self.blocks_delay_0, 0))
-        self.connect((self.blocks_delay_0, 0), (self.tcc_sdr_interleaver_bb_3, 0))
+        self.connect((self.blocks_delay_0, 0), (self.frame_detection_deinterleaver_bb_0, 0))
 
 
 # QT sink close method reimplementation
@@ -339,9 +294,8 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_n(self, n):
         self.n = n
-        self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
         self.set_m(self.n)
-        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
+        self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
 
     def get_sps(self):
         return self.sps
@@ -357,7 +311,6 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
     def set_preamble(self, preamble):
         self.preamble = preamble
         self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
-        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
 
     def get_nfilts(self):
         return self.nfilts
@@ -373,7 +326,6 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
     def set_m(self, m):
         self.m = m
         self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
-        self.set_delay(self.n*self.m - (3*(len(self.preamble)/8) + 7)%(self.n*self.m))
 
     def get_eb(self):
         return self.eb
@@ -387,7 +339,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_timing_loop_bw(self, timing_loop_bw):
         self.timing_loop_bw = timing_loop_bw
-        Qt.QMetaObject.invokeMethod(self._timing_loop_bw_slider, "setValue", Qt.Q_ARG("double", self.timing_loop_bw))
+        self._timing_loop_bw_slider.setValue(self.timing_loop_bw)
         self.digital_pfb_clock_sync_xxx_0.set_loop_bandwidth(self.timing_loop_bw)
 
     def get_time_offset(self):
@@ -395,8 +347,8 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_time_offset(self, time_offset):
         self.time_offset = time_offset
-        Qt.QMetaObject.invokeMethod(self._time_offset_counter, "setValue", Qt.Q_ARG("double", self.time_offset))
-        Qt.QMetaObject.invokeMethod(self._time_offset_slider, "setValue", Qt.Q_ARG("double", self.time_offset))
+        self._time_offset_counter.setValue(self.time_offset)
+        self._time_offset_slider.setValue(self.time_offset)
         self.channels_channel_model_0.set_timing_offset(self.time_offset)
 
     def get_taps(self):
@@ -434,7 +386,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_phase_bw(self, phase_bw):
         self.phase_bw = phase_bw
-        Qt.QMetaObject.invokeMethod(self._phase_bw_slider, "setValue", Qt.Q_ARG("double", self.phase_bw))
+        self._phase_bw_slider.setValue(self.phase_bw)
         self.digital_costas_loop_cc_0.set_loop_bandwidth(self.phase_bw)
 
     def get_payload_size(self):
@@ -443,13 +395,19 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
     def set_payload_size(self, payload_size):
         self.payload_size = payload_size
 
+    def get_packed_preamble(self):
+        return self.packed_preamble
+
+    def set_packed_preamble(self, packed_preamble):
+        self.packed_preamble = packed_preamble
+
     def get_noise_volt(self):
         return self.noise_volt
 
     def set_noise_volt(self, noise_volt):
         self.noise_volt = noise_volt
-        Qt.QMetaObject.invokeMethod(self._noise_volt_counter, "setValue", Qt.Q_ARG("double", self.noise_volt))
-        Qt.QMetaObject.invokeMethod(self._noise_volt_slider, "setValue", Qt.Q_ARG("double", self.noise_volt))
+        self._noise_volt_counter.setValue(self.noise_volt)
+        self._noise_volt_slider.setValue(self.noise_volt)
         self.channels_channel_model_0.set_noise_voltage(self.noise_volt)
 
     def get_matched_filter(self):
@@ -463,8 +421,8 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_freq_offset(self, freq_offset):
         self.freq_offset = freq_offset
-        Qt.QMetaObject.invokeMethod(self._freq_offset_counter, "setValue", Qt.Q_ARG("double", self.freq_offset))
-        Qt.QMetaObject.invokeMethod(self._freq_offset_slider, "setValue", Qt.Q_ARG("double", self.freq_offset))
+        self._freq_offset_counter.setValue(self.freq_offset)
+        self._freq_offset_slider.setValue(self.freq_offset)
         self.channels_channel_model_0.set_frequency_offset(self.freq_offset)
 
     def get_excess_bw(self):
@@ -478,15 +436,8 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_eq_gain(self, eq_gain):
         self.eq_gain = eq_gain
-        Qt.QMetaObject.invokeMethod(self._eq_gain_slider, "setValue", Qt.Q_ARG("double", self.eq_gain))
+        self._eq_gain_slider.setValue(self.eq_gain)
         self.digital_cma_equalizer_cc_0.set_gain(self.eq_gain)
-
-    def get_delay(self):
-        return self.delay
-
-    def set_delay(self, delay):
-        self.delay = delay
-        self.blocks_delay_0.set_dly(self.delay)
 
     def get_arity(self):
         return self.arity
@@ -496,8 +447,8 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
 if __name__ == '__main__':
     import ctypes
-    import sys
-    if sys.platform.startswith('linux'):
+    import os
+    if os.name == 'posix':
         try:
             x11 = ctypes.cdll.LoadLibrary('libX11.so')
             x11.XInitThreads()
@@ -505,7 +456,6 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    Qt.QApplication.setGraphicsSystem(gr.prefs().get_string('qtgui','style','raster'))
     qapp = Qt.QApplication(sys.argv)
     tb = mpsk_sim()
     tb.start()
