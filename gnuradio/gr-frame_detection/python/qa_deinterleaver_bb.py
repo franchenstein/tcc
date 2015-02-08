@@ -33,7 +33,7 @@ class qa_deinterleaver_bb (gr_unittest.TestCase):
 
     def test_001_t (self):
         src_data = (10, 1, 1, 0, 0, 11, 0, 0, 0)
-        expected_result = (6, 0, 0, 0, 0, 1, 0, 1, 0, 7, 5, 5, 5)
+        expected_result = (0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         deint = frame_detection.deinterleaver_bb(2,2)
@@ -45,7 +45,7 @@ class qa_deinterleaver_bb (gr_unittest.TestCase):
 
     def test_002_t (self):
         src_data = (0, 0, 0, 0, 10, 1, 1, 0, 0)
-        expected_result = (5, 5, 5, 5, 6, 0, 0, 0, 0, 1, 0, 1, 0)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         deint = frame_detection.deinterleaver_bb(2,2)
@@ -57,7 +57,7 @@ class qa_deinterleaver_bb (gr_unittest.TestCase):
 
     def test_003_t (self):
         src_data = (10, 1, 1, 0, 0, 1, 0, 1, 0)
-        expected_result = (6, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0)
+        expected_result = (0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         deint = frame_detection.deinterleaver_bb(2,2)
@@ -69,7 +69,7 @@ class qa_deinterleaver_bb (gr_unittest.TestCase):
 
     def test_004_t (self):
         src_data = (0, 0, 0, 0, 10, 1, 1, 0, 0, 1, 0, 1, 0, 1)
-        expected_result = (5, 5, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         deint = frame_detection.deinterleaver_bb(3,3)
@@ -81,7 +81,7 @@ class qa_deinterleaver_bb (gr_unittest.TestCase):
 
     def test_005_t (self):
         src_data = (10, 1, 1, 0, 0)
-        expected_result = (6, 0, 0, 0, 0, 1, 0, 1, 0)
+        expected_result = (0, 0, 0, 0, 0, 1, 0, 1, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         deint = frame_detection.deinterleaver_bb(2,2)
@@ -93,7 +93,7 @@ class qa_deinterleaver_bb (gr_unittest.TestCase):
 
     def test_006_t (self):
         src_data = (0, 0, 0, 10, 1, 1, 0, 0, 1, 0, 1, 0, 11, 0, 0, 0)
-        expected_result = (5, 5, 5, 6, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 7, 5, 5, 5)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         deint = frame_detection.deinterleaver_bb(2,2)

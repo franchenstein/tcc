@@ -16,12 +16,6 @@ frame_detection/api.h
 gnuradio/block.h
 -
 
-../include/frame_detection/preamble_detector_bb.h
-frame_detection/api.h
--
-gnuradio/sync_block.h
--
-
 /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/deinterleaver_bb_impl.cc
 config.h
 /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/config.h
@@ -32,17 +26,5 @@ deinterleaver_bb_impl.h
 
 /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/deinterleaver_bb_impl.h
 frame_detection/deinterleaver_bb.h
--
-
-/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/preamble_detector_bb_impl.cc
-config.h
-/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/config.h
-gnuradio/io_signature.h
--
-preamble_detector_bb_impl.h
-/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/preamble_detector_bb_impl.h
-
-/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/preamble_detector_bb_impl.h
-frame_detection/preamble_detector_bb.h
 -
 

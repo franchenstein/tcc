@@ -40,21 +40,35 @@ namespace gr {
      */
     deinterleaver_bb_impl::deinterleaver_bb_impl(int n, int m)
       : gr::block("deinterleaver_bb",
-              gr::io_signature::make(<+MIN_IN+>, <+MAX_IN+>, sizeof(<+ITYPE+>)),
-              gr::io_signature::make(<+MIN_OUT+>, <+MAX_OUT+>, sizeof(<+OTYPE+>)))
-    {}
+              gr::io_signature::make(1, 1, sizeof(char)),
+              gr::io_signature::make(1, 1, sizeof(char)))
+    {
+        i_n = n;
+        i_m = m;
+        counter = 0;
+        n_count = 0;
+        m_count = 0;
+        buffer = new char[n*m];
+        buffer2 = new char[n*m];
+        buf_count = 0;
+        frame_detected = false;
+        end_of_frame = false;
+        eof_pos = 0;
+    }
 
     /*
      * Our virtual destructor.
      */
     deinterleaver_bb_impl::~deinterleaver_bb_impl()
     {
+        delete[] buffer;
+        delete[] buffer2;
     }
 
     void
     deinterleaver_bb_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
-        /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
+        ninput_items_required[0] = noutput_items;
     }
 
     int
@@ -63,16 +77,89 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-        const <+ITYPE*> *in = (const <+ITYPE*> *) input_items[0];
-        <+OTYPE*> *out = (<+OTYPE*> *) output_items[0];
-
-        // Do <+signal processing+>
-        // Tell runtime system how many input items we consumed on
-        // each input stream.
-        consume_each (noutput_items);
-
+        const char *in = (const char *) input_items[0];
+        char *out = (char *) output_items[0];
+        
+        int n = ninput_items[0];
+        int i = 0;
+        
+        while (n > 0)
+        {
+            if(!frame_detected)
+            {
+                if(in[i] == char(10))
+                {
+                    frame_detected = true;
+                    end_of_frame = false;
+                    out[i] = 6;
+                }
+                else
+                    out[i] = 5;
+                    
+                consume_each(1);
+                n--;
+                i++;
+            }
+            
+            else
+            {
+               if(in[i] == char(11))
+               {
+                   end_of_frame = true;
+                   eof_pos = i;
+               }
+                
+               if ((i == eof_pos + i_n*i_m) && (end_of_frame))
+               {
+                    out[i++] = 7;
+                    n--;
+                    consume_each(1);
+                    frame_detected = false;
+               }
+               
+               else
+               { 
+                   if(counter < i_n*i_m)
+                    {
+                        counter++;
+                        out[i] = 0;
+                    }
+                    else
+                    {
+                        out[i] = buffer2[buf_count++];
+                        n--;
+                        consume_each(1);
+                    }
+                        
+                    if (buf_count >= i_n*i_m)
+                        buf_count = 0;
+                       
+                    buffer[n_count + i_m*m_count] = in[i];
+                    
+                    if (n_count + i_m*m_count == i_n*i_m - 1)
+                    {
+                        for(int j = 0; j < i_n*i_m; j++)
+                            buffer2[j] = buffer[j];
+                    }
+                    
+                    if(m_count < i_n - 1)
+                        m_count++;
+                    else
+                    {
+                        m_count = 0;
+                        n_count++;
+                    }
+                        
+                    if(n_count == i_m)
+                        n_count = 0;
+                        
+                    i++;
+                }
+            }   
+        }
+   
         // Tell runtime system how many output items we produced.
-        return noutput_items;
+        return i;
     }
 
   } /* namespace frame_detection */

@@ -91,10 +91,9 @@ namespace gr {
                 {
                     frame_detected = true;
                     end_of_frame = false;
-                    out[i] = 6;
                 }
-                else
-                    out[i] = 5;
+                
+                out[i] = 0;
                     
                 consume_each(1);
                 n--;
@@ -111,7 +110,7 @@ namespace gr {
                 
                if ((i == eof_pos + i_n*i_m) && (end_of_frame))
                {
-                    out[i++] = 7;
+                    out[i++] = 0;
                     n--;
                     consume_each(1);
                     frame_detected = false;

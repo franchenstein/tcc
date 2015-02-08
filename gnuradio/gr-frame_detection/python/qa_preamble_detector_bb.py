@@ -91,7 +91,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 15, 2, 4, 8, 16, 1, 1, 0, 0)
-        expected_result = (5, 5, 5, 5, 5, 5, 5, 6, 0, 0, 0, 0, 1, 0, 1, 0)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
@@ -107,7 +107,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 15, 2, 4, 8, 16, 1, 1, 0, 0, 1, 0, 1, 0, 5, 9, 12)
-        expected_result = (5, 5, 5, 5, 5, 5, 5, 6, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 7, 5, 5)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 8)
