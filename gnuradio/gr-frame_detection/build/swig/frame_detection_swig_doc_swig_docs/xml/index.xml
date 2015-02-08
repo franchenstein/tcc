@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.6">
+  <compound refid="classgr_1_1frame__detection_1_1deinterleaver__bb" kind="class"><name>gr::frame_detection::deinterleaver_bb</name>
+    <member refid="classgr_1_1frame__detection_1_1deinterleaver__bb_1af5a6099ffad931f5853fad4e09f0ffcb" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1frame__detection_1_1deinterleaver__bb_1a768aa4aea1c86eae5607e486d8aaa5a2" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1frame__detection_1_1preamble__detector__bb" kind="class"><name>gr::frame_detection::preamble_detector_bb</name>
+    <member refid="classgr_1_1frame__detection_1_1preamble__detector__bb_1a47f4acd03eff7a5868c78d42aeeebb42" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1frame__detection_1_1preamble__detector__bb_1a379b56dc75000903bf3203fef17300dd" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="namespacegr" kind="namespace"><name>gr</name>
+  </compound>
+  <compound refid="namespacegr_1_1frame__detection" kind="namespace"><name>gr::frame_detection</name>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="api_8h" kind="file"><name>api.h</name>
+    <member refid="api_8h_1a1bbf56395734729116c74b4fc5979aee" kind="define"><name>FRAME_DETECTION_API</name></member>
+  </compound>
+  <compound refid="deinterleaver__bb_8h" kind="file"><name>deinterleaver_bb.h</name>
+  </compound>
+  <compound refid="preamble__detector__bb_8h" kind="file"><name>preamble_detector_bb.h</name>
+  </compound>
+  <compound refid="dir_f37b43d49f2dd9896d49173859c6b863" kind="dir"><name>/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/include/frame_detection</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/include</name>
+  </compound>
+</doxygenindex>

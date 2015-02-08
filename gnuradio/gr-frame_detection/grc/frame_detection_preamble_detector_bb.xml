@@ -1,0 +1,30 @@
+<block>
+  <name>Preamble detector bb</name>
+  <key>frame_detection_preamble_detector_bb</key>
+  <category>FRAME_DETECTION</category>
+  <import>import frame_detection</import>
+  <make>frame_detection.preamble_detector_bb($preamble, $preamble_length, $message_length)</make>
+  <param>
+    <name>Preamble</name>
+    <key>preamble</key>
+    <type>int_vector</type>
+  </param>
+  <param>
+    <name>Preamble_length</name>
+    <key>preamble_length</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Message_length</name>
+    <key>message_length</key>
+    <type>int</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

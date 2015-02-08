@@ -1,0 +1,25 @@
+<block>
+  <name>Deinterleaver bb</name>
+  <key>frame_detection_deinterleaver_bb</key>
+  <category>FRAME_DETECTION</category>
+  <import>import frame_detection</import>
+  <make>frame_detection.deinterleaver_bb($n, $m)</make>
+  <param>
+    <name>N</name>
+    <key>n</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>M</name>
+    <key>m</key>
+    <type>int</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

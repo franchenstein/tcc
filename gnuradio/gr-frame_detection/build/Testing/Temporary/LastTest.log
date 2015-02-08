@@ -1,0 +1,60 @@
+Start testing: Feb 08 06:36 BRST
+----------------------------------------------------------
+1/3 Testing: test_frame_detection
+1/3 Test: test_frame_detection
+Command: "/bin/sh" "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/lib/test_frame_detection_test.sh"
+Directory: /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/lib
+"test_frame_detection" start time: Feb 08 06:36 BRST
+Output:
+----------------------------------------------------------
+
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_frame_detection" end time: Feb 08 06:36 BRST
+"test_frame_detection" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: qa_deinterleaver_bb
+2/3 Test: qa_deinterleaver_bb
+Command: "/bin/sh" "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/python/qa_deinterleaver_bb_test.sh"
+Directory: /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/python
+"qa_deinterleaver_bb" start time: Feb 08 06:36 BRST
+Output:
+----------------------------------------------------------
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.011s
+
+OK
+<end of output>
+Test time =   0.22 sec
+----------------------------------------------------------
+Test Passed.
+"qa_deinterleaver_bb" end time: Feb 08 06:36 BRST
+"qa_deinterleaver_bb" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: qa_preamble_detector_bb
+3/3 Test: qa_preamble_detector_bb
+Command: "/bin/sh" "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/python/qa_preamble_detector_bb_test.sh"
+Directory: /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/python
+"qa_preamble_detector_bb" start time: Feb 08 06:36 BRST
+Output:
+----------------------------------------------------------
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.012s
+
+OK
+<end of output>
+Test time =   0.21 sec
+----------------------------------------------------------
+Test Passed.
+"qa_preamble_detector_bb" end time: Feb 08 06:36 BRST
+"qa_preamble_detector_bb" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 08 06:36 BRST

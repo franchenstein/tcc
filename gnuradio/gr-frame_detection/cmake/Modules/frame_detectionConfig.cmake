@@ -1,0 +1,30 @@
+INCLUDE(FindPkgConfig)
+PKG_CHECK_MODULES(PC_FRAME_DETECTION frame_detection)
+
+FIND_PATH(
+    FRAME_DETECTION_INCLUDE_DIRS
+    NAMES frame_detection/api.h
+    HINTS $ENV{FRAME_DETECTION_DIR}/include
+        ${PC_FRAME_DETECTION_INCLUDEDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/include
+          /usr/local/include
+          /usr/include
+)
+
+FIND_LIBRARY(
+    FRAME_DETECTION_LIBRARIES
+    NAMES gnuradio-frame_detection
+    HINTS $ENV{FRAME_DETECTION_DIR}/lib
+        ${PC_FRAME_DETECTION_LIBDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/lib
+          ${CMAKE_INSTALL_PREFIX}/lib64
+          /usr/local/lib
+          /usr/local/lib64
+          /usr/lib
+          /usr/lib64
+)
+
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(FRAME_DETECTION DEFAULT_MSG FRAME_DETECTION_LIBRARIES FRAME_DETECTION_INCLUDE_DIRS)
+MARK_AS_ADVANCED(FRAME_DETECTION_LIBRARIES FRAME_DETECTION_INCLUDE_DIRS)
+

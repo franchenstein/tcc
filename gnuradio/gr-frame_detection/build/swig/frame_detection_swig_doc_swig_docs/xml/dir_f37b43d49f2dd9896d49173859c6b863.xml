@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_f37b43d49f2dd9896d49173859c6b863" kind="dir">
+    <compoundname>/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/include/frame_detection</compoundname>
+    <innerfile refid="api_8h">api.h</innerfile>
+    <innerfile refid="deinterleaver__bb_8h">deinterleaver_bb.h</innerfile>
+    <innerfile refid="preamble__detector__bb_8h">preamble_detector_bb.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/include/frame_detection/"/>
+  </compounddef>
+</doxygen>

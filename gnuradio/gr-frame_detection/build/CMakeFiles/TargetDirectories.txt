@@ -1,0 +1,9 @@
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/swig/CMakeFiles/_frame_detection_swig.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/swig/CMakeFiles/_frame_detection_swig_doc_tag.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/swig/CMakeFiles/_frame_detection_swig_swig_tag.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/lib/CMakeFiles/gnuradio-frame_detection.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/python/CMakeFiles/pygen_python_9d327.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/swig/CMakeFiles/pygen_swig_eec5e.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/lib/CMakeFiles/test-frame_detection.dir
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/build/CMakeFiles/uninstall.dir

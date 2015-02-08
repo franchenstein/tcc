@@ -1,0 +1,16 @@
+/usr/local/lib/cmake/frame_detection/frame_detectionConfig.cmake
+/usr/local/include/frame_detection/api.h
+/usr/local/include/frame_detection/deinterleaver_bb.h
+/usr/local/include/frame_detection/preamble_detector_bb.h
+/usr/local/lib/libgnuradio-frame_detection.so
+/usr/local/lib/python2.7/dist-packages/frame_detection/_frame_detection_swig.so
+/usr/local/lib/python2.7/dist-packages/frame_detection/frame_detection_swig.py
+/usr/local/lib/python2.7/dist-packages/frame_detection/frame_detection_swig.pyc
+/usr/local/lib/python2.7/dist-packages/frame_detection/frame_detection_swig.pyo
+/usr/local/include/frame_detection/frame_detection/swig/frame_detection_swig.i
+/usr/local/include/frame_detection/frame_detection/swig/frame_detection_swig_doc.i
+/usr/local/lib/python2.7/dist-packages/frame_detection/__init__.py
+/usr/local/lib/python2.7/dist-packages/frame_detection/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/frame_detection/__init__.pyo
+/usr/local/share/gnuradio/grc/blocks/frame_detection_deinterleaver_bb.xml
+/usr/local/share/gnuradio/grc/blocks/frame_detection_preamble_detector_bb.xml
