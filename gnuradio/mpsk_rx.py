@@ -3,11 +3,10 @@
 # Gnuradio Python Flow Graph
 # Title: MPSK Receiver
 # Author: Daniel Franch
-# Generated: Fri Jan 16 00:30:33 2015
+# Generated: Sun Feb  8 17:03:10 2015
 ##################################################
 
 from PyQt4 import Qt
-from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
@@ -18,9 +17,9 @@ from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
 import PyQt4.Qwt5 as Qwt
+import frame_detection
 import sip
 import sys
-import tcc_sdr
 import time
 
 class mpsk_rx(gr.top_block, Qt.QWidget):
@@ -53,19 +52,18 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.sps = sps = 4
-        self.preamble = preamble = [1,-1,1,-1,1,1,-1,-1,1,1,-1,1,1,1,-1,1,1,-1,1,-1,-1,1,-1,-1,1,1,1,-1,-1,-1,1,-1,1,1,1,1,-1,-1,1,-1,1,-1,-1,-1,1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,1,1,1,1,1,1,-1,-1]
         self.nfilts = nfilts = 32
-        self.n = n = 4
         self.eb = eb = 0.35
         self.usrp_gain = usrp_gain = 40
         self.timing_loop_bw = timing_loop_bw = 0.01
         self.samp_rate = samp_rate = 1e6
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 11*sps*nfilts)
         self.qpsk = qpsk = digital.constellation_rect(([0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j]), ([0, 1, 2, 3]), 4, 2, 2, 1, 1).base()
+        self.preamble = preamble = [1,-1,1,-1,1,1,-1,-1,1,1,-1,1,1,1,-1,1,1,-1,1,-1,-1,1,-1,-1,1,1,1,-1,-1,-1,1,-1,1,1,1,1,-1,-1,1,-1,1,-1,-1,-1,1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,1,1,1,1,1,1,-1,-1]
         self.phase_bw = phase_bw = 0.1
+        self.n = n = 4
         self.matched_filter = matched_filter = firdes.root_raised_cosine(nfilts, nfilts, 1, eb, int(11*sps*nfilts))
         self.eq_gain = eq_gain = 0.01
-        self.delay = delay = n*n - (3*(len(preamble)/8) + 7)%(n*n)
         self.arity = arity = 4
 
         ##################################################
@@ -75,13 +73,7 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
         self._usrp_gain_tool_bar = Qt.QToolBar(self)
         self._usrp_gain_layout.addWidget(self._usrp_gain_tool_bar)
         self._usrp_gain_tool_bar.addWidget(Qt.QLabel("USRP Gain"+": "))
-        class qwt_counter_pyslot(Qwt.QwtCounter):
-            def __init__(self, parent=None):
-                Qwt.QwtCounter.__init__(self, parent)
-            @pyqtSlot('double')
-            def setValue(self, value):
-                super(Qwt.QwtCounter, self).setValue(value)
-        self._usrp_gain_counter = qwt_counter_pyslot()
+        self._usrp_gain_counter = Qwt.QwtCounter()
         self._usrp_gain_counter.setRange(0, 100, 1)
         self._usrp_gain_counter.setNumButtons(2)
         self._usrp_gain_counter.setValue(self.usrp_gain)
@@ -137,7 +129,6 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
         self.uhd_usrp_source_0.set_samp_rate(samp_rate)
         self.uhd_usrp_source_0.set_center_freq(2.4e9, 0)
         self.uhd_usrp_source_0.set_gain(usrp_gain, 0)
-        self.tcc_sdr_interleaver_bb_0 = tcc_sdr.interleaver_bb(n, n)
         self.qtgui_sink_x_1 = qtgui.sink_c(
         	1024, #fftsize
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -170,6 +161,7 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
         self.top_layout.addWidget(self._qtgui_sink_x_0_win)
         
         
+        self.frame_detection_deinterleaver_bb_0 = frame_detection.deinterleaver_bb(n, n)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, timing_loop_bw, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(4)
         self.digital_costas_loop_cc_0 = digital.costas_loop_cc(phase_bw, arity)
@@ -181,7 +173,6 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*1)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/ubuntu/rx_message", False)
         self.blocks_file_sink_0.set_unbuffered(False)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_char*1, delay)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
         ##################################################
@@ -199,9 +190,8 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
         self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_decoder_cb_0, 0))
         self.connect((self.digital_constellation_decoder_cb_0, 0), (self.digital_diff_decoder_bb_0, 0))
         self.connect((self.digital_costas_loop_cc_0, 0), (self.qtgui_sink_x_1, 0))
-        self.connect((self.blocks_pack_k_bits_bb_1, 0), (self.blocks_delay_0, 0))
-        self.connect((self.blocks_delay_0, 0), (self.tcc_sdr_interleaver_bb_0, 0))
-        self.connect((self.tcc_sdr_interleaver_bb_0, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.blocks_pack_k_bits_bb_1, 0), (self.frame_detection_deinterleaver_bb_0, 0))
+        self.connect((self.frame_detection_deinterleaver_bb_0, 0), (self.blocks_file_sink_0, 0))
 
 
 # QT sink close method reimplementation
@@ -215,30 +205,16 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
 
     def set_sps(self, sps):
         self.sps = sps
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
-
-    def get_preamble(self):
-        return self.preamble
-
-    def set_preamble(self, preamble):
-        self.preamble = preamble
-        self.set_delay(self.n*self.n - (3*(len(self.preamble)/8) + 7)%(self.n*self.n))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_nfilts(self):
         return self.nfilts
 
     def set_nfilts(self, nfilts):
         self.nfilts = nfilts
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
-
-    def get_n(self):
-        return self.n
-
-    def set_n(self, n):
-        self.n = n
-        self.set_delay(self.n*self.n - (3*(len(self.preamble)/8) + 7)%(self.n*self.n))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_eb(self):
         return self.eb
@@ -253,8 +229,8 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
     def set_usrp_gain(self, usrp_gain):
         self.usrp_gain = usrp_gain
         self.uhd_usrp_source_0.set_gain(self.usrp_gain, 0)
-        Qt.QMetaObject.invokeMethod(self._usrp_gain_counter, "setValue", Qt.Q_ARG("double", self.usrp_gain))
-        Qt.QMetaObject.invokeMethod(self._usrp_gain_slider, "setValue", Qt.Q_ARG("double", self.usrp_gain))
+        self._usrp_gain_counter.setValue(self.usrp_gain)
+        self._usrp_gain_slider.setValue(self.usrp_gain)
 
     def get_timing_loop_bw(self):
         return self.timing_loop_bw
@@ -262,7 +238,7 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
     def set_timing_loop_bw(self, timing_loop_bw):
         self.timing_loop_bw = timing_loop_bw
         self.digital_pfb_clock_sync_xxx_0.set_loop_bandwidth(self.timing_loop_bw)
-        Qt.QMetaObject.invokeMethod(self._timing_loop_bw_slider, "setValue", Qt.Q_ARG("double", self.timing_loop_bw))
+        self._timing_loop_bw_slider.setValue(self.timing_loop_bw)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -286,13 +262,25 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
     def set_qpsk(self, qpsk):
         self.qpsk = qpsk
 
+    def get_preamble(self):
+        return self.preamble
+
+    def set_preamble(self, preamble):
+        self.preamble = preamble
+
     def get_phase_bw(self):
         return self.phase_bw
 
     def set_phase_bw(self, phase_bw):
         self.phase_bw = phase_bw
-        Qt.QMetaObject.invokeMethod(self._phase_bw_slider, "setValue", Qt.Q_ARG("double", self.phase_bw))
+        self._phase_bw_slider.setValue(self.phase_bw)
         self.digital_costas_loop_cc_0.set_loop_bandwidth(self.phase_bw)
+
+    def get_n(self):
+        return self.n
+
+    def set_n(self, n):
+        self.n = n
 
     def get_matched_filter(self):
         return self.matched_filter
@@ -306,14 +294,7 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
     def set_eq_gain(self, eq_gain):
         self.eq_gain = eq_gain
         self.digital_cma_equalizer_cc_0.set_gain(self.eq_gain)
-        Qt.QMetaObject.invokeMethod(self._eq_gain_slider, "setValue", Qt.Q_ARG("double", self.eq_gain))
-
-    def get_delay(self):
-        return self.delay
-
-    def set_delay(self, delay):
-        self.delay = delay
-        self.blocks_delay_0.set_dly(self.delay)
+        self._eq_gain_slider.setValue(self.eq_gain)
 
     def get_arity(self):
         return self.arity
@@ -323,8 +304,8 @@ class mpsk_rx(gr.top_block, Qt.QWidget):
 
 if __name__ == '__main__':
     import ctypes
-    import sys
-    if sys.platform.startswith('linux'):
+    import os
+    if os.name == 'posix':
         try:
             x11 = ctypes.cdll.LoadLibrary('libX11.so')
             x11.XInitThreads()
@@ -332,7 +313,6 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    Qt.QApplication.setGraphicsSystem(gr.prefs().get_string('qtgui','style','raster'))
     qapp = Qt.QApplication(sys.argv)
     tb = mpsk_rx()
     tb.start()
