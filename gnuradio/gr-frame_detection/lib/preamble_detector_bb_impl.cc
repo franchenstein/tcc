@@ -24,6 +24,7 @@
 
 #include <gnuradio/io_signature.h>
 #include "preamble_detector_bb_impl.h"
+#include <cmath>
 #include <iostream>
 using namespace std;
 
@@ -79,18 +80,16 @@ namespace gr {
         int i = 0;
         bool thresh_sent = false;
         int thresh_count = 0;
-        char* buffer = new char[item_size];
-        int buf_count = 0;
         int zero_count = 0; 
+        int history = 0;
         
         while(n > 0)
-        {
-            cout << int(in[i]) << endl;
+        {            
             if(!thresh_sent)
             {
                 if(!sequence_detected)
                 {
-                    if(in[i] == sequence[counter])
+                    if(in[i - history] == sequence[counter])
                     {
                         counter++;
                     }
@@ -116,9 +115,8 @@ namespace gr {
                 }
                 else
                 {                    
-                    buffer[buf_count++] = in[i];
                     
-                    if(thresh_count < item_size - zero_count)
+                    if(thresh_count < (item_size - zero_count))
                     {
                         thresh_count++;
                         out[i] = char(255);
@@ -128,7 +126,7 @@ namespace gr {
                         thresh_sent = true;
                         sequence_detected = false;
                         thresh_count = 0;
-                        out[i] = buffer[0];
+                        out[i] = in[i - (history + item_size - zero_count) + 1];
                         message_counter++;
                         n--;
                     }
@@ -137,15 +135,7 @@ namespace gr {
             }
             else
             {
-                if(buf_count == (item_size - zero_count))
-                    buf_count = 0;
-                buffer[buf_count++] = in[i];
-                if(buf_count == (item_size - zero_count))
-                    out[i] = buffer[0];
-                else
-                    out[i] = buffer[buf_count];
-                    
-                cout << "sending message" << endl;
+                out[i] = in[i - (history + item_size - zero_count) + 1];    
                     
                 if(message_counter < (m_length - 1))
                 {
@@ -154,8 +144,9 @@ namespace gr {
                 else
                 {
                     thresh_sent = false;
+                    history += item_size - zero_count - 1;
                     zero_count = 0;
-                    buf_count = 0; 
+                    message_counter = 0;
                 }
                     
                 n--;
@@ -166,8 +157,6 @@ namespace gr {
         }
         
         consume_each(ninput_items[0]);
-        
-        delete[] buffer;
         
         return i;
     }

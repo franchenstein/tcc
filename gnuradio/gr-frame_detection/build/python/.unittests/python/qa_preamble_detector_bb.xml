@@ -1,31 +1,18 @@
-<testsuite errors="0" failures="1" name="unittest.suite.TestSuite" tests="1" time="0.003">
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_012_t" time="0.0032">
-    <failure type="exceptions.AssertionError">Tuples differ: (0, 0, 0, 255, 255, 255, 1, 2,... != (0L, 0L, 0L, 255L, 255L, 255L,...
-
-First differing element 13:
-255
-0
-
-First tuple contains 2 additional elements.
-First extra element 18:
-6
-
-- (0, 0, 0, 255, 255, 255, 1, 2, 3, 4, 0, 0, 0, 255, 255, 255, 8, 7, 6, 5)
-+ (0L, 0L, 0L, 255L, 255L, 255L, 1L, 2L, 3L, 4L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L)
-  File "/usr/lib/python2.7/unittest/case.py", line 331, in run
-    testMethod()
-  File "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/python/qa_preamble_detector_bb.py", line 46, in test_012_t
-    self.assertEqual(expected_result, result_data)
-  File "/usr/lib/python2.7/unittest/case.py", line 515, in assertEqual
-    assertion_func(first, second, msg=msg)
-  File "/usr/lib/python2.7/unittest/case.py", line 755, in assertTupleEqual
-    self.assertSequenceEqual(tuple1, tuple2, msg, seq_type=tuple)
-  File "/usr/lib/python2.7/unittest/case.py", line 726, in assertSequenceEqual
-    self.fail(msg)
-  File "/usr/lib/python2.7/unittest/case.py", line 412, in fail
-    raise self.failureException(msg)
-    </failure>
-  </testcase>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="14" time="0.028">
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_001_t" time="0.0021"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_002_t" time="0.0016"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_003_t" time="0.0016"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_004_t" time="0.0017"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_005_t" time="0.0018"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_006_t" time="0.0018"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_007_t" time="0.0022"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_008_t" time="0.0023"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_009_t" time="0.0017"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_010_t" time="0.0026"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_011_t" time="0.0023"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_012_t" time="0.0022"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_013_t" time="0.0022"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_014_t" time="0.0011"></testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -23,6 +23,8 @@ gnuradio/io_signature.h
 -
 preamble_detector_bb_impl.h
 /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/preamble_detector_bb_impl.h
+cmath
+-
 iostream
 -
 
