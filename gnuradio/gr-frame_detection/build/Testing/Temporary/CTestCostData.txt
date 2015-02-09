@@ -1,5 +1,5 @@
-test_frame_detection 58 8.06718e-05
-qa_deinterleaver_bb 53 0.00390715
-qa_preamble_detector_bb 15 0
+test_frame_detection 93 6.80852e-05
+qa_deinterleaver_bb 88 0.00237943
+qa_preamble_detector_bb 21 0
 ---
 qa_preamble_detector_bb

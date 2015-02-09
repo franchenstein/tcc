@@ -80,41 +80,48 @@ namespace gr {
         bool thresh_sent = false;
         int thresh_count = 0;
         char* buffer = new char[item_size];
-        int buf_count = 0; 
+        int buf_count = 0;
+        int zero_count = 0; 
         
         while(n > 0)
         {
+            cout << int(in[i]) << endl;
             if(!thresh_sent)
             {
                 if(!sequence_detected)
                 {
                     if(in[i] == sequence[counter])
+                    {
                         counter++;
+                    }
                     else
                         counter = 0;
                         
                     if(counter == sequence_length)
                     {
-                        out[i] = char(254);
+                        out[i] = char(255);
                         sequence_detected = true;
                         counter = 0;
                         thresh_count++;
                     }
                     else
                     {
-                        out[i] = 0;
+                        out[i] = 0;                        
+                        zero_count++;
+                        if(zero_count == item_size)
+                            zero_count = 0;
                     }
-                    
+                                            
                     n--;
                 }
                 else
-                {
+                {                    
                     buffer[buf_count++] = in[i];
                     
-                    if(thresh_count < item_size)
+                    if(thresh_count < item_size - zero_count)
                     {
                         thresh_count++;
-                        out[i] = char(254);
+                        out[i] = char(255);
                     }
                     else
                     {
@@ -130,22 +137,25 @@ namespace gr {
             }
             else
             {
-                if(message_counter < m_length)
+                if(buf_count == (item_size - zero_count))
+                    buf_count = 0;
+                buffer[buf_count++] = in[i];
+                if(buf_count == (item_size - zero_count))
+                    out[i] = buffer[0];
+                else
+                    out[i] = buffer[buf_count];
+                    
+                cout << "sending message" << endl;
+                    
+                if(message_counter < (m_length - 1))
                 {
-                    if(buf_count == item_size)
-                        buf_count = 0;
-                    buffer[buf_count++] = in[i];
-                    if(buf_count == item_size)
-                        out[i] = buffer[0];
-                    else
-                        out[i] = buffer[buf_count];
-                    message_counter++;
-                        
+                    message_counter++;                        
                 }
                 else
                 {
                     thresh_sent = false;
-                    out[i] = 0;
+                    zero_count = 0;
+                    buf_count = 0; 
                 }
                     
                 n--;
