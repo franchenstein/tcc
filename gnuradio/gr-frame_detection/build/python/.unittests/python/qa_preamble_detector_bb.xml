@@ -1,18 +1,18 @@
-<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="14" time="0.028">
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_001_t" time="0.0021"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_002_t" time="0.0016"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_003_t" time="0.0016"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_004_t" time="0.0017"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_005_t" time="0.0018"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_006_t" time="0.0018"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_007_t" time="0.0022"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_008_t" time="0.0023"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_009_t" time="0.0017"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_010_t" time="0.0026"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_011_t" time="0.0023"></testcase>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="14" time="0.025">
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_001_t" time="0.0022"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_002_t" time="0.0005"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_003_t" time="0.0017"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_004_t" time="0.0006"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_005_t" time="0.0019"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_006_t" time="0.0006"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_007_t" time="0.0018"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_008_t" time="0.0016"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_009_t" time="0.0019"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_010_t" time="0.0025"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_011_t" time="0.0025"></testcase>
   <testcase classname="__main__.qa_preamble_detector_bb" name="test_012_t" time="0.0022"></testcase>
   <testcase classname="__main__.qa_preamble_detector_bb" name="test_013_t" time="0.0022"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_014_t" time="0.0011"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_014_t" time="0.0022"></testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
