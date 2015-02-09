@@ -22,4 +22,4 @@ Params: (n, m, message_length)"
 
 To avoid accidental use of raw pointers, frame_detection::preamble_detector_bb's constructor is in a private implementation class. frame_detection::preamble_detector_bb::make is the public interface for creating new instances.
 
-Params: (preamble, preamble_length, message_length)"
+Params: (preamble, preamble_length, message_length, i_size)"

@@ -30,15 +30,15 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
 
     def tearDown (self):
         self.tb = None
-
+        
     def test_001_t (self):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 16, 1, 0, 1, 0, 1)
-        expected_result = (0, 0, 0, 254, 1, 0, 1, 0, 255)
+        expected_result = (0, 0, 0, 254, 1, 0, 1, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
-        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4, 1)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, dst)        
         self.tb.run ()
@@ -49,10 +49,10 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (5, 9, 4, 3, 2, 4, 8, 16, 1, 0, 1, 0, 1)
-        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 255)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
-        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4, 1)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, dst)        
         self.tb.run ()
@@ -63,10 +63,10 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 15, 2, 4, 8, 16, 1, 0, 1, 0, 1)
-        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 255)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
-        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4, 1)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, dst)        
         self.tb.run ()
@@ -77,10 +77,10 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 15, 2, 4, 8, 16, 1, 0, 1, 0, 1, 2, 4, 8, 16, 1)
-        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 1, 2, 255, 0, 0, 0)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
-        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 6)
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 6, 1)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, dst)        
         self.tb.run ()
@@ -94,7 +94,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         expected_result = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
-        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4, 1)
         deint = frame_detection.deinterleaver_bb(2, 2, 4)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, deint)
@@ -110,7 +110,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         expected_result = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
-        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 8)
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 8, 1)
         deint = frame_detection.deinterleaver_bb(2, 2, 8)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, deint)
@@ -119,6 +119,48 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         result_data = dst.data()
         self.assertEqual(expected_result, result_data)
 
+    def test_007_t (self):
+        preamble = [2, 4, 8, 16]
+        pre_len = len(preamble);
+        src_data = (2, 4, 8, 16, 1, 0, 1, 0, 1)
+        expected_result = (0, 0, 0, 254, 254, 254, 254, 1, 0, 1, 0, 0)
+        src = blocks.vector_source_b(src_data)
+        dst = blocks.vector_sink_b()
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4, 4)
+        self.tb.connect(src, dtct)
+        self.tb.connect(dtct, dst)        
+        self.tb.run ()
+        result_data = dst.data()
+        self.assertEqual(expected_result, result_data)
 
+    def test_008_t (self):
+        preamble = [2, 4, 8, 16]
+        pre_len = len(preamble);
+        src_data = (2, 4, 8, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+        expected_result = (0, 0, 0, 254, 254, 254, 254, 254, 254, 254, 254, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 0, 0, 0)
+        src = blocks.vector_source_b(src_data)
+        dst = blocks.vector_sink_b()
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 16, 8)
+        self.tb.connect(src, dtct)
+        self.tb.connect(dtct, dst)        
+        self.tb.run ()
+        result_data = dst.data()
+        self.assertEqual(expected_result, result_data)
+
+    def test_008_t (self):
+        preamble = [2, 4, 8, 16]
+        pre_len = len(preamble);
+        src_data = (2, 4, 8, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+        expected_result = (0, 0, 0, 254, 254, 254, 254, 254, 254, 254, 254, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 0, 0, 0)
+        src = blocks.vector_source_b(src_data)
+        dst = blocks.vector_sink_b()
+        pck = blocks.pack_k_bits_bb(8)
+        dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 16, 8)
+        self.tb.connect(src, dtct)
+        self.tb.connect(dtct, pck, dst)        
+        self.tb.run ()
+        result_data = dst.data()
+        self.assertEqual(expected_result, result_data)
+        
 if __name__ == '__main__':
     gr_unittest.run(qa_preamble_detector_bb, "qa_preamble_detector_bb.xml")

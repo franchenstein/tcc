@@ -29,10 +29,19 @@ namespace gr {
     class preamble_detector_bb_impl : public preamble_detector_bb
     {
      private:
-      // Nothing to declare in this block.
+      char* sequence;
+      int sequence_length;
+      bool sequence_detected;
+      int counter;
+      int message_counter;
+      int m_length;
+      int item_size;
 
      public:
-      preamble_detector_bb_impl(const std::vector<int> &preamble, int preamble_length, int message_length);
+      preamble_detector_bb_impl(const std::vector<int> &preamble, 
+                                int preamble_length, 
+                                int message_length, 
+                                int item_size);
       ~preamble_detector_bb_impl();
 
       // Where all the action really happens

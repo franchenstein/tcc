@@ -1,10 +1,68 @@
-<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="6" time="0.009">
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_001_t" time="0.0022"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_002_t" time="0.0016"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_003_t" time="0.0016"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_004_t" time="0.0006"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_005_t" time="0.0009"></testcase>
-  <testcase classname="__main__.qa_preamble_detector_bb" name="test_006_t" time="0.0019"></testcase>
+<testsuite errors="0" failures="1" name="unittest.suite.TestSuite" tests="8" time="0.016">
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_001_t" time="0.0024"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_002_t" time="0.0017"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_003_t" time="0.0017"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_004_t" time="0.0018"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_005_t" time="0.0007"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_006_t" time="0.0018"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_007_t" time="0.0023"></testcase>
+  <testcase classname="__main__.qa_preamble_detector_bb" name="test_008_t" time="0.0031">
+    <failure type="exceptions.AssertionError">Tuples differ: (0, 0, 0, 254, 254, 254, 254, ... != (0L, 21L, 85L)
+
+First differing element 1:
+0
+21
+
+First tuple contains 28 additional elements.
+First extra element 3:
+254
+
++ (0L, 21L, 85L)
+- (0,
+-  0,
+-  0,
+-  254,
+-  254,
+-  254,
+-  254,
+-  254,
+-  254,
+-  254,
+-  254,
+-  1,
+-  2,
+-  3,
+-  4,
+-  5,
+-  6,
+-  7,
+-  8,
+-  9,
+-  10,
+-  11,
+-  12,
+-  13,
+-  14,
+-  15,
+-  16,
+-  0,
+-  0,
+-  0,
+-  0)
+  File "/usr/lib/python2.7/unittest/case.py", line 331, in run
+    testMethod()
+  File "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/python/qa_preamble_detector_bb.py", line 163, in test_008_t
+    self.assertEqual(expected_result, result_data)
+  File "/usr/lib/python2.7/unittest/case.py", line 515, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "/usr/lib/python2.7/unittest/case.py", line 755, in assertTupleEqual
+    self.assertSequenceEqual(tuple1, tuple2, msg, seq_type=tuple)
+  File "/usr/lib/python2.7/unittest/case.py", line 726, in assertSequenceEqual
+    self.fail(msg)
+  File "/usr/lib/python2.7/unittest/case.py", line 412, in fail
+    raise self.failureException(msg)
+    </failure>
+  </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

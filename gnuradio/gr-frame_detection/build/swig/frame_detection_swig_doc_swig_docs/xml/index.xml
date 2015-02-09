@@ -6,7 +6,7 @@
   </compound>
   <compound refid="classgr_1_1frame__detection_1_1preamble__detector__bb" kind="class"><name>gr::frame_detection::preamble_detector_bb</name>
     <member refid="classgr_1_1frame__detection_1_1preamble__detector__bb_1a47f4acd03eff7a5868c78d42aeeebb42" kind="typedef"><name>sptr</name></member>
-    <member refid="classgr_1_1frame__detection_1_1preamble__detector__bb_1a379b56dc75000903bf3203fef17300dd" kind="function"><name>make</name></member>
+    <member refid="classgr_1_1frame__detection_1_1preamble__detector__bb_1a07ea892765ef1385f6ecf888573e85a4" kind="function"><name>make</name></member>
   </compound>
   <compound refid="namespacegr" kind="namespace"><name>gr</name>
   </compound>

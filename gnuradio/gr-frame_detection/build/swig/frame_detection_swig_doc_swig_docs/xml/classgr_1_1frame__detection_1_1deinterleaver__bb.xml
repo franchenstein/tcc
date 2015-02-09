@@ -51,25 +51,25 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
+      <node id="1">
+        <label>block</label>
+      </node>
       <node id="0">
         <label>gr::frame_detection::deinterleaver_bb</label>
         <link refid="classgr_1_1frame__detection_1_1deinterleaver__bb"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="1">
-        <label>gr::block</label>
-      </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="3">
+        <label>block</label>
+      </node>
       <node id="2">
         <label>gr::frame_detection::deinterleaver_bb</label>
         <link refid="classgr_1_1frame__detection_1_1deinterleaver__bb"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="3">
-        <label>gr::block</label>
       </node>
     </collaborationgraph>
     <location file="/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/include/frame_detection/deinterleaver_bb.h" line="37" column="1" bodyfile="/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/include/frame_detection/deinterleaver_bb.h" bodystart="36" bodyend="50"/>

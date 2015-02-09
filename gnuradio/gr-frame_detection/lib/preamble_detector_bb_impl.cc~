@@ -24,22 +24,27 @@
 
 #include <gnuradio/io_signature.h>
 #include "preamble_detector_bb_impl.h"
+#include <iostream>
+using namespace std;
 
 namespace gr {
   namespace frame_detection {
 
     preamble_detector_bb::sptr
-    preamble_detector_bb::make(const std::vector<int> &preamble, int preamble_length, int message_length)
+    preamble_detector_bb::make(const std::vector<int> &preamble, int preamble_length, int message_length, int i_size)
     {
       return gnuradio::get_initial_sptr
-        (new preamble_detector_bb_impl(preamble, preamble_length, message_length));
+        (new preamble_detector_bb_impl(preamble, preamble_length, message_length, i_size));
     }
 
     /*
      * The private constructor
      */
-    preamble_detector_bb_impl::preamble_detector_bb_impl(const std::vector<int> &preamble, int preamble_length, int message_length)
-      : gr::sync_block("preamble_detector_bb",
+    preamble_detector_bb_impl::preamble_detector_bb_impl(const std::vector<int> &preamble,
+                                                         int preamble_length, 
+                                                         int message_length,
+                                                         int i_size)
+      : gr::block("preamble_detector_bb",
               gr::io_signature::make(1, 1, sizeof(char)),
               gr::io_signature::make(1, 1, sizeof(char)))
     {
@@ -51,6 +56,7 @@ namespace gr {
         counter = 0;
         message_counter = 0;
         m_length = message_length;
+        item_size = i_size;
     }
 
     /*
@@ -62,49 +68,97 @@ namespace gr {
     }
 
     int
-    preamble_detector_bb_impl::work(int noutput_items,
+    preamble_detector_bb_impl::general_work(int noutput_items,
+		      gr_vector_int &ninput_items,
 			  gr_vector_const_void_star &input_items,
 			  gr_vector_void_star &output_items)
     {
         const char *in = (const char *) input_items[0];
         char *out = (char *) output_items[0];
+        int n = ninput_items[0];
+        int i = 0;
+        bool thresh_sent = false;
+        int thresh_count = 0;
+        char* buffer = new char[item_size];
+        int buf_count = 0; 
         
-        for(int i = 0; i < noutput_items; i++)
+        while(n > 0)
         {
-            if(!sequence_detected)
+            if(!thresh_sent)
             {
-                if(in[i] == sequence[counter])
-                    counter++;
-                else
-                    counter = 0;
-                    
-                if(counter == sequence_length)
+                if(!sequence_detected)
                 {
-                    out[i] = char(17);
-                    sequence_detected = true;
-                    counter = 0;
-                }
-                else
-                    if (message_counter > 0)
+                    if(in[i] == sequence[counter])
+                        counter++;
+                    else
+                        counter = 0;
+                        
+                    if(counter == sequence_length)
                     {
-                        out[i] = char(18);
-                        message_counter = 0;
+                        out[i] = char(254);
+                        sequence_detected = true;
+                        counter = 0;
+                        thresh_count++;
                     }
                     else
+                    {
                         out[i] = 0;
+                    }
+                    
+                    n--;
+                }
+                else
+                {
+                    buffer[buf_count++] = in[i];
+                    
+                    if(thresh_count < item_size)
+                    {
+                        thresh_count++;
+                        out[i] = char(254);
+                    }
+                    else
+                    {
+                        thresh_sent = true;
+                        sequence_detected = false;
+                        thresh_count = 0;
+                        out[i] = buffer[0];
+                        message_counter++;
+                        n--;
+                    }
+                }
+                
             }
             else
             {
-                out[i] = in[i];
-                if(message_counter < m_length - 1)
+                if(message_counter < m_length)
+                {
+                    if(buf_count == item_size)
+                        buf_count = 0;
+                    buffer[buf_count++] = in[i];
+                    if(buf_count == item_size)
+                        cout << "derp" << endl;
+                    out[i] = buffer[buf_count];
                     message_counter++;
+                        
+                }
                 else
-                    sequence_detected = false;
+                {
+                    thresh_sent = false;
+                    out[i] = 0;
+                }
+                    
+                n--;
                 
             }
+            
+            i++;
         }
         
-        return noutput_items;
+        consume_each(ninput_items[0]);
+        
+        delete[] buffer;
+        
+        return i;
     }
 
   } /* namespace frame_detection */

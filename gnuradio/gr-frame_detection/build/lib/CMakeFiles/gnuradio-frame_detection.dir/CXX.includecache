@@ -10,21 +10,23 @@
 gnuradio/attributes.h
 -
 
-../include/frame_detection/deinterleaver_bb.h
+../include/frame_detection/preamble_detector_bb.h
 frame_detection/api.h
 -
-gnuradio/block.h
+gnuradio/sync_block.h
 -
 
-/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/deinterleaver_bb_impl.cc
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/preamble_detector_bb_impl.cc
 config.h
 /home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/config.h
 gnuradio/io_signature.h
 -
-deinterleaver_bb_impl.h
-/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/deinterleaver_bb_impl.h
+preamble_detector_bb_impl.h
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/preamble_detector_bb_impl.h
+iostream
+-
 
-/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/deinterleaver_bb_impl.h
-frame_detection/deinterleaver_bb.h
+/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/gr-frame_detection/lib/preamble_detector_bb_impl.h
+frame_detection/preamble_detector_bb.h
 -
 

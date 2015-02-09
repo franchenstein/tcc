@@ -408,13 +408,14 @@ class preamble_detector_bb(object):
     __repr__ = _swig_repr
     def make(*args, **kwargs):
         """
-        make(std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length) -> preamble_detector_bb_sptr
+        make(std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length, 
+            int i_size) -> preamble_detector_bb_sptr
 
         Return a shared_ptr to a new instance of frame_detection::preamble_detector_bb.
 
         To avoid accidental use of raw pointers, frame_detection::preamble_detector_bb's constructor is in a private implementation class. frame_detection::preamble_detector_bb::make is the public interface for creating new instances.
 
-        Params: (preamble, preamble_length, message_length)
+        Params: (preamble, preamble_length, message_length, i_size)
         """
         return _frame_detection_swig.preamble_detector_bb_make(*args, **kwargs)
 
@@ -426,13 +427,14 @@ preamble_detector_bb_swigregister(preamble_detector_bb)
 
 def preamble_detector_bb_make(*args, **kwargs):
   """
-    preamble_detector_bb_make(std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length) -> preamble_detector_bb_sptr
+    preamble_detector_bb_make(std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length, 
+        int i_size) -> preamble_detector_bb_sptr
 
     Return a shared_ptr to a new instance of frame_detection::preamble_detector_bb.
 
     To avoid accidental use of raw pointers, frame_detection::preamble_detector_bb's constructor is in a private implementation class. frame_detection::preamble_detector_bb::make is the public interface for creating new instances.
 
-    Params: (preamble, preamble_length, message_length)
+    Params: (preamble, preamble_length, message_length, i_size)
     """
   return _frame_detection_swig.preamble_detector_bb_make(*args, **kwargs)
 
@@ -456,13 +458,14 @@ class preamble_detector_bb_sptr(object):
     __del__ = lambda self : None;
     def make(self, *args, **kwargs):
         """
-        make(preamble_detector_bb_sptr self, std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length) -> preamble_detector_bb_sptr
+        make(preamble_detector_bb_sptr self, std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length, 
+            int i_size) -> preamble_detector_bb_sptr
 
         Return a shared_ptr to a new instance of frame_detection::preamble_detector_bb.
 
         To avoid accidental use of raw pointers, frame_detection::preamble_detector_bb's constructor is in a private implementation class. frame_detection::preamble_detector_bb::make is the public interface for creating new instances.
 
-        Params: (preamble, preamble_length, message_length)
+        Params: (preamble, preamble_length, message_length, i_size)
         """
         return _frame_detection_swig.preamble_detector_bb_sptr_make(self, *args, **kwargs)
 

@@ -33,7 +33,7 @@ namespace gr {
      * \ingroup frame_detection
      *
      */
-    class FRAME_DETECTION_API preamble_detector_bb : virtual public gr::block
+    class FRAME_DETECTION_API preamble_detector_bb : virtual public gr::sync_block
     {
      public:
       typedef boost::shared_ptr<preamble_detector_bb> sptr;

@@ -8053,20 +8053,24 @@ SWIGINTERN PyObject *_wrap_preamble_detector_bb_make(PyObject *SWIGUNUSEDPARM(se
   std::vector< int,std::allocator< int > > *arg1 = 0 ;
   int arg2 ;
   int arg3 ;
+  int arg4 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
   int ecode2 = 0 ;
   int val3 ;
   int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
   char *  kwnames[] = {
-    (char *) "preamble",(char *) "preamble_length",(char *) "message_length", NULL 
+    (char *) "preamble",(char *) "preamble_length",(char *) "message_length",(char *) "i_size", NULL 
   };
   gr::frame_detection::preamble_detector_bb::sptr result;
   
-  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OOO:preamble_detector_bb_make",kwnames,&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OOOO:preamble_detector_bb_make",kwnames,&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
   {
     std::vector<int,std::allocator< int > > *ptr = (std::vector<int,std::allocator< int > > *)0;
     res1 = swig::asptr(obj0, &ptr);
@@ -8088,9 +8092,14 @@ SWIGINTERN PyObject *_wrap_preamble_detector_bb_make(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "preamble_detector_bb_make" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "preamble_detector_bb_make" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
   {
     try {
-      result = gr::frame_detection::preamble_detector_bb::make((std::vector< int,std::allocator< int > > const &)*arg1,arg2,arg3);
+      result = gr::frame_detection::preamble_detector_bb::make((std::vector< int,std::allocator< int > > const &)*arg1,arg2,arg3,arg4);
     }
     catch(std::exception &e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8307,6 +8316,7 @@ SWIGINTERN PyObject *_wrap_preamble_detector_bb_sptr_make(PyObject *SWIGUNUSEDPA
   std::vector< int,std::allocator< int > > *arg2 = 0 ;
   int arg3 ;
   int arg4 ;
+  int arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int res2 = SWIG_OLDOBJ ;
@@ -8314,16 +8324,19 @@ SWIGINTERN PyObject *_wrap_preamble_detector_bb_sptr_make(PyObject *SWIGUNUSEDPA
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
   char *  kwnames[] = {
-    (char *) "self",(char *) "preamble",(char *) "preamble_length",(char *) "message_length", NULL 
+    (char *) "self",(char *) "preamble",(char *) "preamble_length",(char *) "message_length",(char *) "i_size", NULL 
   };
   gr::frame_detection::preamble_detector_bb::sptr result;
   
-  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OOOO:preamble_detector_bb_sptr_make",kwnames,&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OOOOO:preamble_detector_bb_sptr_make",kwnames,&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_boost__shared_ptrT_gr__frame_detection__preamble_detector_bb_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "preamble_detector_bb_sptr_make" "', argument " "1"" of type '" "boost::shared_ptr< gr::frame_detection::preamble_detector_bb > *""'"); 
@@ -8350,9 +8363,14 @@ SWIGINTERN PyObject *_wrap_preamble_detector_bb_sptr_make(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "preamble_detector_bb_sptr_make" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(obj4, &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "preamble_detector_bb_sptr_make" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
   {
     try {
-      result = (*arg1)->make((std::vector< int,std::allocator< int > > const &)*arg2,arg3,arg4);
+      result = (*arg1)->make((std::vector< int,std::allocator< int > > const &)*arg2,arg3,arg4,arg5);
     }
     catch(std::exception &e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11254,13 +11272,14 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"deinterleaver_bb_sptr_message_subscribers", (PyCFunction) _wrap_deinterleaver_bb_sptr_message_subscribers, METH_VARARGS | METH_KEYWORDS, (char *)"deinterleaver_bb_sptr_message_subscribers(deinterleaver_bb_sptr self, swig_int_ptr which_port) -> swig_int_ptr"},
 	 { (char *)"deinterleaver_bb_sptr_swigregister", deinterleaver_bb_sptr_swigregister, METH_VARARGS, NULL},
 	 { (char *)"preamble_detector_bb_make", (PyCFunction) _wrap_preamble_detector_bb_make, METH_VARARGS | METH_KEYWORDS, (char *)"\n"
-		"preamble_detector_bb_make(std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length) -> preamble_detector_bb_sptr\n"
+		"preamble_detector_bb_make(std::vector< int,std::allocator< int > > const & preamble, int preamble_length, int message_length, \n"
+		"    int i_size) -> preamble_detector_bb_sptr\n"
 		"\n"
 		"Return a shared_ptr to a new instance of frame_detection::preamble_detector_bb.\n"
 		"\n"
 		"To avoid accidental use of raw pointers, frame_detection::preamble_detector_bb's constructor is in a private implementation class. frame_detection::preamble_detector_bb::make is the public interface for creating new instances.\n"
 		"\n"
-		"Params: (preamble, preamble_length, message_length)\n"
+		"Params: (preamble, preamble_length, message_length, i_size)\n"
 		""},
 	 { (char *)"delete_preamble_detector_bb", _wrap_delete_preamble_detector_bb, METH_VARARGS, (char *)"delete_preamble_detector_bb(preamble_detector_bb self)"},
 	 { (char *)"preamble_detector_bb_swigregister", preamble_detector_bb_swigregister, METH_VARARGS, NULL},
@@ -11272,13 +11291,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_preamble_detector_bb_sptr", _wrap_delete_preamble_detector_bb_sptr, METH_VARARGS, (char *)"delete_preamble_detector_bb_sptr(preamble_detector_bb_sptr self)"},
 	 { (char *)"preamble_detector_bb_sptr_make", (PyCFunction) _wrap_preamble_detector_bb_sptr_make, METH_VARARGS | METH_KEYWORDS, (char *)"\n"
 		"preamble_detector_bb_sptr_make(preamble_detector_bb_sptr self, std::vector< int,std::allocator< int > > const & preamble, \n"
-		"    int preamble_length, int message_length) -> preamble_detector_bb_sptr\n"
+		"    int preamble_length, int message_length, int i_size) -> preamble_detector_bb_sptr\n"
 		"\n"
 		"Return a shared_ptr to a new instance of frame_detection::preamble_detector_bb.\n"
 		"\n"
 		"To avoid accidental use of raw pointers, frame_detection::preamble_detector_bb's constructor is in a private implementation class. frame_detection::preamble_detector_bb::make is the public interface for creating new instances.\n"
 		"\n"
-		"Params: (preamble, preamble_length, message_length)\n"
+		"Params: (preamble, preamble_length, message_length, i_size)\n"
 		""},
 	 { (char *)"preamble_detector_bb_sptr_history", _wrap_preamble_detector_bb_sptr_history, METH_VARARGS, (char *)"preamble_detector_bb_sptr_history(preamble_detector_bb_sptr self) -> unsigned int"},
 	 { (char *)"preamble_detector_bb_sptr_declare_sample_delay", _wrap_preamble_detector_bb_sptr_declare_sample_delay, METH_VARARGS, (char *)"\n"
@@ -11373,7 +11392,7 @@ static void *_p_gr__sync_decimatorTo_p_gr__block(void *x, int *SWIGUNUSEDPARM(ne
     return (void *)((gr::block *) (gr::sync_block *) ((gr::sync_decimator *) x));
 }
 static void *_p_gr__frame_detection__preamble_detector_bbTo_p_gr__block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((gr::block *) (gr::sync_block *) ((gr::frame_detection::preamble_detector_bb *) x));
+    return (void *)((gr::block *)  ((gr::frame_detection::preamble_detector_bb *) x));
 }
 static void *_p_gr__sync_blockTo_p_gr__block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((gr::block *)  ((gr::sync_block *) x));
@@ -11397,7 +11416,7 @@ static void *_p_gr__sync_decimatorTo_p_gr__basic_block(void *x, int *SWIGUNUSEDP
     return (void *)((gr::basic_block *) (gr::block *)(gr::sync_block *) ((gr::sync_decimator *) x));
 }
 static void *_p_gr__frame_detection__preamble_detector_bbTo_p_gr__basic_block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((gr::basic_block *) (gr::block *)(gr::sync_block *) ((gr::frame_detection::preamble_detector_bb *) x));
+    return (void *)((gr::basic_block *) (gr::block *) ((gr::frame_detection::preamble_detector_bb *) x));
 }
 static void *_p_gr__hier_block2To_p_gr__basic_block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((gr::basic_block *)  ((gr::hier_block2 *) x));
@@ -11416,15 +11435,6 @@ static void *_p_gr__sync_interpolatorTo_p_gr__basic_block(void *x, int *SWIGUNUS
 }
 static void *_p_gr__top_blockTo_p_gr__basic_block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((gr::basic_block *) (gr::hier_block2 *) ((gr::top_block *) x));
-}
-static void *_p_gr__sync_decimatorTo_p_gr__sync_block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((gr::sync_block *)  ((gr::sync_decimator *) x));
-}
-static void *_p_gr__frame_detection__preamble_detector_bbTo_p_gr__sync_block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((gr::sync_block *)  ((gr::frame_detection::preamble_detector_bb *) x));
-}
-static void *_p_gr__sync_interpolatorTo_p_gr__sync_block(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((gr::sync_block *)  ((gr::sync_interpolator *) x));
 }
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__intrusive_ptrT_pmt__pmt_base_t = {"_p_boost__intrusive_ptrT_pmt__pmt_base_t", "pmt::pmt_t *|boost::intrusive_ptr< pmt::pmt_base > *", 0, 0, (void*)0, 0};
@@ -11445,6 +11455,7 @@ static swig_type_info _swigt__p_const_reference = {"_p_const_reference", "const_
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_gr__basic_block = {"_p_gr__basic_block", "gr::basic_block *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_gr__sync_decimator = {"_p_gr__sync_decimator", 0, 0, 0, 0, 0};
+static swig_type_info _swigt__p_gr__sync_block = {"_p_gr__sync_block", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_gr__tagged_stream_block = {"_p_gr__tagged_stream_block", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_gr__block_gateway = {"_p_gr__block_gateway", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_gr__hier_block2 = {"_p_gr__hier_block2", 0, 0, 0, 0, 0};
@@ -11455,7 +11466,6 @@ static swig_type_info _swigt__p_gr__endianness_t = {"_p_gr__endianness_t", "enum
 static swig_type_info _swigt__p_gr__frame_detection__deinterleaver_bb = {"_p_gr__frame_detection__deinterleaver_bb", "gr::frame_detection::deinterleaver_bb *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_gr__frame_detection__preamble_detector_bb = {"_p_gr__frame_detection__preamble_detector_bb", "gr::frame_detection::preamble_detector_bb *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_gr__rt_status_t = {"_p_gr__rt_status_t", "enum gr::rt_status_t *|gr::rt_status_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_gr__sync_block = {"_p_gr__sync_block", "gr::sync_block *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "intptr_t *|int *|int_least32_t *|int_fast32_t *|int32_t *|int_fast16_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_long_long = {"_p_long_long", "gr::high_res_timer_type *|int_least64_t *|int_fast64_t *|int64_t *|long long *|intmax_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_reference = {"_p_reference", "reference *", 0, 0, (void*)0, 0};
@@ -11536,6 +11546,7 @@ static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0,
 static swig_cast_info _swigc__p_const_reference[] = {  {&_swigt__p_const_reference, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_gr__sync_decimator[] = {{&_swigt__p_gr__sync_decimator, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_gr__sync_block[] = {{&_swigt__p_gr__sync_block, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_gr__tagged_stream_block[] = {{&_swigt__p_gr__tagged_stream_block, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_gr__block_gateway[] = {{&_swigt__p_gr__block_gateway, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_gr__hier_block2[] = {{&_swigt__p_gr__hier_block2, 0, 0, 0},{0, 0, 0, 0}};
@@ -11547,7 +11558,6 @@ static swig_cast_info _swigc__p_gr__endianness_t[] = {  {&_swigt__p_gr__endianne
 static swig_cast_info _swigc__p_gr__frame_detection__deinterleaver_bb[] = {  {&_swigt__p_gr__frame_detection__deinterleaver_bb, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_gr__frame_detection__preamble_detector_bb[] = {  {&_swigt__p_gr__frame_detection__preamble_detector_bb, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_gr__rt_status_t[] = {  {&_swigt__p_gr__rt_status_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_gr__sync_block[] = {  {&_swigt__p_gr__sync_decimator, _p_gr__sync_decimatorTo_p_gr__sync_block, 0, 0},  {&_swigt__p_gr__frame_detection__preamble_detector_bb, _p_gr__frame_detection__preamble_detector_bbTo_p_gr__sync_block, 0, 0},  {&_swigt__p_gr__sync_block, 0, 0, 0},  {&_swigt__p_gr__sync_interpolator, _p_gr__sync_interpolatorTo_p_gr__sync_block, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_long_long[] = {  {&_swigt__p_long_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_reference[] = {  {&_swigt__p_reference, 0, 0, 0},{0, 0, 0, 0}};

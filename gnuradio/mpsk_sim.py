@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Mpsk Sim
-# Generated: Sun Feb  8 21:44:26 2015
+# Generated: Mon Feb  9 00:19:09 2015
 ##################################################
 
 from PyQt4 import Qt
@@ -217,7 +217,6 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.controls_grid_layout_1.addWidget(self._qtgui_sink_x_0_win, 3,0,2,2)
         
         
-        self.frame_detection_preamble_detector_bb_0 = frame_detection.preamble_detector_bb((map(lambda x: (-x+1)/2, preamble)), len(preamble), payload_size*8)
         self.frame_detection_deinterleaver_bb_0 = frame_detection.deinterleaver_bb(n, n, payload_size)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, timing_loop_bw, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(4)
@@ -275,13 +274,12 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_file_source_0, 0), (self.tcc_sdr_interleaver_bb_2, 0))
         self.connect((self.digital_constellation_decoder_cb_0, 0), (self.digital_diff_decoder_bb_0, 0))
         self.connect((self.digital_diff_decoder_bb_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))
-        self.connect((self.frame_detection_deinterleaver_bb_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.tcc_sdr_interleaver_bb_2, 0), (self.blocks_skiphead_0, 0))
         self.connect((self.blocks_skiphead_0, 0), (self.blocks_stream_mux_0_0_0, 1))
-        self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.frame_detection_preamble_detector_bb_0, 0))
-        self.connect((self.frame_detection_preamble_detector_bb_0, 0), (self.blocks_pack_k_bits_bb_1, 0))
+        self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.blocks_pack_k_bits_bb_1, 0))
         self.connect((self.blocks_pack_k_bits_bb_1, 0), (self.frame_detection_deinterleaver_bb_0, 0))
-        self.connect((self.frame_detection_deinterleaver_bb_0, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.frame_detection_deinterleaver_bb_0, 0), (self.blocks_file_sink_0, 0))
 
 
 # QT sink close method reimplementation
@@ -295,24 +293,24 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_n(self, n):
         self.n = n
-        self.set_payload_size(1000*self.n*self.m)
         self.set_m(self.n)
+        self.set_payload_size(1000*self.n*self.m)
 
     def get_sps(self):
         return self.sps
 
     def set_sps(self, sps):
         self.sps = sps
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_nfilts(self):
         return self.nfilts
 
     def set_nfilts(self, nfilts):
         self.nfilts = nfilts
-        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
+        self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
 
     def get_m(self):
         return self.m
