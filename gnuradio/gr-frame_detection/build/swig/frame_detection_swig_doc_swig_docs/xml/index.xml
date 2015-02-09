@@ -2,7 +2,7 @@
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.6">
   <compound refid="classgr_1_1frame__detection_1_1deinterleaver__bb" kind="class"><name>gr::frame_detection::deinterleaver_bb</name>
     <member refid="classgr_1_1frame__detection_1_1deinterleaver__bb_1af5a6099ffad931f5853fad4e09f0ffcb" kind="typedef"><name>sptr</name></member>
-    <member refid="classgr_1_1frame__detection_1_1deinterleaver__bb_1a768aa4aea1c86eae5607e486d8aaa5a2" kind="function"><name>make</name></member>
+    <member refid="classgr_1_1frame__detection_1_1deinterleaver__bb_1ad9ee33f6fe0721a9dc4260cc5c3508bf" kind="function"><name>make</name></member>
   </compound>
   <compound refid="classgr_1_1frame__detection_1_1preamble__detector__bb" kind="class"><name>gr::frame_detection::preamble_detector_bb</name>
     <member refid="classgr_1_1frame__detection_1_1preamble__detector__bb_1a47f4acd03eff7a5868c78d42aeeebb42" kind="typedef"><name>sptr</name></member>

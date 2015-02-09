@@ -14,7 +14,7 @@
 
 To avoid accidental use of raw pointers, frame_detection::deinterleaver_bb's constructor is in a private implementation class. frame_detection::deinterleaver_bb::make is the public interface for creating new instances.
 
-Params: (n, m)"
+Params: (n, m, message_length)"
 
 %feature("docstring") gr::frame_detection::preamble_detector_bb "<+description of block+>"
 

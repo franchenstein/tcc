@@ -4973,18 +4973,22 @@ SWIGINTERN PyObject *_wrap_deinterleaver_bb_make(PyObject *SWIGUNUSEDPARM(self),
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
+  int arg3 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
   char *  kwnames[] = {
-    (char *) "n",(char *) "m", NULL 
+    (char *) "n",(char *) "m",(char *) "message_length", NULL 
   };
   gr::frame_detection::deinterleaver_bb::sptr result;
   
-  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OO:deinterleaver_bb_make",kwnames,&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OOO:deinterleaver_bb_make",kwnames,&obj0,&obj1,&obj2)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "deinterleaver_bb_make" "', argument " "1"" of type '" "int""'");
@@ -4995,9 +4999,14 @@ SWIGINTERN PyObject *_wrap_deinterleaver_bb_make(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "deinterleaver_bb_make" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "deinterleaver_bb_make" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
   {
     try {
-      result = gr::frame_detection::deinterleaver_bb::make(arg1,arg2);
+      result = gr::frame_detection::deinterleaver_bb::make(arg1,arg2,arg3);
     }
     catch(std::exception &e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -5211,21 +5220,25 @@ SWIGINTERN PyObject *_wrap_deinterleaver_bb_sptr_make(PyObject *SWIGUNUSEDPARM(s
   boost::shared_ptr< gr::frame_detection::deinterleaver_bb > *arg1 = (boost::shared_ptr< gr::frame_detection::deinterleaver_bb > *) 0 ;
   int arg2 ;
   int arg3 ;
+  int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
   int val3 ;
   int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
   char *  kwnames[] = {
-    (char *) "self",(char *) "n",(char *) "m", NULL 
+    (char *) "self",(char *) "n",(char *) "m",(char *) "message_length", NULL 
   };
   gr::frame_detection::deinterleaver_bb::sptr result;
   
-  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OOO:deinterleaver_bb_sptr_make",kwnames,&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTupleAndKeywords(args,kwargs,(char *)"OOOO:deinterleaver_bb_sptr_make",kwnames,&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_boost__shared_ptrT_gr__frame_detection__deinterleaver_bb_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "deinterleaver_bb_sptr_make" "', argument " "1"" of type '" "boost::shared_ptr< gr::frame_detection::deinterleaver_bb > *""'"); 
@@ -5241,9 +5254,14 @@ SWIGINTERN PyObject *_wrap_deinterleaver_bb_sptr_make(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "deinterleaver_bb_sptr_make" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "deinterleaver_bb_sptr_make" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
   {
     try {
-      result = (*arg1)->make(arg2,arg3);
+      result = (*arg1)->make(arg2,arg3,arg4);
     }
     catch(std::exception &e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11130,13 +11148,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"high_res_timer_tps", _wrap_high_res_timer_tps, METH_VARARGS, (char *)"high_res_timer_tps() -> gr::high_res_timer_type"},
 	 { (char *)"high_res_timer_epoch", _wrap_high_res_timer_epoch, METH_VARARGS, (char *)"high_res_timer_epoch() -> gr::high_res_timer_type"},
 	 { (char *)"deinterleaver_bb_make", (PyCFunction) _wrap_deinterleaver_bb_make, METH_VARARGS | METH_KEYWORDS, (char *)"\n"
-		"deinterleaver_bb_make(int n, int m) -> deinterleaver_bb_sptr\n"
+		"deinterleaver_bb_make(int n, int m, int message_length) -> deinterleaver_bb_sptr\n"
 		"\n"
 		"Return a shared_ptr to a new instance of frame_detection::deinterleaver_bb.\n"
 		"\n"
 		"To avoid accidental use of raw pointers, frame_detection::deinterleaver_bb's constructor is in a private implementation class. frame_detection::deinterleaver_bb::make is the public interface for creating new instances.\n"
 		"\n"
-		"Params: (n, m)\n"
+		"Params: (n, m, message_length)\n"
 		""},
 	 { (char *)"delete_deinterleaver_bb", _wrap_delete_deinterleaver_bb, METH_VARARGS, (char *)"delete_deinterleaver_bb(deinterleaver_bb self)"},
 	 { (char *)"deinterleaver_bb_swigregister", deinterleaver_bb_swigregister, METH_VARARGS, NULL},
@@ -11147,13 +11165,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"deinterleaver_bb_sptr___deref__", _wrap_deinterleaver_bb_sptr___deref__, METH_VARARGS, (char *)"deinterleaver_bb_sptr___deref__(deinterleaver_bb_sptr self) -> deinterleaver_bb"},
 	 { (char *)"delete_deinterleaver_bb_sptr", _wrap_delete_deinterleaver_bb_sptr, METH_VARARGS, (char *)"delete_deinterleaver_bb_sptr(deinterleaver_bb_sptr self)"},
 	 { (char *)"deinterleaver_bb_sptr_make", (PyCFunction) _wrap_deinterleaver_bb_sptr_make, METH_VARARGS | METH_KEYWORDS, (char *)"\n"
-		"deinterleaver_bb_sptr_make(deinterleaver_bb_sptr self, int n, int m) -> deinterleaver_bb_sptr\n"
+		"deinterleaver_bb_sptr_make(deinterleaver_bb_sptr self, int n, int m, int message_length) -> deinterleaver_bb_sptr\n"
 		"\n"
 		"Return a shared_ptr to a new instance of frame_detection::deinterleaver_bb.\n"
 		"\n"
 		"To avoid accidental use of raw pointers, frame_detection::deinterleaver_bb's constructor is in a private implementation class. frame_detection::deinterleaver_bb::make is the public interface for creating new instances.\n"
 		"\n"
-		"Params: (n, m)\n"
+		"Params: (n, m, message_length)\n"
 		""},
 	 { (char *)"deinterleaver_bb_sptr_history", _wrap_deinterleaver_bb_sptr_history, METH_VARARGS, (char *)"deinterleaver_bb_sptr_history(deinterleaver_bb_sptr self) -> unsigned int"},
 	 { (char *)"deinterleaver_bb_sptr_declare_sample_delay", _wrap_deinterleaver_bb_sptr_declare_sample_delay, METH_VARARGS, (char *)"\n"

@@ -46,7 +46,7 @@ namespace gr {
        * class. frame_detection::deinterleaver_bb::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int n, int m, int message_length);
+      static sptr make(int n, int m, int m_length);
     };
 
   } // namespace frame_detection

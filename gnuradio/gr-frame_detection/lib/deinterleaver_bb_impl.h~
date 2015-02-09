@@ -29,7 +29,18 @@ namespace gr {
     class deinterleaver_bb_impl : public deinterleaver_bb
     {
      private:
-      // Nothing to declare in this block.
+        int i_n;
+        int i_m;
+        int counter;
+        int n_count;
+        int m_count;
+        char* buffer;
+        char* buffer2;
+        int buf_count;
+        bool frame_detected;
+        bool end_of_frame;
+        int eof_pos;
+        int m_length;
 
      public:
       deinterleaver_bb_impl(int n, int m);

@@ -35,7 +35,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 16, 1, 0, 1, 0, 1)
-        expected_result = (0, 0, 0, 10, 1, 0, 1, 0, 11)
+        expected_result = (0, 0, 0, 254, 1, 0, 1, 0, 255)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
@@ -49,7 +49,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (5, 9, 4, 3, 2, 4, 8, 16, 1, 0, 1, 0, 1)
-        expected_result = (0, 0, 0, 0, 0, 0, 0, 10, 1, 0, 1, 0, 11)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 255)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
@@ -63,7 +63,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 15, 2, 4, 8, 16, 1, 0, 1, 0, 1)
-        expected_result = (0, 0, 0, 0, 0, 0, 0, 10, 1, 0, 1, 0, 11)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 255)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
@@ -77,7 +77,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         preamble = [2, 4, 8, 16]
         pre_len = len(preamble);
         src_data = (2, 4, 8, 15, 2, 4, 8, 16, 1, 0, 1, 0, 1, 2, 4, 8, 16, 1)
-        expected_result = (0, 0, 0, 0, 0, 0, 0, 10, 1, 0, 1, 0, 1, 2, 11, 0, 0, 0)
+        expected_result = (0, 0, 0, 0, 0, 0, 0, 254, 1, 0, 1, 0, 1, 2, 255, 0, 0, 0)
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 6)
@@ -95,7 +95,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 4)
-        deint = frame_detection.deinterleaver_bb(2, 2)
+        deint = frame_detection.deinterleaver_bb(2, 2, 4)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, deint)
         self.tb.connect(deint, dst)        
@@ -111,7 +111,7 @@ class qa_preamble_detector_bb (gr_unittest.TestCase):
         src = blocks.vector_source_b(src_data)
         dst = blocks.vector_sink_b()
         dtct = frame_detection.preamble_detector_bb(preamble, pre_len, 8)
-        deint = frame_detection.deinterleaver_bb(2, 2)
+        deint = frame_detection.deinterleaver_bb(2, 2, 8)
         self.tb.connect(src, dtct)
         self.tb.connect(dtct, deint)
         self.tb.connect(deint, dst)        

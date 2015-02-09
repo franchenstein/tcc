@@ -3,7 +3,7 @@
   <key>frame_detection_deinterleaver_bb</key>
   <category>FRAME_DETECTION</category>
   <import>import frame_detection</import>
-  <make>frame_detection.deinterleaver_bb($n, $m)</make>
+  <make>frame_detection.deinterleaver_bb($n, $m, $message_length)</make>
   <param>
     <name>N</name>
     <key>n</key>
@@ -12,6 +12,11 @@
   <param>
     <name>M</name>
     <key>m</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Message_length</name>
+    <key>message_length</key>
     <type>int</type>
   </param>
   <sink>

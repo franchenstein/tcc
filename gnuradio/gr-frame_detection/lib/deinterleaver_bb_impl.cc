@@ -29,16 +29,16 @@ namespace gr {
   namespace frame_detection {
 
     deinterleaver_bb::sptr
-    deinterleaver_bb::make(int n, int m)
+    deinterleaver_bb::make(int n, int m, int message_length)
     {
       return gnuradio::get_initial_sptr
-        (new deinterleaver_bb_impl(n, m));
+        (new deinterleaver_bb_impl(n, m, message_length));
     }
 
     /*
      * The private constructor
      */
-    deinterleaver_bb_impl::deinterleaver_bb_impl(int n, int m)
+    deinterleaver_bb_impl::deinterleaver_bb_impl(int n, int m, int message_length)
       : gr::block("deinterleaver_bb",
               gr::io_signature::make(1, 1, sizeof(char)),
               gr::io_signature::make(1, 1, sizeof(char)))
@@ -54,6 +54,7 @@ namespace gr {
         frame_detected = false;
         end_of_frame = false;
         eof_pos = 0;
+        m_length = message_length;
     }
 
     /*
@@ -82,12 +83,13 @@ namespace gr {
         
         int n = ninput_items[0];
         int i = 0;
+        int msg_count = 0;
         
         while (n > 0)
         {
             if(!frame_detected)
             {
-                if(in[i] == char(10))
+                if(in[i] != char(0))
                 {
                     frame_detected = true;
                     end_of_frame = false;
@@ -102,7 +104,7 @@ namespace gr {
             
             else
             {
-               if(in[i] == char(11))
+               if(msg_count == m_length)
                {
                    end_of_frame = true;
                    eof_pos = i;
@@ -134,6 +136,8 @@ namespace gr {
                         buf_count = 0;
                        
                     buffer[n_count + i_m*m_count] = in[i];
+                    
+                    msg_count++;
                     
                     if (n_count + i_m*m_count == i_n*i_m - 1)
                     {

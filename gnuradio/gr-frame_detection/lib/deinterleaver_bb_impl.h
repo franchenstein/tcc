@@ -40,9 +40,10 @@ namespace gr {
         bool frame_detected;
         bool end_of_frame;
         int eof_pos;
+        int m_length;
 
      public:
-      deinterleaver_bb_impl(int n, int m);
+      deinterleaver_bb_impl(int n, int m, int message_length);
       ~deinterleaver_bb_impl();
 
       // Where all the action really happens

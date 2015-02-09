@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Mpsk Sim
-# Generated: Sun Feb  8 17:00:45 2015
+# Generated: Sun Feb  8 21:44:26 2015
 ##################################################
 
 from PyQt4 import Qt
@@ -53,7 +53,6 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         ##################################################
         self.n = n = 4
         self.sps = sps = 4
-        self.preamble = preamble = [1,-1,1,-1,1,1,-1,-1,1,1,-1,1,1,1,-1,1,1,-1,1,-1,-1,1,-1,-1,1,1,1,-1,-1,-1,1,-1,1,1,1,1,-1,-1,1,-1,1,-1,-1,-1,1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,1,1,1,1,1,1,-1,-1]
         self.nfilts = nfilts = 32
         self.m = m = n
         self.eb = eb = 0.35
@@ -63,8 +62,9 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate = 32000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 11*sps*nfilts)
         self.qpsk = qpsk = digital.constellation_rect(([0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j]), ([0, 1, 2, 3]), 4, 2, 2, 1, 1).base()
+        self.preamble = preamble = [1,-1,1,-1,1,1,-1,-1,1,1,-1,1,1,1,-1,1,1,-1,1,-1,-1,1,-1,-1,1,1,1,-1,-1,-1,1,-1,1,1,1,1,-1,-1,1,-1,1,-1,-1,-1,1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,1,1,1,1,1,1,-1,-1]
         self.phase_bw = phase_bw = 0.1
-        self.payload_size = payload_size = 10000*n*m - len(preamble)/8
+        self.payload_size = payload_size = 1000*n*m
         self.packed_preamble = packed_preamble = [83, 34, 91, 29, 13, 115, 223, 3]
         self.noise_volt = noise_volt = 0
         self.matched_filter = matched_filter = firdes.root_raised_cosine(nfilts, nfilts, 1, eb, int(11*sps*nfilts))
@@ -217,7 +217,8 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.controls_grid_layout_1.addWidget(self._qtgui_sink_x_0_win, 3,0,2,2)
         
         
-        self.frame_detection_deinterleaver_bb_0 = frame_detection.deinterleaver_bb(n, n)
+        self.frame_detection_preamble_detector_bb_0 = frame_detection.preamble_detector_bb((map(lambda x: (-x+1)/2, preamble)), len(preamble), payload_size*8)
+        self.frame_detection_deinterleaver_bb_0 = frame_detection.deinterleaver_bb(n, n, payload_size)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, timing_loop_bw, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(4)
         self.digital_costas_loop_cc_0 = digital.costas_loop_cc(phase_bw, arity)
@@ -252,7 +253,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/tx_teste.txt", True)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/franchz/Documents/UTFPR/10o_periodo/TCC2/projeto/tcc/gnuradio/rx_teste.txt", False)
         self.blocks_file_sink_0.set_unbuffered(True)
-        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
+        self.blocks_char_to_float_0 = blocks.char_to_float(1, 8)
 
         ##################################################
         # Connections
@@ -277,9 +278,10 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.connect((self.frame_detection_deinterleaver_bb_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.tcc_sdr_interleaver_bb_2, 0), (self.blocks_skiphead_0, 0))
         self.connect((self.blocks_skiphead_0, 0), (self.blocks_stream_mux_0_0_0, 1))
+        self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.frame_detection_preamble_detector_bb_0, 0))
+        self.connect((self.frame_detection_preamble_detector_bb_0, 0), (self.blocks_pack_k_bits_bb_1, 0))
         self.connect((self.blocks_pack_k_bits_bb_1, 0), (self.frame_detection_deinterleaver_bb_0, 0))
-        self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.blocks_pack_k_bits_bb_1, 0))
-        self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.frame_detection_deinterleaver_bb_0, 0), (self.blocks_char_to_float_0, 0))
 
 
 # QT sink close method reimplementation
@@ -293,7 +295,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_n(self, n):
         self.n = n
-        self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
+        self.set_payload_size(1000*self.n*self.m)
         self.set_m(self.n)
 
     def get_sps(self):
@@ -301,30 +303,23 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_sps(self, sps):
         self.sps = sps
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
         self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
-
-    def get_preamble(self):
-        return self.preamble
-
-    def set_preamble(self, preamble):
-        self.preamble = preamble
-        self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
+        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
 
     def get_nfilts(self):
         return self.nfilts
 
     def set_nfilts(self, nfilts):
         self.nfilts = nfilts
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
         self.set_matched_filter(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1, self.eb, int(11*self.sps*self.nfilts)))
+        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 11*self.sps*self.nfilts))
 
     def get_m(self):
         return self.m
 
     def set_m(self, m):
         self.m = m
-        self.set_payload_size(10000*self.n*self.m - len(self.preamble)/8)
+        self.set_payload_size(1000*self.n*self.m)
 
     def get_eb(self):
         return self.eb
@@ -379,6 +374,12 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
 
     def set_qpsk(self, qpsk):
         self.qpsk = qpsk
+
+    def get_preamble(self):
+        return self.preamble
+
+    def set_preamble(self, preamble):
+        self.preamble = preamble
 
     def get_phase_bw(self):
         return self.phase_bw

@@ -80,14 +80,14 @@ namespace gr {
                     
                 if(counter == sequence_length)
                 {
-                    out[i] = 10;
+                    out[i] = char(254);
                     sequence_detected = true;
                     counter = 0;
                 }
                 else
                     if (message_counter > 0)
                     {
-                        out[i] = 11;
+                        out[i] = char(255);
                         message_counter = 0;
                     }
                     else

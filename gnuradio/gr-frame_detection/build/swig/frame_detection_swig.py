@@ -102,13 +102,13 @@ class deinterleaver_bb(object):
     __repr__ = _swig_repr
     def make(*args, **kwargs):
         """
-        make(int n, int m) -> deinterleaver_bb_sptr
+        make(int n, int m, int message_length) -> deinterleaver_bb_sptr
 
         Return a shared_ptr to a new instance of frame_detection::deinterleaver_bb.
 
         To avoid accidental use of raw pointers, frame_detection::deinterleaver_bb's constructor is in a private implementation class. frame_detection::deinterleaver_bb::make is the public interface for creating new instances.
 
-        Params: (n, m)
+        Params: (n, m, message_length)
         """
         return _frame_detection_swig.deinterleaver_bb_make(*args, **kwargs)
 
@@ -120,13 +120,13 @@ deinterleaver_bb_swigregister(deinterleaver_bb)
 
 def deinterleaver_bb_make(*args, **kwargs):
   """
-    deinterleaver_bb_make(int n, int m) -> deinterleaver_bb_sptr
+    deinterleaver_bb_make(int n, int m, int message_length) -> deinterleaver_bb_sptr
 
     Return a shared_ptr to a new instance of frame_detection::deinterleaver_bb.
 
     To avoid accidental use of raw pointers, frame_detection::deinterleaver_bb's constructor is in a private implementation class. frame_detection::deinterleaver_bb::make is the public interface for creating new instances.
 
-    Params: (n, m)
+    Params: (n, m, message_length)
     """
   return _frame_detection_swig.deinterleaver_bb_make(*args, **kwargs)
 
@@ -150,13 +150,13 @@ class deinterleaver_bb_sptr(object):
     __del__ = lambda self : None;
     def make(self, *args, **kwargs):
         """
-        make(deinterleaver_bb_sptr self, int n, int m) -> deinterleaver_bb_sptr
+        make(deinterleaver_bb_sptr self, int n, int m, int message_length) -> deinterleaver_bb_sptr
 
         Return a shared_ptr to a new instance of frame_detection::deinterleaver_bb.
 
         To avoid accidental use of raw pointers, frame_detection::deinterleaver_bb's constructor is in a private implementation class. frame_detection::deinterleaver_bb::make is the public interface for creating new instances.
 
-        Params: (n, m)
+        Params: (n, m, message_length)
         """
         return _frame_detection_swig.deinterleaver_bb_sptr_make(self, *args, **kwargs)
 
