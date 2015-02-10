@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Mpsk Sim
-# Generated: Mon Feb  9 20:50:48 2015
+# Generated: Tue Feb 10 08:21:32 2015
 ##################################################
 
 from PyQt4 import Qt
@@ -217,7 +217,7 @@ class mpsk_sim(gr.top_block, Qt.QWidget):
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, timing_loop_bw, (rrc_taps), nfilts, nfilts/2, 1.5, 2)
         self.digital_diff_decoder_bb_0 = digital.diff_decoder_bb(4)
         self.digital_costas_loop_cc_0 = digital.costas_loop_cc(phase_bw, arity)
-        self.digital_correlate_and_sync_cc_0 = digital.correlate_and_sync_cc((packed_preamble), (matched_filter), sps)
+        self.digital_correlate_and_sync_cc_0 = digital.correlate_and_sync_cc((preamble), (matched_filter), sps)
         self.digital_constellation_modulator_0 = digital.generic_mod(
           constellation=qpsk,
           differential=True,
